@@ -13,5 +13,9 @@
             <result>/pages/HotelReport.jsp</result>
         </action>
         
+         <action name="*Search" class="br.inf.pucrio.hotel.web.action.{1}SearchAction">
+            <result>/pages/{1}Result.jsp</result>
+        </action>
+        
     </package>
 </struts>

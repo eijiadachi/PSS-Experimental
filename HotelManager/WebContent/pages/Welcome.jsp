@@ -17,6 +17,12 @@
     <li>
     	<a href="<s:url action="HotelReport"/>">Gerar Relatório do Hotel</a>
     </li>
+    <li>
+    	<a href="<s:url action="ClientSearch"/>">Buscar por Cliente</a>
+    </li>
+    <li>
+    	<a href="<s:url action="RoomSearch"/>">Buscar por Quarto</a>
+    </li>
 </ul>
 
 </body>

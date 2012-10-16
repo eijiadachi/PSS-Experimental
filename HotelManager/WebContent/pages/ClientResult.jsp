@@ -4,20 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Relatório Hotel</title>
+<title>Insert title here</title>
 </head>
 <body>
-
-<%
-	
-	final Object requestedObject = request.getAttribute( "eiji" );
-
-%>
-
-<h1>
-Relatório
-</h1>
-	<%= requestedObject %>
-
+	client
 </body>
 </html>
