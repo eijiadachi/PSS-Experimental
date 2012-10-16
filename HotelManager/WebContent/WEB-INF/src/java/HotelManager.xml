@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="HotelManager" namespace="/pss" extends="default">
+        <action name="Welcome">
+            <result>/pages/Welcome.jsp</result>
+        </action>
+        
+        <action name="HotelReport" class="br.inf.pucrio.hotel.web.action.HotelReportAction">
+            <result>/pages/HotelReport.jsp</result>
+        </action>
+        
+    </package>
+</struts>
