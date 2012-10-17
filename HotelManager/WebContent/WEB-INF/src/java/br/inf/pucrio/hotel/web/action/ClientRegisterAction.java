@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+import br.inf.pucrio.hotel.HotelManagerFacade;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ClientRegisterAction extends ActionSupport implements ServletRequestAware
@@ -27,6 +29,9 @@ public class ClientRegisterAction extends ActionSupport implements ServletReques
 	@Override
 	public String execute()
 	{
+
+		HotelManagerFacade.addClient( clientName, cpf, birthday, address, phone );
+
 		request.getSession().setAttribute( "success_msg",
 				String.format( "Cliente '%s' cadastrado com sucesso.", clientName ) );
 

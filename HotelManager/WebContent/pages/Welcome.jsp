@@ -24,6 +24,9 @@
 
 <ul>
 	<li>
+    	<a href="<s:url action="ClientSearch"/>">Listar Todos Clientes</a>
+    </li>
+	<li>
     	<a href="<s:url action="ClientForm"/>">Cadastrar Novo Cliente</a>
     </li>
     <li>
