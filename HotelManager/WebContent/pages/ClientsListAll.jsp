@@ -17,7 +17,7 @@
 			for(Client client : allClients )
 			{
 	%>
-		<%= client.getName() %><p>
+		<%= client.toString() %><p>
 	<%	
 			}
 		}

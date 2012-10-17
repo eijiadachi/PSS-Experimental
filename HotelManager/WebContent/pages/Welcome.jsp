@@ -9,34 +9,18 @@
 
 <body>
 
-<%
-	Object requestedObject = request.getSession().getAttribute( "success_msg" );
-
-	if( requestedObject != null )
-	{
-%>
-	<h1>
-	<%= requestedObject %>
-	</h1>	
-<% 	
-	}
-%>
+<s:if test="hasActionMessages()">
+	<div class="welcome">
+		<s:actionmessage/>
+	</div>
+</s:if>
 
 <ul>
 	<li>
-    	<a href="<s:url action="ClientSearch"/>">Listar Todos Clientes</a>
-    </li>
-	<li>
     	<a href="<s:url action="ClientForm"/>">Cadastrar Novo Cliente</a>
     </li>
-    <li>
-    	<a href="<s:url action="HotelReport"/>">Gerar Relatório do Hotel</a>
-    </li>
-    <li>
-    	<a href="<s:url action="ClientSearch"/>">Buscar por Cliente</a>
-    </li>
-    <li>
-    	<a href="<s:url action="RoomSearch"/>">Buscar por Quarto</a>
+	<li>
+    	<a href="<s:url action="ListAllClients"/>">Listar Todos Clientes</a>
     </li>
 </ul>
 

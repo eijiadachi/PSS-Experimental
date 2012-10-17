@@ -5,32 +5,21 @@
 
 <struts>
     <package name="HotelManager" namespace="/pss" extends="default">
-        <action name="Welcome">
+        <action name="Welcome" class="br.inf.pucrio.hotel.web.action.RedirectAction">
             <result>/pages/Welcome.jsp</result>
         </action>
         
-        <action name="add*" class="br.inf.pucrio.hotel.web.action.{1}Action" method="add">
+        <action name="Add*" class="br.inf.pucrio.hotel.web.action.{1}Action" method="add">
         	<result name="input">/pages/{1}Form.jsp</result>
+        	<result name="error">/pages/{1}Form.jsp</result>
             <result name="success" type="redirectAction">
 				<param name="actionName">Welcome</param>
 				<param name="namespace">/pss</param>
             </result>
         </action>
         
-        <action name="*Report" class="br.inf.pucrio.hotel.web.action.{1}ReportAction">
-            <result>/pages/{1}Report.jsp</result>
-        </action>
-        
-		<action name="*Search" class="br.inf.pucrio.hotel.web.action.{1}SearchAction">
-            <result>/pages/{1}Result.jsp</result>
-        </action>
-        
-        <action name="*Register" class="br.inf.pucrio.hotel.web.action.{1}RegisterAction">
-            <result name="input">/pages/{1}Form.jsp</result>
-            <result name="success" type="redirectAction">
-				<param name="actionName">Welcome</param>
-				<param name="namespace">/pss</param>
-            </result>
+        <action name="ListAll*s" class="br.inf.pucrio.hotel.web.action.{1}Action" method="listAll">
+            <result name="success">/pages/{1}sListAll.jsp</result>
         </action>
         
         <action name="*Form" class="br.inf.pucrio.hotel.web.action.RedirectAction">

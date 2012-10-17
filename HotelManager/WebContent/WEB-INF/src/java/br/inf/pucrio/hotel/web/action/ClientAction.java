@@ -1,84 +1,70 @@
 package br.inf.pucrio.hotel.web.action;
 
-import java.util.Date;
+import java.util.List;
 
 import br.inf.pucrio.hotel.HotelConstants;
 import br.inf.pucrio.hotel.HotelManagerFacade;
+import br.inf.pucrio.hotel.exception.HotelException;
 import br.inf.pucrio.hotel.model.Client;
 
 public class ClientAction extends HotelBaseAction<Client>
 {
 	private static final long serialVersionUID = 1L;
 
-	private String address;
-
-	private Date birthday;
-
-	private String name;
-
-	private String cpf;
-
-	private String phone;
+	private Client client;
 
 	@Override
 	public String add()
 	{
-		HotelManagerFacade.addClient( name, cpf, birthday, address, phone );
+		try
+		{
+			Client localClient = getClient();
 
-		String successMsg = String.format( "Cliente '%s - %s' cadastrado com sucesso.", name, cpf );
+			HotelManagerFacade.addClient( localClient );
 
-		request.getSession().setAttribute( HotelConstants.SUCCESS_MSG_ATTR, successMsg );
+			String successMsg = String.format( "Cliente '%s' cadastrado com sucesso.", localClient.toString() );
+
+			addActionMessage( successMsg );
+
+			saveOnRequest( HotelConstants.SUCCESS_MSG_ATTR, successMsg );
+
+			return SUCCESS;
+		}
+		catch (HotelException e)
+		{
+			return ERROR;
+		}
+	}
+
+	public Client getClient()
+	{
+		return client;
+	}
+
+	@Override
+	public String listAll()
+	{
+		List<Client> listAllClients = HotelManagerFacade.listAllClients();
+
+		saveOnSession( HotelConstants.ALL_CLIENTS_ATTR, listAllClients );
 
 		return SUCCESS;
 	}
 
-	public String getAddress()
+	public void setClient(Client client)
 	{
-		return address;
+		this.client = client;
 	}
 
-	public Date getBirthday()
-	{
-		return birthday;
-	}
+	// @Override
+	// public void validate()
+	// {
+	// String cpf = getClient().getCpf();
+	// if (!HotelManagerFacade.isCpfUnique( cpf ))
+	// {
+	// addFieldError( "client.cpf", String.format(
+	// "CPF %s já está cadastrado no sistema.", cpf ) );
+	// }
+	// }
 
-	public String getCpf()
-	{
-		return cpf;
-	}
-
-	public String getName()
-	{
-		return name;
-	}
-
-	public String getPhone()
-	{
-		return phone;
-	}
-
-	public void setAddress(String address)
-	{
-		this.address = address;
-	}
-
-	public void setBirthday(Date birthday)
-	{
-		this.birthday = birthday;
-	}
-
-	public void setCpf(String cpf)
-	{
-		this.cpf = cpf;
-	}
-
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-
-	public void setPhone(String phone)
-	{
-		this.phone = phone;
-	}
 }
