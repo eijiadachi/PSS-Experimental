@@ -12,14 +12,12 @@
         <action name="Add*" class="br.inf.pucrio.hotel.web.action.{1}Action" method="add">
         	<result name="input">/pages/{1}Form.jsp</result>
         	<result name="error">/pages/{1}Form.jsp</result>
-            <result name="success" type="redirectAction">
-				<param name="actionName">Welcome</param>
-				<param name="namespace">/pss</param>
-            </result>
+            <result name="success">/pages/Welcome.jsp</result>
         </action>
         
         <action name="ListAll*s" class="br.inf.pucrio.hotel.web.action.{1}Action" method="listAll">
             <result name="success">/pages/{1}sListAll.jsp</result>
+            <result name="input">/pages/{1}sListAll.jsp</result>
         </action>
         
         <action name="*Form" class="br.inf.pucrio.hotel.web.action.RedirectAction">

@@ -10,7 +10,7 @@
 <body>
 
 <s:if test="hasActionMessages()">
-	<div class="welcome">
+	<div class="confirmation">
 		<s:actionmessage/>
 	</div>
 </s:if>
@@ -21,6 +21,9 @@
     </li>
 	<li>
     	<a href="<s:url action="ListAllClients"/>">Listar Todos Clientes</a>
+    </li>
+    <li>
+    	<a href="<s:url action="ListAllRooms"/>">Listar Todos Quartos</a>
     </li>
 </ul>
 

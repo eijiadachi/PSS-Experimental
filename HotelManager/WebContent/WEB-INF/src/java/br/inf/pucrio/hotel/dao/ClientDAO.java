@@ -7,6 +7,8 @@ import br.inf.pucrio.hotel.model.Client;
 
 public class ClientDAO extends TransientDAOImpl<Client>
 {
+	private static Integer counter = 100;
+
 	@Override
 	public void add(Client client)
 	{
@@ -22,6 +24,8 @@ public class ClientDAO extends TransientDAOImpl<Client>
 				throw new HotelException( msg );
 			}
 		}
+
+		client.setId( ++counter );
 
 		super.add( client );
 	}

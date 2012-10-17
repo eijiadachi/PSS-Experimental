@@ -11,15 +11,21 @@
 <body>
 	<h3> Cadastro de Cliente </h3>
 
+	<s:if test="hasActionErrors()">
+		<div class="error">
+			<s:actionerror/>
+		</div>
+	</s:if>
+
 	<s:div id="clientRegister">
-		<s:form action="AddClient" validate="true">
+		<s:form action="AddClient" validate="false">
 			<s:textfield name="client.name" label="Nome do Cliente"/>
 			<s:textfield name="client.cpf" label="CPF"/>
 			<s:textfield name="client.birthday" label="Data de Nascimento"/>
 			<s:textfield name="client.address" label="Endereço"/>
 			<s:textfield name="client.phone" label="Telefone"/>
 			<s:submit value="Submit" targets="loginDiv" notifyTopics="/ajaxloginCancel"/>
-			<s:submit action="ClientForm" value="Cancel" onclick="form.onsubmit=null"/>
+			<s:submit action="Welcome" value="Cancel" onclick="form.onsubmit=null"/>
 		</s:form>
 	</s:div>
 </body>

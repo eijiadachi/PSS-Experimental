@@ -67,6 +67,7 @@ public class Client extends Bean
 	@Override
 	public String toString()
 	{
-		return String.format( "%s - %s", name, cpf );
+		String toString = String.format( "%s - %s - %s", getId(), name, cpf );
+		return toString;
 	}
 }
