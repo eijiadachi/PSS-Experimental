@@ -8,31 +8,17 @@ import br.inf.pucrio.hotel.model.Bean;
 public class TransientDAOImpl<T extends Bean> implements IGenericDAO<T>
 {
 
+	private final List<T> repository;
+
 	public TransientDAOImpl()
 	{
 		this.repository = new ArrayList<T>();
 	}
 
-	private final List<T> repository;
-
 	@Override
-	public T getById(Integer id)
+	public void add(T element)
 	{
-		for (T element : getRepository())
-		{
-			if (id.equals( element.getId() ))
-			{
-				return element;
-			}
-		}
-
-		return null;
-	}
-
-	@Override
-	public List<T> getAll()
-	{
-		return getRepository();
+		this.getRepository().add( element );
 	}
 
 	@Override
@@ -42,20 +28,37 @@ public class TransientDAOImpl<T extends Bean> implements IGenericDAO<T>
 	}
 
 	@Override
-	public void update(T element)
+	public List<T> getAll()
 	{
-		throw new IllegalStateException( "Not yet implemented" );
+		return getRepository();
 	}
 
 	@Override
-	public void add(T element)
+	public T getById(Integer id)
 	{
-		this.getRepository().add( element );
+		if (id != null)
+		{
+			for (T element : getRepository())
+			{
+				if (id.equals( element.getId() ))
+				{
+					return element;
+				}
+			}
+		}
+
+		return null;
 	}
 
 	public List<T> getRepository()
 	{
 		return repository;
+	}
+
+	@Override
+	public void update(T element)
+	{
+		throw new IllegalStateException( "Not yet implemented" );
 	}
 
 }

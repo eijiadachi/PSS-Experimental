@@ -18,13 +18,13 @@
 	</s:if>
 
 	<s:div id="clientRegister">
-		<s:form action="AddClient" validate="false">
+		<s:form action="AddClient" validate="true">
 			<s:textfield name="client.name" label="Nome do Cliente"/>
 			<s:textfield name="client.cpf" label="CPF"/>
 			<s:textfield name="client.birthday" label="Data de Nascimento"/>
 			<s:textfield name="client.address" label="Endereço"/>
 			<s:textfield name="client.phone" label="Telefone"/>
-			<s:submit value="Submit" targets="loginDiv" notifyTopics="/ajaxloginCancel"/>
+			<s:submit value="Submit" targets="clientRegister" notifyTopics="/ajaxloginCancel"/>
 			<s:submit action="Welcome" value="Cancel" onclick="form.onsubmit=null"/>
 		</s:form>
 	</s:div>
