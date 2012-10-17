@@ -3,15 +3,20 @@ package br.inf.pucrio.hotel;
 import java.util.List;
 
 import br.inf.pucrio.hotel.dao.ClientDAO;
+import br.inf.pucrio.hotel.dao.RoomDAO;
 import br.inf.pucrio.hotel.model.Client;
+import br.inf.pucrio.hotel.model.Room;
 
 public class HotelManagerFacade
 {
 	private static ClientDAO clientDAO;
 
+	private static RoomDAO roomDAO;
+
 	static
 	{
 		clientDAO = new ClientDAO();
+		roomDAO = new RoomDAO();
 	}
 
 	public static void addClient(Client client)
@@ -39,5 +44,11 @@ public class HotelManagerFacade
 	{
 		List<Client> allClients = clientDAO.getAll();
 		return allClients;
+	}
+
+	public static List<Room> listAllRooms()
+	{
+		List<Room> allRooms = roomDAO.getAll();
+		return allRooms;
 	}
 }
