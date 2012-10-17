@@ -11,8 +11,8 @@
 	<h3> Cadastro de Cliente </h3>
 	
 	<s:div id="clientRegister">
-		<s:form action="ClientRegister" validate="true">
-			<s:textfield name="clientName" label="Nome do Cliente"/>
+		<s:form action="addClient" validate="true">
+			<s:textfield name="name" label="Nome do Cliente"/>
 			<s:textfield name="cpf" label="CPF"/>
 			<s:textfield name="birthday" label="Data de Nascimento"/>
 			<s:textfield name="address" label="Endereço"/>

@@ -1,9 +1,15 @@
-package br.inf.pucrio.hotel.model;
+package br.inf.pucrio.hotel.web.action;
 
 import java.util.Date;
 
-public class Client extends Bean
+import br.inf.pucrio.hotel.HotelConstants;
+import br.inf.pucrio.hotel.HotelManagerFacade;
+import br.inf.pucrio.hotel.model.Client;
+
+public class ClientAction extends HotelBaseAction<Client>
 {
+	private static final long serialVersionUID = 1L;
+
 	private String address;
 
 	private Date birthday;
@@ -13,6 +19,18 @@ public class Client extends Bean
 	private String cpf;
 
 	private String phone;
+
+	@Override
+	public String add()
+	{
+		HotelManagerFacade.addClient( name, cpf, birthday, address, phone );
+
+		String successMsg = String.format( "Cliente '%s - %s' cadastrado com sucesso.", name, cpf );
+
+		request.getSession().setAttribute( HotelConstants.SUCCESS_MSG_ATTR, successMsg );
+
+		return SUCCESS;
+	}
 
 	public String getAddress()
 	{
@@ -62,11 +80,5 @@ public class Client extends Bean
 	public void setPhone(String phone)
 	{
 		this.phone = phone;
-	}
-
-	@Override
-	public String toString()
-	{
-		return String.format( "%s - %s", name, cpf );
 	}
 }
