@@ -9,11 +9,23 @@
 
 <body>
 
-<h1>
-	
-</h1>
+<%
+	Object requestedObject = request.getSession().getAttribute( "success_msg" );
+
+	if( requestedObject != null )
+	{
+%>
+	<h1>
+	<%= requestedObject %>
+	</h1>	
+<% 	
+	}
+%>
 
 <ul>
+	<li>
+    	<a href="<s:url action="ClientForm"/>">Cadastrar Novo Cliente</a>
+    </li>
     <li>
     	<a href="<s:url action="HotelReport"/>">Gerar Relatório do Hotel</a>
     </li>
