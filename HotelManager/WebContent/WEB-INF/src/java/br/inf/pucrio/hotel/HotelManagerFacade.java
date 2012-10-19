@@ -62,6 +62,12 @@ public class HotelManagerFacade
 
 	}
 
+	public static List<Booking> listAllBookings()
+	{
+		List<Booking> allBookings = bookingDAO.getAll();
+		return allBookings;
+	}
+
 	public static List<Client> listAllClients()
 	{
 		List<Client> allClients = clientDAO.getAll();

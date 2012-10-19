@@ -2,7 +2,9 @@ package br.inf.pucrio.hotel.web.action;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import br.inf.pucrio.hotel.HotelConstants;
 import br.inf.pucrio.hotel.HotelManagerFacade;
 import br.inf.pucrio.hotel.model.Booking;
 import br.inf.pucrio.hotel.model.Client;
@@ -18,8 +20,6 @@ public class BookingAction extends HotelBaseAction<Booking>
 
 	private Integer roomNumber;
 
-	private String room;
-
 	private Integer guests;
 
 	public BookingAction()
@@ -30,7 +30,14 @@ public class BookingAction extends HotelBaseAction<Booking>
 	@Override
 	public String add()
 	{
+		Client client = HotelManagerFacade.getClientById( clientCode );
+		Room room = HotelManagerFacade.getRoomById( roomNumber );
+
+		booking.setClient( client );
+		booking.setRoom( room );
+
 		HotelManagerFacade.addBooking( booking );
+		addActionMessage( String.format( "Reserva cadastrada com sucesso." ) );
 		return SUCCESS;
 	}
 
@@ -47,11 +54,6 @@ public class BookingAction extends HotelBaseAction<Booking>
 	public Integer getGuests()
 	{
 		return guests;
-	}
-
-	public String getRoom()
-	{
-		return room;
 	}
 
 	public Integer getRoomNumber()
@@ -108,8 +110,9 @@ public class BookingAction extends HotelBaseAction<Booking>
 	@Override
 	public String listAll()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		List<Booking> allBookings = HotelManagerFacade.listAllBookings();
+		saveOnSession( HotelConstants.ALL_BOOKINGS_ATTR, allBookings );
+		return SUCCESS;
 	}
 
 	public void setBooking(Booking booking)
@@ -125,11 +128,6 @@ public class BookingAction extends HotelBaseAction<Booking>
 	public void setGuests(Integer guests)
 	{
 		this.guests = guests;
-	}
-
-	public void setRoom(String room)
-	{
-		this.room = room;
 	}
 
 	public void setRoomNumber(Integer roomNumber)
@@ -211,13 +209,37 @@ public class BookingAction extends HotelBaseAction<Booking>
 			addFieldError( "booking.checkout", "Data de checkout é obrigatório." );
 		}
 
-		if (!isCheckinBeforeCheckout( checkin, checkout ))
+		if (checkin != null && checkout != null)
 		{
-			addFieldError( "booking.checkout", "Data de checkout deve ser posterior a data de checkin." );
+			if (!isCheckinBeforeCheckout( checkin, checkout ))
+			{
+				addFieldError( "booking.checkout", "Data de checkout deve ser posterior a data de checkin." );
+			}
+			else if (!hasMoreThanOneDayBetween( checkin, checkout ))
+			{
+				addFieldError( "booking.checkout",
+						"Data de checkout deve ser pelo menos um dia após a data de checkin." );
+			}
 		}
-		else if (!hasMoreThanOneDayBetween( checkin, checkout ))
+
+		Integer guests2 = booking.getGuests();
+		if (guests2 == null || guests2 <= 0)
 		{
-			addFieldError( "booking.checkout", "Data de checkout deve ser pelo menos um dia após a data de checkin." );
+			addFieldError( "booking.guests", "Número de hóspedes é obrigatório." );
+		}
+		else
+		{
+			Room room = HotelManagerFacade.getRoomById( roomNumber );
+			Integer maximumCapacity = room.getMaximumCapacity();
+
+			if (guests2 > maximumCapacity + 1)
+			{
+				String msg = String
+						.format(
+								"Número de hóspedes excede a capacidade máxima do quarto. Quarto suporta %s hóspedes, mais uma cama extra.",
+								maximumCapacity );
+				addFieldError( "booking.guests", msg );
+			}
 		}
 
 	}

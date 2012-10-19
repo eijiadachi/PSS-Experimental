@@ -7,18 +7,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Clientes cadastrados</title>
+<title>Reservas cadastradas</title>
 </head>
 <body>
 	<%
-		Object object = session.getAttribute( HotelConstants.ALL_CLIENTS_ATTR );
+		Object object = session.getAttribute( HotelConstants.ALL_BOOKINGS_ATTR );
 		if( object != null )
 		{
-			List<Client> allClients = (List<Client>)object;
-			for(Client client : allClients )
+			List<Booking> allBookings = (List<Booking>)object;
+			for(Booking booking : allBookings )
 			{
 	%>
-		<%= client.toString() %><p>
+		<%= booking.toString() %><p>
 	<%	
 			}
 		}

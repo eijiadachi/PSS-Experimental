@@ -63,4 +63,10 @@ public class Booking extends Bean
 	{
 		this.room = room;
 	}
+
+	@Override
+	public String toString()
+	{
+		return String.format( "Cliente: %s - Quarto: %s - Checkin: %s - Checkout: %s", client, room, checkin, checkout );
+	}
 }

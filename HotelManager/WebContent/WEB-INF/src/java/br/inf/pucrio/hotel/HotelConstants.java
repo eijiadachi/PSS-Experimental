@@ -9,4 +9,6 @@ public final class HotelConstants
 	public static final String ALL_CLIENTS_ATTR = "all_clients";
 
 	public static final String ALL_ROOMS_ATTR = "all_rooms";
+
+	public static final String ALL_BOOKINGS_ATTR = "all_bookings";
 }

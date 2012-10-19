@@ -28,6 +28,9 @@
     <li>
     	<a href="<s:url action="ListAllRooms"/>">Listar Todos Quartos</a>
     </li>
+    <li>
+    	<a href="<s:url action="ListAllBookings"/>">Listar Todas Reservas</a>
+    </li>
 </ul>
 
 </body>
