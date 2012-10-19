@@ -1,5 +1,6 @@
 package br.inf.pucrio.hotel.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import br.inf.pucrio.hotel.exception.HotelException;
@@ -8,6 +9,17 @@ import br.inf.pucrio.hotel.model.Client;
 public class ClientDAO extends TransientDAOImpl<Client>
 {
 	private static Integer counter = 100;
+
+	public ClientDAO()
+	{
+		Client client = new Client();
+
+		client.setCpf( "063.931.944-05" );
+		client.setName( "Eiji Adachi Medeiros Barbosa" );
+		client.setBirthday( new Date( "17/10/95" ) );
+
+		this.add( client );
+	}
 
 	@Override
 	public void add(Client client)

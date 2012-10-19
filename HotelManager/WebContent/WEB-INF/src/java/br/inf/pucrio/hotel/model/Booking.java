@@ -1,5 +1,6 @@
 package br.inf.pucrio.hotel.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Booking extends Bean
@@ -39,6 +40,11 @@ public class Booking extends Bean
 		return room;
 	}
 
+	public boolean hasExtraBed()
+	{
+		return guests > getRoom().getMaximumCapacity();
+	}
+
 	public void setCheckin(Date checkin)
 	{
 		this.checkin = checkin;
@@ -67,6 +73,10 @@ public class Booking extends Bean
 	@Override
 	public String toString()
 	{
-		return String.format( "Cliente: %s - Quarto: %s - Checkin: %s - Checkout: %s", client, room, checkin, checkout );
+		String dateFormat = "dd-MM-yyyy";
+		String checkinStr = new SimpleDateFormat( dateFormat ).format( checkin );
+		String checkoutStr = new SimpleDateFormat( dateFormat ).format( checkout );
+		return String.format( "Cliente: %s - Quarto: %s - Checkin: %s - Checkout: %s - Guests: %s - Extra bed: %s",
+				client, room, checkinStr, checkoutStr, guests, hasExtraBed() );
 	}
 }

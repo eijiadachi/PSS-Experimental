@@ -34,6 +34,12 @@ public class HotelManagerFacade
 		clientDAO.add( client );
 	}
 
+	public static List<Booking> getBookingsOfRoom(Integer roomId)
+	{
+		List<Booking> bookings = bookingDAO.getBookings( roomId );
+		return bookings;
+	}
+
 	public static Client getClientById(Integer id)
 	{
 		Client client = clientDAO.getById( id );

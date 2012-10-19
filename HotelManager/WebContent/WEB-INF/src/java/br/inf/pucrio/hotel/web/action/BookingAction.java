@@ -94,6 +94,45 @@ public class BookingAction extends HotelBaseAction<Booking>
 		return isCheckinBeforeCheckout;
 	}
 
+	private boolean isRoomAvailable(Integer roomNumber2, Date checkin, Date checkout)
+	{
+		List<Booking> bookings = HotelManagerFacade.getBookingsOfRoom( roomNumber2 );
+		if (bookings == null || bookings.isEmpty())
+		{
+			return true;
+		}
+
+		long checkinTime = checkin.getTime();
+		long checkoutTime = checkout.getTime();
+
+		for (Booking booking : bookings)
+		{
+			Date checkinBooked = booking.getCheckin();
+			long checkinBookedTime = checkinBooked.getTime();
+
+			Date checkoutBooked = booking.getCheckout();
+			long checkoutBookedTime = checkoutBooked.getTime();
+
+			// Se o início que se deseja reservar cair entre um período ocupado
+			boolean isCheckinAfterCheckinBooked = checkinTime >= checkinBookedTime;
+			boolean isCheckinBeforeCheckoutBooked = checkinTime < checkoutBookedTime;
+			if (isCheckinAfterCheckinBooked && isCheckinBeforeCheckoutBooked)
+			{
+				return false;
+			}
+
+			// Se o fim que se deseja reservar cair entre um período ocupado
+			boolean isCheckoutAfterCheckinBooked = checkoutTime > checkinBookedTime;
+			boolean isCheckoutBeforeCheckoutBooked = checkoutTime <= checkoutBookedTime;
+			if (isCheckoutAfterCheckinBooked && isCheckoutBeforeCheckoutBooked)
+			{
+				return false;
+			}
+
+		}
+		return true;
+	}
+
 	private boolean isValidClient(Integer clientId)
 	{
 		Client client = HotelManagerFacade.getClientById( clientId );
@@ -220,6 +259,11 @@ public class BookingAction extends HotelBaseAction<Booking>
 				addFieldError( "booking.checkout",
 						"Data de checkout deve ser pelo menos um dia após a data de checkin." );
 			}
+		}
+
+		if (!isRoomAvailable( roomNumber, checkin, checkout ))
+		{
+			addFieldError( "roomNumber", "Quarto indisponível no período desejado." );
 		}
 
 		Integer guests2 = booking.getGuests();
