@@ -11,11 +11,11 @@ import br.inf.pucrio.hotel.model.Room;
 
 public class HotelManagerFacade
 {
+	private static BookingDAO bookingDAO;
+
 	private static ClientDAO clientDAO;
 
 	private static RoomDAO roomDAO;
-
-	private static BookingDAO bookingDAO;
 
 	static
 	{
@@ -34,9 +34,15 @@ public class HotelManagerFacade
 		clientDAO.add( client );
 	}
 
+	public static List<Booking> getBookingsOfClient(Integer clientId)
+	{
+		List<Booking> bookings = bookingDAO.getBookingsOfClient( clientId );
+		return bookings;
+	}
+
 	public static List<Booking> getBookingsOfRoom(Integer roomId)
 	{
-		List<Booking> bookings = bookingDAO.getBookings( roomId );
+		List<Booking> bookings = bookingDAO.getBookingsOfRoom( roomId );
 		return bookings;
 	}
 

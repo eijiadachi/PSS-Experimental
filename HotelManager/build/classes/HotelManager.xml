@@ -24,5 +24,10 @@
             <result>/pages/{1}Form.jsp</result>
         </action>
         
+        <action name="*Search" class="br.inf.pucrio.hotel.web.action.{1}Action" method="search">
+            <result name="success">/pages/{1}SearchResult.jsp</result>
+            <result name="input">/pages/{1}SearchForm.jsp</result>
+        </action>
+        
     </package>
 </struts>

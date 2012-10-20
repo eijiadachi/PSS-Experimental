@@ -9,13 +9,17 @@ import java.util.regex.Pattern;
 import br.inf.pucrio.hotel.HotelConstants;
 import br.inf.pucrio.hotel.HotelManagerFacade;
 import br.inf.pucrio.hotel.exception.HotelException;
+import br.inf.pucrio.hotel.model.Booking;
 import br.inf.pucrio.hotel.model.Client;
+import br.inf.pucrio.hotel.model.ClientSearchResult;
 
 public class ClientAction extends HotelBaseAction<Client>
 {
 	private static final long serialVersionUID = 1L;
 
 	private Client client;
+
+	private Integer id;
 
 	@Override
 	public String add()
@@ -44,6 +48,11 @@ public class ClientAction extends HotelBaseAction<Client>
 		return client;
 	}
 
+	public Integer getId()
+	{
+		return id;
+	}
+
 	private boolean isEmptyString(final String str)
 	{
 		return str == null || str.isEmpty();
@@ -70,9 +79,33 @@ public class ClientAction extends HotelBaseAction<Client>
 		return SUCCESS;
 	}
 
+	@Override
+	public String search()
+	{
+		Integer clientId = getId();
+
+		Client client = HotelManagerFacade.getClientById( clientId );
+
+		List<Booking> bookings = HotelManagerFacade.getBookingsOfClient( clientId );
+
+		ClientSearchResult result = new ClientSearchResult();
+
+		result.setClient( client );
+		result.setBookings( bookings );
+
+		saveOnSession( HotelConstants.RESULT_CLIENT_ATTR, result );
+
+		return SUCCESS;
+	}
+
 	public void setClient(Client client)
 	{
 		this.client = client;
+	}
+
+	public void setId(Integer id)
+	{
+		this.id = id;
 	}
 
 	@Override
@@ -81,6 +114,10 @@ public class ClientAction extends HotelBaseAction<Client>
 		Client localClient = getClient();
 		if (localClient == null)
 		{
+			if (getId() == null)
+			{
+				addFieldError( "id", "C—digo do Cliente Ž obrigat—rio." );
+			}
 			return;
 		}
 
@@ -103,17 +140,21 @@ public class ClientAction extends HotelBaseAction<Client>
 
 		Date birthday = localClient.getBirthday();
 
-		Calendar birthdayCalendar = Calendar.getInstance();
-		birthdayCalendar.setTime( birthday );
-
-		Calendar currentCalendar = Calendar.getInstance();
-		currentCalendar.setTimeInMillis( System.currentTimeMillis() );
-
-		boolean isAfter = birthdayCalendar.after( currentCalendar );
-
-		if (isAfter)
+		if (birthday != null)
 		{
-			addFieldError( "client.birthday", "Data de Nascimento deve ser posterior a data de hoje." );
+			Calendar birthdayCalendar = Calendar.getInstance();
+			birthdayCalendar.setTime( birthday );
+
+			Calendar currentCalendar = Calendar.getInstance();
+			currentCalendar.setTimeInMillis( System.currentTimeMillis() );
+
+			boolean isAfter = birthdayCalendar.after( currentCalendar );
+
+			if (isAfter)
+			{
+				addFieldError( "client.birthday", "Data de Nascimento deve ser posterior a data de hoje." );
+			}
+
 		}
 	}
 }

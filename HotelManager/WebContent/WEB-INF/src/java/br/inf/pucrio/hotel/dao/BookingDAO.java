@@ -9,9 +9,11 @@ import br.inf.pucrio.hotel.model.Booking;
 
 public class BookingDAO extends TransientDAOImpl<Booking>
 {
-	private static Integer counter = 0;
+	private static final Map<Integer, List<Booking>> bookingsPerClientIdMap = new TreeMap<Integer, List<Booking>>();
 
-	private static final Map<Integer, List<Booking>> bookingsPerRoomId = new TreeMap<Integer, List<Booking>>();
+	private static final Map<Integer, List<Booking>> bookingsPerRoomIdMap = new TreeMap<Integer, List<Booking>>();
+
+	private static Integer counter = 0;
 
 	@Override
 	public void add(Booking booking)
@@ -20,21 +22,35 @@ public class BookingDAO extends TransientDAOImpl<Booking>
 
 		Integer roomId = booking.getRoom().getId();
 
-		List<Booking> bookingsList = bookingsPerRoomId.get( roomId );
-		if (bookingsList == null)
-		{
-			bookingsList = new ArrayList<Booking>();
-			bookingsPerRoomId.put( roomId, bookingsList );
-		}
+		addOrUpdate( bookingsPerRoomIdMap, roomId, booking );
 
-		bookingsList.add( booking );
+		Integer clientId = booking.getClient().getId();
+
+		addOrUpdate( bookingsPerClientIdMap, clientId, booking );
 
 		super.add( booking );
 	}
 
-	public List<Booking> getBookings(Integer roomId)
+	private <T> void addOrUpdate(Map<Integer, List<T>> map, Integer key, T element)
 	{
-		List<Booking> bookingsList = bookingsPerRoomId.get( roomId );
+		List<T> list = map.get( key );
+		if (list == null)
+		{
+			list = new ArrayList<T>();
+			map.put( key, list );
+		}
+		list.add( element );
+	}
+
+	public List<Booking> getBookingsOfClient(Integer clientId)
+	{
+		List<Booking> clientBookingsList = bookingsPerClientIdMap.get( clientId );
+		return clientBookingsList;
+	}
+
+	public List<Booking> getBookingsOfRoom(Integer roomId)
+	{
+		List<Booking> bookingsList = bookingsPerRoomIdMap.get( roomId );
 		return bookingsList;
 	}
 }

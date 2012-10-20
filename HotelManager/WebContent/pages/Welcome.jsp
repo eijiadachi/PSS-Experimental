@@ -22,6 +22,9 @@
     <li>
     	<a href="<s:url action="BookingForm"/>">Cadastrar Reserva</a>
     </li>
+    <li>
+    	<a href="<s:url action="ClientSearchForm"/>">Consultar Cliente</a>
+    </li>
 	<li>
     	<a href="<s:url action="ListAllClients"/>">Listar Todos Clientes</a>
     </li>

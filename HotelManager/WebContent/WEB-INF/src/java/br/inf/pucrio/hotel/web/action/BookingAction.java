@@ -18,9 +18,9 @@ public class BookingAction extends HotelBaseAction<Booking>
 
 	private Integer clientCode;
 
-	private Integer roomNumber;
-
 	private Integer guests;
+
+	private Integer roomNumber;
 
 	public BookingAction()
 	{
@@ -152,6 +152,13 @@ public class BookingAction extends HotelBaseAction<Booking>
 		List<Booking> allBookings = HotelManagerFacade.listAllBookings();
 		saveOnSession( HotelConstants.ALL_BOOKINGS_ATTR, allBookings );
 		return SUCCESS;
+	}
+
+	@Override
+	public String search()
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public void setBooking(Booking booking)

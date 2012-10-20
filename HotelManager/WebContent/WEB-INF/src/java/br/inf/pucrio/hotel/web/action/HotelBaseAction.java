@@ -18,15 +18,12 @@ public abstract class HotelBaseAction<T extends Bean> extends ActionSupport impl
 
 	public abstract String listAll();
 
-	public void saveOnRequest(final String attributeKey, final Object attributeValue)
-	{
-		request.setAttribute( attributeKey, attributeValue );
-	}
-
 	public void saveOnSession(final String attributeKey, final Object attributeValue)
 	{
 		request.getSession().setAttribute( attributeKey, attributeValue );
 	}
+
+	public abstract String search();
 
 	@Override
 	public void setServletRequest(HttpServletRequest arg0)

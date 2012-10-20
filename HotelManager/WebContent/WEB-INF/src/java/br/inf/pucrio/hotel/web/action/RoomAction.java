@@ -27,4 +27,11 @@ public class RoomAction extends HotelBaseAction<Room>
 		return SUCCESS;
 	}
 
+	@Override
+	public String search()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
