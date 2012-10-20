@@ -5,15 +5,15 @@ import java.util.Date;
 
 public class Booking extends Bean
 {
-	private Client client;
-
-	private Room room;
-
 	private Date checkin;
 
 	private Date checkout;
 
+	private Client client;
+
 	private Integer guests;
+
+	private Room room;
 
 	public Date getCheckin()
 	{
@@ -74,9 +74,9 @@ public class Booking extends Bean
 	public String toString()
 	{
 		String dateFormat = "dd-MM-yyyy";
-		String checkinStr = new SimpleDateFormat( dateFormat ).format( checkin );
-		String checkoutStr = new SimpleDateFormat( dateFormat ).format( checkout );
-		return String.format( "Cliente: %s - Quarto: %s - Checkin: %s - Checkout: %s - Guests: %s - Extra bed: %s",
-				client, room, checkinStr, checkoutStr, guests, hasExtraBed() );
+		String checkinStr = checkin == null ? "" : new SimpleDateFormat( dateFormat ).format( checkin );
+		String checkoutStr = checkout == null ? "" : new SimpleDateFormat( dateFormat ).format( checkout );
+		return String.format( "Cliente: %s - Quarto: %s - Checkin: %s - Checkout: %s - H—spedes: %s - Cama extra: %s",
+				client, room, checkinStr, checkoutStr, guests, hasExtraBed() ? "Sim" : "N‹o" );
 	}
 }

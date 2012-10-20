@@ -17,11 +17,14 @@ public class HotelManagerFacade
 
 	private static RoomDAO roomDAO;
 
+	private static BookingDAO stayDAO;
+
 	static
 	{
+		bookingDAO = new BookingDAO();
 		clientDAO = new ClientDAO();
 		roomDAO = new RoomDAO();
-		bookingDAO = new BookingDAO();
+		stayDAO = new BookingDAO();
 	}
 
 	public static void addBooking(Booking booking)
@@ -32,6 +35,11 @@ public class HotelManagerFacade
 	public static void addClient(Client client)
 	{
 		clientDAO.add( client );
+	}
+
+	public static void addStay(Booking stay)
+	{
+		stayDAO.add( stay );
 	}
 
 	public static List<Booking> getBookingsOfClient(Integer clientId)
@@ -56,6 +64,18 @@ public class HotelManagerFacade
 	{
 		Room room = roomDAO.getById( roomId );
 		return room;
+	}
+
+	public static List<Booking> getStaysOfClient(Integer clientId)
+	{
+		List<Booking> bookings = stayDAO.getBookingsOfClient( clientId );
+		return bookings;
+	}
+
+	public static List<Booking> getStaysOfRoom(Integer roomId)
+	{
+		List<Booking> bookings = stayDAO.getBookingsOfRoom( roomId );
+		return bookings;
 	}
 
 	public static boolean isCpfUnique(String cpf)
@@ -90,5 +110,11 @@ public class HotelManagerFacade
 	{
 		List<Room> allRooms = roomDAO.getAll();
 		return allRooms;
+	}
+
+	public static List<Booking> listAllStays()
+	{
+		List<Booking> allStays = stayDAO.getAll();
+		return allStays;
 	}
 }

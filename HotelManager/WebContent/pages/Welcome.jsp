@@ -23,6 +23,9 @@
     	<a href="<s:url action="BookingForm"/>">Cadastrar Reserva</a>
     </li>
     <li>
+    	<a href="<s:url action="StayForm"/>">Fazer Check-In</a>
+    </li>
+    <li>
     	<a href="<s:url action="ClientSearchForm"/>">Consultar Cliente</a>
     </li>
 	<li>
@@ -33,6 +36,9 @@
     </li>
     <li>
     	<a href="<s:url action="ListAllBookings"/>">Listar Todas Reservas</a>
+    </li>
+    <li>
+    	<a href="<s:url action="ListAllStays"/>">Listar Todas Ocupações</a>
     </li>
 </ul>
 
