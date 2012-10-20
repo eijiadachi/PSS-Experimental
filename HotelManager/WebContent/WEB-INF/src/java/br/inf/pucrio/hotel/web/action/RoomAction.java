@@ -39,6 +39,11 @@ public class RoomAction extends HotelBaseAction<Room>
 	@Override
 	public String search()
 	{
+		if (id == null)
+		{
+			addFieldError( "id", "C—digo do quarto Ž obrigat—rio." );
+			return INPUT;
+		}
 		Room room = HotelManagerFacade.getRoomById( id );
 
 		List<Booking> bookingsOfRoom = HotelManagerFacade.getBookingsOfRoom( id );
@@ -63,11 +68,7 @@ public class RoomAction extends HotelBaseAction<Room>
 	@Override
 	public void validate()
 	{
-		if (id == null)
-		{
-			addFieldError( "id", "C—digo do quarto Ž obrigat—rio." );
-		}
-		else
+		if (id != null)
 		{
 			Room room = HotelManagerFacade.getRoomById( id );
 			if (room == null)

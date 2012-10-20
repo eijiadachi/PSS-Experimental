@@ -5,7 +5,7 @@
 
 <struts>
     <package name="HotelManager" namespace="/pss" extends="default">
-        <action name="Welcome" class="br.inf.pucrio.hotel.web.action.RedirectAction">
+        <action name="Welcome" class="br.inf.pucrio.hotel.web.action.WelcomeAction">
             <result>/pages/Welcome.jsp</result>
         </action>
         

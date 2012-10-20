@@ -55,10 +55,4 @@ public class BookingDAO extends TransientDAOImpl<Booking>
 		List<Booking> bookingsList = bookingsPerRoomIdMap.get( roomId );
 		return bookingsList;
 	}
-
-	@Override
-	public Integer initCounter()
-	{
-		return 0;
-	}
 }

@@ -84,6 +84,12 @@ public class ClientAction extends HotelBaseAction<Client>
 	{
 		Integer clientId = getId();
 
+		if (clientId == null)
+		{
+			addFieldError( "id", "C—digo do Cliente Ž obrigat—rio." );
+			return INPUT;
+		}
+
 		Client client = HotelManagerFacade.getClientById( clientId );
 
 		List<Booking> bookings = HotelManagerFacade.getBookingsOfClient( clientId );
@@ -117,10 +123,6 @@ public class ClientAction extends HotelBaseAction<Client>
 		Client localClient = getClient();
 		if (localClient == null)
 		{
-			if (getId() == null)
-			{
-				addFieldError( "id", "C—digo do Cliente Ž obrigat—rio." );
-			}
 			return;
 		}
 

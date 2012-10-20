@@ -21,10 +21,4 @@ public class RoomDAO extends TransientDAOImpl<Room>
 			this.add( new Room( type ) );
 		}
 	}
-
-	@Override
-	public Integer initCounter()
-	{
-		return 0;
-	}
 }

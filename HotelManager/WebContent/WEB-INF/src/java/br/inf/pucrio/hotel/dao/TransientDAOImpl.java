@@ -8,14 +8,20 @@ import br.inf.pucrio.hotel.model.Bean;
 public abstract class TransientDAOImpl<T extends Bean> implements IGenericDAO<T>
 {
 
-	private static Integer counter;
+	private Integer counter;
 
 	private final List<T> repository;
 
 	public TransientDAOImpl()
 	{
 		this.repository = new ArrayList<T>();
-		counter = this.initCounter();
+		counter = 0;
+	}
+
+	public TransientDAOImpl(Integer initialCounter)
+	{
+		this.repository = new ArrayList<T>();
+		counter = initialCounter;
 	}
 
 	@Override
@@ -58,8 +64,6 @@ public abstract class TransientDAOImpl<T extends Bean> implements IGenericDAO<T>
 	{
 		return repository;
 	}
-
-	public abstract Integer initCounter();
 
 	@Override
 	public void update(T element)
