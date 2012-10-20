@@ -26,6 +26,9 @@
     	<a href="<s:url action="StayForm"/>">Cadastrar Ocupação (Fazer Check-In)</a>
     </li>
     <li>
+    	<a href="<s:url action="LeaveForm"/>">Cadastrar Desocupação (Fazer Check-Out)</a>
+    </li>
+    <li>
     	<a href="<s:url action="ClientSearchForm"/>">Consultar Cliente</a>
     </li>
     <li>
