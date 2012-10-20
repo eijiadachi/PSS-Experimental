@@ -5,7 +5,6 @@ import br.inf.pucrio.hotel.model.Room.RoomType;
 
 public class RoomDAO extends TransientDAOImpl<Room>
 {
-	private static Integer counter = 0;
 
 	public RoomDAO()
 	{
@@ -15,18 +14,17 @@ public class RoomDAO extends TransientDAOImpl<Room>
 		this.addRoom( RoomType.SUITE, 2 );
 	}
 
-	@Override
-	public void add(Room room)
-	{
-		room.setId( ++counter );
-		super.add( room );
-	}
-
 	private void addRoom(RoomType type, Integer quantity)
 	{
 		for (int i = 0; i < quantity; i++)
 		{
 			this.add( new Room( type ) );
 		}
+	}
+
+	@Override
+	public Integer initCounter()
+	{
+		return 0;
 	}
 }

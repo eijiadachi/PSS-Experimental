@@ -5,19 +5,23 @@ import java.util.List;
 
 import br.inf.pucrio.hotel.model.Bean;
 
-public class TransientDAOImpl<T extends Bean> implements IGenericDAO<T>
+public abstract class TransientDAOImpl<T extends Bean> implements IGenericDAO<T>
 {
+
+	private static Integer counter;
 
 	private final List<T> repository;
 
 	public TransientDAOImpl()
 	{
 		this.repository = new ArrayList<T>();
+		counter = this.initCounter();
 	}
 
 	@Override
 	public void add(T element)
 	{
+		element.setId( ++counter );
 		this.getRepository().add( element );
 	}
 
@@ -54,6 +58,8 @@ public class TransientDAOImpl<T extends Bean> implements IGenericDAO<T>
 	{
 		return repository;
 	}
+
+	public abstract Integer initCounter();
 
 	@Override
 	public void update(T element)

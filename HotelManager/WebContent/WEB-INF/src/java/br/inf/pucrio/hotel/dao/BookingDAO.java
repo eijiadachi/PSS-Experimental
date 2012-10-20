@@ -13,12 +13,10 @@ public class BookingDAO extends TransientDAOImpl<Booking>
 
 	private static final Map<Integer, List<Booking>> bookingsPerRoomIdMap = new TreeMap<Integer, List<Booking>>();
 
-	private static Integer counter = 0;
-
 	@Override
 	public void add(Booking booking)
 	{
-		booking.setId( ++counter );
+		super.add( booking );
 
 		Integer roomId = booking.getRoom().getId();
 
@@ -27,8 +25,6 @@ public class BookingDAO extends TransientDAOImpl<Booking>
 		Integer clientId = booking.getClient().getId();
 
 		addOrUpdate( bookingsPerClientIdMap, clientId, booking );
-
-		super.add( booking );
 	}
 
 	private <T> void addOrUpdate(Map<Integer, List<T>> map, Integer key, T element)
@@ -52,5 +48,11 @@ public class BookingDAO extends TransientDAOImpl<Booking>
 	{
 		List<Booking> bookingsList = bookingsPerRoomIdMap.get( roomId );
 		return bookingsList;
+	}
+
+	@Override
+	public Integer initCounter()
+	{
+		return 0;
 	}
 }
