@@ -9,9 +9,15 @@ import br.inf.pucrio.hotel.model.Booking;
 
 public class BookingDAO extends TransientDAOImpl<Booking>
 {
-	private static final Map<Integer, List<Booking>> bookingsPerClientIdMap = new TreeMap<Integer, List<Booking>>();
+	private final Map<Integer, List<Booking>> bookingsPerClientIdMap;
 
-	private static final Map<Integer, List<Booking>> bookingsPerRoomIdMap = new TreeMap<Integer, List<Booking>>();
+	private final Map<Integer, List<Booking>> bookingsPerRoomIdMap;
+
+	public BookingDAO()
+	{
+		bookingsPerClientIdMap = new TreeMap<Integer, List<Booking>>();
+		bookingsPerRoomIdMap = new TreeMap<Integer, List<Booking>>();
+	}
 
 	@Override
 	public void add(Booking booking)

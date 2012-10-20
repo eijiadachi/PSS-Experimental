@@ -88,10 +88,13 @@ public class ClientAction extends HotelBaseAction<Client>
 
 		List<Booking> bookings = HotelManagerFacade.getBookingsOfClient( clientId );
 
+		List<Booking> stays = HotelManagerFacade.getStaysOfClient( clientId );
+
 		ClientSearchResult result = new ClientSearchResult();
 
 		result.setClient( client );
 		result.setBookings( bookings );
+		result.setStays( stays );
 
 		saveOnSession( HotelConstants.RESULT_CLIENT_ATTR, result );
 

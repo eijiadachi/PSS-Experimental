@@ -8,6 +8,8 @@ public class ClientSearchResult
 
 	private Client client;
 
+	private List<Booking> stays;
+
 	public List<Booking> getBookings()
 	{
 		return bookings;
@@ -18,6 +20,11 @@ public class ClientSearchResult
 		return client;
 	}
 
+	public List<Booking> getStays()
+	{
+		return stays;
+	}
+
 	public void setBookings(List<Booking> bookings)
 	{
 		this.bookings = bookings;
@@ -26,5 +33,10 @@ public class ClientSearchResult
 	public void setClient(Client client)
 	{
 		this.client = client;
+	}
+
+	public void setStays(List<Booking> stays)
+	{
+		this.stays = stays;
 	}
 }

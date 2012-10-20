@@ -18,6 +18,7 @@
 		ClientSearchResult result = (ClientSearchResult) session.getAttribute( HotelConstants.RESULT_CLIENT_ATTR );
 		Client client = result.getClient();
 		List<Booking> bookings = result.getBookings();
+		List<Booking> stays = result.getStays();
 %>
 		Dados do Cliente:<p>
 		<ul>
@@ -52,7 +53,31 @@
 		}
 %>
 		</ul>
-
+		
+		Histórico de Ocupações:<p>
+		<ul>
+<%
+		if( stays != null)
+		{
+			for(Booking booking : stays )
+			{
+%>
+				<li><%= booking.getRoom().toString() %></li>
+				<li><%= booking.getCheckin() %></li>
+				<li><%= booking.getCheckout() %></li>
+				<li><%= booking.getGuests() %></li>
+			
+<%
+			}
+		}
+		else
+		{
+%>
+			<li>Cliente sem ocupações.</li>
+<%			
+		}
+%>
+		</ul>
 
 </body>
 </html>
