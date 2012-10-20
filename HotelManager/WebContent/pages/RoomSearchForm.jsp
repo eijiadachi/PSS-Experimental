@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Consulta de Cliente</title>
+<title>Consulta de Quarto</title>
 </head>
 <body>
-	<h3> Consulta de Cliente </h3>
+	<h3> Consulta de Quarto </h3>
 
 	<s:if test="hasActionErrors()">
 		<div class="error">
@@ -16,10 +16,10 @@
 		</div>
 	</s:if>
 
-	<s:div id="clientSearch">
-		<s:form action="ClientSearch" validate="false">
-			<s:textfield name="id" label="Código do Cliente"/>
-			<s:submit value="Submit" targets="clientSearch" notifyTopics="/ajaxloginCancel"/>
+	<s:div id="roomSearch">
+		<s:form action="RoomSearch" validate="false">
+			<s:textfield name="id" label="Código do Quarto"/>
+			<s:submit value="Submit" targets="roomSearch" notifyTopics="/ajaxloginCancel"/>
 			<s:submit action="Welcome" value="Cancel" onclick="form.onsubmit=null"/>
 		</s:form>
 	</s:div>
