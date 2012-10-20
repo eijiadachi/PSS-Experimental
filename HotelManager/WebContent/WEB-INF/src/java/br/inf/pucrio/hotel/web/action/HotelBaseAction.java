@@ -12,6 +12,8 @@ public abstract class HotelBaseAction<T extends Bean> extends ActionSupport impl
 {
 	private static final long serialVersionUID = 1L;
 
+	protected final String DETAIL = "detail";
+
 	protected HttpServletRequest request;
 
 	public abstract String add();

@@ -5,6 +5,11 @@ import java.util.Date;
 
 public class Booking extends Bean
 {
+	public enum Status
+	{
+		FINISHED, OCCUPIED, RESERVED
+	}
+
 	private Date checkin;
 
 	private Date checkout;
@@ -14,6 +19,8 @@ public class Booking extends Bean
 	private Integer guests;
 
 	private Room room;
+
+	private Status status;
 
 	public Date getCheckin()
 	{
@@ -38,6 +45,11 @@ public class Booking extends Bean
 	public Room getRoom()
 	{
 		return room;
+	}
+
+	public Status getStatus()
+	{
+		return status;
 	}
 
 	public boolean hasExtraBed()
@@ -68,6 +80,11 @@ public class Booking extends Bean
 	public void setRoom(Room room)
 	{
 		this.room = room;
+	}
+
+	public void setStatus(Status status)
+	{
+		this.status = status;
 	}
 
 	@Override

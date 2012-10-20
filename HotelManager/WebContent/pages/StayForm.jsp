@@ -25,6 +25,7 @@
 			<s:textfield name="clientCode" label="Código do Cliente"/>
 			<s:textfield name="roomNumber" label="Número do Quarto"/>
 			<s:textfield name="booking.checkin" label="Data de Checkin"/>
+			<s:textfield name="booking.checkout" label="Data prevista de Checkout"/>
 			<s:textfield name="booking.guests" label="Número de Hóspedes"/>
 			
 			<s:submit value="Submit" targets="checkinRegister" notifyTopics="/ajaxloginCancel"/>

@@ -6,6 +6,7 @@ import br.inf.pucrio.hotel.dao.BookingDAO;
 import br.inf.pucrio.hotel.dao.ClientDAO;
 import br.inf.pucrio.hotel.dao.RoomDAO;
 import br.inf.pucrio.hotel.model.Booking;
+import br.inf.pucrio.hotel.model.Booking.Status;
 import br.inf.pucrio.hotel.model.Client;
 import br.inf.pucrio.hotel.model.Room;
 
@@ -29,6 +30,7 @@ public class HotelManagerFacade
 
 	public static void addBooking(Booking booking)
 	{
+		booking.setStatus( Status.RESERVED );
 		bookingDAO.add( booking );
 	}
 
@@ -44,6 +46,7 @@ public class HotelManagerFacade
 
 	public static void addStay(Booking stay)
 	{
+		stay.setStatus( Status.OCCUPIED );
 		stayDAO.add( stay );
 	}
 

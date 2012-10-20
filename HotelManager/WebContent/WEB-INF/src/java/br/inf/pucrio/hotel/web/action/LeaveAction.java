@@ -1,12 +1,11 @@
 package br.inf.pucrio.hotel.web.action;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import br.inf.pucrio.hotel.HotelConstants;
 import br.inf.pucrio.hotel.HotelManagerFacade;
 import br.inf.pucrio.hotel.model.Booking;
+import br.inf.pucrio.hotel.model.Booking.Status;
 import br.inf.pucrio.hotel.model.LeaveResult;
 
 public class LeaveAction extends HotelBaseAction<Booking>
@@ -23,10 +22,8 @@ public class LeaveAction extends HotelBaseAction<Booking>
 		Booking checkout = null;
 		for (Booking stay : stays)
 		{
-			if (stay.getCheckout() == null)
+			if (Status.OCCUPIED.equals( stay.getStatus() ))
 			{
-				Date currentDate = Calendar.getInstance().getTime();
-				stay.setCheckout( currentDate );
 				checkout = stay;
 				break;
 			}
@@ -34,12 +31,13 @@ public class LeaveAction extends HotelBaseAction<Booking>
 
 		if (checkout != null)
 		{
+			checkout.setStatus( Status.FINISHED );
 			LeaveResult result = new LeaveResult();
 			result.setStay( checkout );
 			saveOnSession( HotelConstants.RESULT_LEAVE_ATTR, result );
 		}
 
-		return "detail";
+		return DETAIL;
 	}
 
 	public Integer getId()
