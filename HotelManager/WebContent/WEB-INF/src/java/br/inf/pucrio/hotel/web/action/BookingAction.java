@@ -108,8 +108,14 @@ public class BookingAction extends HotelBaseAction<Booking>
 		long checkoutTime = checkout.getTime();
 
 		List<Booking> occupations = new ArrayList<Booking>();
-		occupations.addAll( stays );
-		occupations.addAll( bookings );
+		if (stays != null)
+		{
+			occupations.addAll( stays );
+		}
+		if (bookings != null)
+		{
+			occupations.addAll( bookings );
+		}
 
 		for (Booking occupation : occupations)
 		{

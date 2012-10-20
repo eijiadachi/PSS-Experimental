@@ -125,4 +125,10 @@ public class HotelManagerFacade
 		List<Booking> allStays = stayDAO.getAll();
 		return allStays;
 	}
+
+	public static void removeStay(Booking stay)
+	{
+		stay.setStatus( Status.FINISHED );
+		stayDAO.delete( stay );
+	}
 }

@@ -19,25 +19,26 @@ public class LeaveAction extends HotelBaseAction<Booking>
 	{
 		List<Booking> stays = HotelManagerFacade.getStaysOfRoom( id );
 
-		Booking checkout = null;
-		for (Booking stay : stays)
+		if (stays != null && !stays.isEmpty())
 		{
-			if (Status.OCCUPIED.equals( stay.getStatus() ))
+			for (Booking stay : stays)
 			{
-				checkout = stay;
-				break;
+				if (Status.OCCUPIED.equals( stay.getStatus() ))
+				{
+					HotelManagerFacade.removeStay( stay );
+
+					LeaveResult result = new LeaveResult();
+					result.setStay( stay );
+					saveOnSession( HotelConstants.RESULT_LEAVE_ATTR, result );
+
+					return DETAIL;
+				}
 			}
 		}
 
-		if (checkout != null)
-		{
-			checkout.setStatus( Status.FINISHED );
-			LeaveResult result = new LeaveResult();
-			result.setStay( checkout );
-			saveOnSession( HotelConstants.RESULT_LEAVE_ATTR, result );
-		}
+		addFieldError( "id", String.format( "Quarto %s n‹o est‡ ocupado neste momento.", id ) );
 
-		return DETAIL;
+		return INPUT;
 	}
 
 	public Integer getId()

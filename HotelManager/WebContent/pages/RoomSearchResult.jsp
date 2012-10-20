@@ -64,6 +64,7 @@
 				<li><%= booking.getCheckin() %></li>
 				<li><%= booking.getCheckout() %></li>
 				<li><%= booking.getGuests() %></li>
+				<li><%= booking.getStatus() %></li>
 			
 <%
 			}
