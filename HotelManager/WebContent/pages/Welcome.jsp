@@ -17,13 +17,13 @@
 
 <ul>
 	<li>
-    	<a href="<s:url action="ClientForm"/>">Cadastrar Novo Cliente</a>
+    	<a href="<s:url action="ClientForm"/>">Cadastrar Cliente</a>
     </li>
     <li>
     	<a href="<s:url action="BookingForm"/>">Cadastrar Reserva</a>
     </li>
     <li>
-    	<a href="<s:url action="StayForm"/>">Fazer Check-In</a>
+    	<a href="<s:url action="StayForm"/>">Cadastrar Ocupação (Fazer Check-In)</a>
     </li>
     <li>
     	<a href="<s:url action="ClientSearchForm"/>">Consultar Cliente</a>
