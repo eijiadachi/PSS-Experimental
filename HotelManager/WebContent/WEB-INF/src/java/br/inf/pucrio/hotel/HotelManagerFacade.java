@@ -37,6 +37,11 @@ public class HotelManagerFacade
 		clientDAO.add( client );
 	}
 
+	public static void addRoom(Room room)
+	{
+		roomDAO.add( room );
+	}
+
 	public static void addStay(Booking stay)
 	{
 		stayDAO.add( stay );
