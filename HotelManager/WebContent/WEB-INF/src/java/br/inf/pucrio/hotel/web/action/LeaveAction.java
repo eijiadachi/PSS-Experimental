@@ -8,7 +8,7 @@ import br.inf.pucrio.hotel.model.Booking;
 import br.inf.pucrio.hotel.model.Booking.Status;
 import br.inf.pucrio.hotel.model.LeaveResult;
 
-public class LeaveAction extends HotelBaseAction<Booking>
+public class LeaveAction extends HotelBaseAction
 {
 	private static final long serialVersionUID = 1L;
 

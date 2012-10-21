@@ -30,5 +30,9 @@
             <result name="input">/pages/{1}SearchForm.jsp</result>
         </action>
         
+        <action name="HotelReport" class="br.inf.pucrio.hotel.web.action.HotelAction">
+            <result name="success">/pages/HotelReport.jsp</result>
+        </action>
+        
     </package>
 </struts>

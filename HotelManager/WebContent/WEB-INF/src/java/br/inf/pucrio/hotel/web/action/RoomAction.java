@@ -8,7 +8,7 @@ import br.inf.pucrio.hotel.model.Booking;
 import br.inf.pucrio.hotel.model.Room;
 import br.inf.pucrio.hotel.model.RoomSearchResult;
 
-public class RoomAction extends HotelBaseAction<Room>
+public class RoomAction extends HotelBaseAction
 {
 
 	private static final long serialVersionUID = 1L;

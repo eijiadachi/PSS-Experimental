@@ -1,6 +1,10 @@
 package br.inf.pucrio.hotel;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import br.inf.pucrio.hotel.dao.BookingDAO;
 import br.inf.pucrio.hotel.dao.ClientDAO;
@@ -9,12 +13,17 @@ import br.inf.pucrio.hotel.model.Booking;
 import br.inf.pucrio.hotel.model.Booking.Status;
 import br.inf.pucrio.hotel.model.Client;
 import br.inf.pucrio.hotel.model.Room;
+import br.inf.pucrio.hotel.util.HotelUtil;
 
 public class HotelManagerFacade
 {
 	private static BookingDAO bookingDAO;
 
 	private static ClientDAO clientDAO;
+
+	private static Map<Integer, Integer> guestsAmountPerMonth;
+
+	private static Map<Integer, Float> incomingPerMonth;
 
 	private static RoomDAO roomDAO;
 
@@ -26,6 +35,10 @@ public class HotelManagerFacade
 		clientDAO = new ClientDAO();
 		roomDAO = new RoomDAO();
 		stayDAO = new BookingDAO();
+
+		guestsAmountPerMonth = new TreeMap<Integer, Integer>();
+
+		incomingPerMonth = new TreeMap<Integer, Float>();
 	}
 
 	public static void addBooking(Booking booking)
@@ -66,6 +79,29 @@ public class HotelManagerFacade
 	{
 		Client client = clientDAO.getById( id );
 		return client;
+	}
+
+	public static Integer getGuestsOfMonth(int month)
+	{
+		Integer guestsOfMonth = guestsAmountPerMonth.get( month );
+		if (guestsOfMonth == null)
+		{
+			guestsOfMonth = new Integer( 0 );
+		}
+		return guestsOfMonth;
+	}
+
+	public static Float getIncomingOfMonth(int month)
+	{
+		Float incoming = incomingPerMonth.get( month );
+
+		if (incoming == null)
+		{
+			incoming = new Float( 0.0 );
+		}
+
+		return incoming;
+
 	}
 
 	public static Room getRoomById(Integer roomId)
@@ -130,5 +166,33 @@ public class HotelManagerFacade
 	{
 		stay.setStatus( Status.FINISHED );
 		stayDAO.delete( stay );
+
+		Date checkout = stay.getCheckout();
+
+		Calendar checkoutCalendar = Calendar.getInstance();
+		checkoutCalendar.setTime( checkout );
+
+		int month = checkoutCalendar.get( Calendar.MONTH );
+
+		Integer guestsAmount = guestsAmountPerMonth.get( month );
+		if (guestsAmount == null)
+		{
+			guestsAmount = new Integer( 0 );
+		}
+
+		Integer guests = stay.getGuests();
+		guestsAmount += guests;
+
+		guestsAmountPerMonth.put( month, guestsAmount );
+
+		Float incoming = incomingPerMonth.get( month );
+		if (incoming == null)
+		{
+			incoming = new Float( 0.0 );
+		}
+
+		incoming += HotelUtil.calculateStayPrice( stay );
+
+		incomingPerMonth.put( month, incoming );
 	}
 }

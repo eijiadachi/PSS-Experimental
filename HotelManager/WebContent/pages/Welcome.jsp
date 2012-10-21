@@ -46,6 +46,10 @@
     <li>
     	<a href="<s:url action="ListAllStays"/>">Listar Todas Ocupações</a>
     </li>
+    
+     <li>
+    	<a href="<s:url action="HotelReport"/>">Gerar Relatorio do Hotel</a>
+    </li>
 </ul>
 
 </body>

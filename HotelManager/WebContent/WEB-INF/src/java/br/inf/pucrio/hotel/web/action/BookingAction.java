@@ -12,7 +12,7 @@ import br.inf.pucrio.hotel.model.Client;
 import br.inf.pucrio.hotel.model.Room;
 import br.inf.pucrio.hotel.util.HotelUtil;
 
-public class BookingAction extends HotelBaseAction<Booking>
+public class BookingAction extends HotelBaseAction
 {
 	private static final long serialVersionUID = 1L;
 

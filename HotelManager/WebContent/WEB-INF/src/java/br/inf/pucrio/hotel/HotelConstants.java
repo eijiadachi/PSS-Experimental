@@ -18,6 +18,8 @@ public final class HotelConstants
 
 	public static final String RESULT_CLIENT_ATTR = "result_client";
 
+	public static final String RESULT_HOTEL_REPORT_ATTR = "result_hotel_report";
+
 	public static final String RESULT_LEAVE_ATTR = "result_leave";
 
 	public static final String RESULT_ROOM_ATTR = "result_room";

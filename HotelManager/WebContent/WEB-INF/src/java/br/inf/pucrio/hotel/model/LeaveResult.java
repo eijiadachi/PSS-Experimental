@@ -14,22 +14,7 @@ public class LeaveResult
 
 	public Float getPrice()
 	{
-		Room room = stay.getRoom();
-
-		Float pricePerDay = room.getPrice();
-
-		boolean hasExtraBed = stay.hasExtraBed();
-
-		Long days = getDays();
-
-		Float total = pricePerDay * days;
-
-		if (hasExtraBed)
-		{
-			total = total * 0.3f;
-		}
-
-		return total;
+		return HotelUtil.calculateStayPrice( stay );
 	}
 
 	public Booking getStay()

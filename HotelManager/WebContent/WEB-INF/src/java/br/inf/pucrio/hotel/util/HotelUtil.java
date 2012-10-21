@@ -2,8 +2,31 @@ package br.inf.pucrio.hotel.util;
 
 import java.util.Date;
 
+import br.inf.pucrio.hotel.model.Booking;
+import br.inf.pucrio.hotel.model.Room;
+
 public final class HotelUtil
 {
+	public static Float calculateStayPrice(Booking stay)
+	{
+		Room room = stay.getRoom();
+
+		Float pricePerDay = room.getPrice();
+
+		boolean hasExtraBed = stay.hasExtraBed();
+
+		Long days = HotelUtil.subtractionInDays( stay.getCheckin(), stay.getCheckout() );
+
+		Float total = pricePerDay * days;
+
+		if (hasExtraBed)
+		{
+			total = total * 0.3f;
+		}
+
+		return total;
+	}
+
 	public static boolean hasMoreThanOneDayBetween(Date begin, Date end)
 	{
 		Long subtractionInDays = subtractionInDays( begin, end );

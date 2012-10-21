@@ -4,11 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-import br.inf.pucrio.hotel.model.Bean;
-
 import com.opensymphony.xwork2.ActionSupport;
 
-public abstract class HotelBaseAction<T extends Bean> extends ActionSupport implements ServletRequestAware
+public abstract class HotelBaseAction extends ActionSupport implements ServletRequestAware
 {
 	private static final long serialVersionUID = 1L;
 
