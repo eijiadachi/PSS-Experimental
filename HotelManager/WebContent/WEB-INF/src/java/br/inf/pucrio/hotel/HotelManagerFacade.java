@@ -63,6 +63,13 @@ public class HotelManagerFacade
 		stayDAO.add( stay );
 	}
 
+	public static Booking getBookingById(Integer bookingId)
+	{
+		Booking booking = bookingDAO.getById( bookingId );
+
+		return booking;
+	}
+
 	public static List<Booking> getBookingsOfClient(Integer clientId)
 	{
 		List<Booking> bookings = bookingDAO.getBookingsOfClient( clientId );
@@ -160,6 +167,11 @@ public class HotelManagerFacade
 	{
 		List<Booking> allStays = stayDAO.getAll();
 		return allStays;
+	}
+
+	public static void removeBooking(Booking booking)
+	{
+		bookingDAO.delete( booking );
 	}
 
 	public static void removeStay(Booking stay)

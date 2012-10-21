@@ -24,5 +24,9 @@ public final class HotelConstants
 
 	public static final String RESULT_ROOM_ATTR = "result_room";
 
+	public static final String RESULT_STAY_BOOKED_ATTR = "result_stay_booked";
+
+	public static final String STAY_BOOKED_ID = "stay_booked_id";
+
 	public static final String SUCCESS_MSG_ATTR = "success_msg";
 }

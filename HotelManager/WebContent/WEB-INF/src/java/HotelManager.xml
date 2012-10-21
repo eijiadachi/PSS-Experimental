@@ -13,6 +13,7 @@
         	<result name="input">/pages/{1}Form.jsp</result>
         	<result name="error">/pages/{1}Form.jsp</result>
         	<result name="detail">/pages/{1}Detail.jsp</result>
+        	<result name="confirmation">/pages/{1}Confirmation.jsp</result>
             <result name="success">/pages/Welcome.jsp</result>
         </action>
         
@@ -32,6 +33,11 @@
         
         <action name="HotelReport" class="br.inf.pucrio.hotel.web.action.HotelAction">
             <result name="success">/pages/HotelReport.jsp</result>
+        </action>
+        
+        <action name="ConfirmStayBooked" class="br.inf.pucrio.hotel.web.action.StayBookedAction" method="confirm">
+        	<result name="success">/pages/Welcome.jsp</result>
+        	<result name="input">/pages/StayBookedConfirmation.jsp</result>
         </action>
         
     </package>

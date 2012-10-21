@@ -7,9 +7,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Quartos cadastradose</title>
+<title>Quartos cadastrados</title>
 </head>
 <body>
+	<h1>Quartos cadastrados</h1>
 	<%
 		Object object = session.getAttribute( HotelConstants.ALL_ROOMS_ATTR );
 		if( object != null )
@@ -18,7 +19,7 @@
 			for(Room room : allRooms )
 			{
 	%>
-		<%= room.toString() %><p>
+		<%= room.toHtml() %><p>
 	<%	
 			}
 		}

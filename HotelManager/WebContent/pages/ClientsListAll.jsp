@@ -17,7 +17,7 @@
 	if( object != null )
 	{
 %>
-	Clientes cadastrados<p>
+	<h1>Clientes cadastrados</h1>
 <%
 		List<Client> allClients = (List<Client>)object;
 		for(Client client : allClients )
@@ -30,14 +30,7 @@
 			Date birthday = client.getBirthday();
 			String birthdayStr = HotelConstants.DATE_FORMATTER.format( birthday );
 %>
-	<ul>
-		<li>Código: <%= id %></li>
-		<li>Nome: <%= name %></li>
-		<li>CPF: <%= cpf %></li>
-		<li>Data de nascimento: <%= birthdayStr %></li>
-		<li>Endereço: <%= address %></li>
-		<li>Telefone: <%= phone %></li>
-	</ul>
+	<%= client.toHtml() %>
 <%
 		}//for
 	}//if

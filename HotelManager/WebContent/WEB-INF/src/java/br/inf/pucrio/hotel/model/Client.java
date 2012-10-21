@@ -2,15 +2,17 @@ package br.inf.pucrio.hotel.model;
 
 import java.util.Date;
 
+import br.inf.pucrio.hotel.util.HotelUtil;
+
 public class Client extends Bean
 {
 	private String address;
 
 	private Date birthday;
 
-	private String name;
-
 	private String cpf;
+
+	private String name;
 
 	private String phone;
 
@@ -22,6 +24,13 @@ public class Client extends Bean
 	public Date getBirthday()
 	{
 		return birthday;
+	}
+
+	public String getBirthdayStr()
+	{
+		String dateStr = HotelUtil.getDateStr( getBirthday() );
+		return dateStr;
+
 	}
 
 	public String getCpf()
@@ -62,6 +71,16 @@ public class Client extends Bean
 	public void setPhone(String phone)
 	{
 		this.phone = phone;
+	}
+
+	public String toHtml()
+	{
+		String html = String
+				.format(
+						"<ul class='client'><li>Código: %1$s</li><li>Nome: %2$s</li><li>CPF: %3$s</li><li>Endereço: %4$s</li><li>Telefone: %5$s</li><li>Data de Nascimento: %6$s</li></ul>",
+						getId(), getName(), getCpf(), getAddress(), getPhone(), getBirthdayStr() );
+
+		return html;
 	}
 
 	@Override

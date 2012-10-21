@@ -10,6 +10,7 @@
 <title>Ocupações</title>
 </head>
 <body>
+<h1> Ocupações Cadastradas</h1>
 	<%
 		Object object = session.getAttribute( HotelConstants.ALL_STAYS_ATTR );
 		if( object != null )
@@ -18,7 +19,8 @@
 			for(Booking stay : allStays )
 			{
 	%>
-		<%= stay.toString() %><p>
+		<span class="bookingId">Ocupação <%= stay.getId() %></span>
+		<%= stay.toHtml() %><p>
 	<%	
 			}
 		}

@@ -2,6 +2,7 @@ package br.inf.pucrio.hotel.util;
 
 import java.util.Date;
 
+import br.inf.pucrio.hotel.HotelConstants;
 import br.inf.pucrio.hotel.model.Booking;
 import br.inf.pucrio.hotel.model.Room;
 
@@ -25,6 +26,16 @@ public final class HotelUtil
 		}
 
 		return total;
+	}
+
+	public static String getDateStr(Date date)
+	{
+		if (date == null)
+		{
+			return "Data n‹o cadastrada";
+		}
+
+		return HotelConstants.DATE_FORMATTER.format( date );
 	}
 
 	public static boolean hasMoreThanOneDayBetween(Date begin, Date end)

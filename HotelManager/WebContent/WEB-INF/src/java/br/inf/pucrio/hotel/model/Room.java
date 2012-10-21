@@ -24,24 +24,24 @@ public class Room extends Bean
 				return 268.00f;
 			}
 		},
-		WOODLAND
+		SUITE
 		{
 			@Override
 			public String getCategory()
 			{
-				return "Vista Bosque";
+				return "Suite";
 			}
 
 			@Override
 			public Integer getMaximumCapacity()
 			{
-				return 4;
+				return 2;
 			}
 
 			@Override
 			public Float getPrice()
 			{
-				return 315.00f;
+				return 498.00f;
 			}
 		},
 		VALLEY
@@ -64,24 +64,24 @@ public class Room extends Bean
 				return 353.00f;
 			}
 		},
-		SUITE
+		WOODLAND
 		{
 			@Override
 			public String getCategory()
 			{
-				return "Suite";
+				return "Vista Bosque";
 			}
 
 			@Override
 			public Integer getMaximumCapacity()
 			{
-				return 2;
+				return 4;
 			}
 
 			@Override
 			public Float getPrice()
 			{
-				return 498.00f;
+				return 315.00f;
 			}
 		};
 		public abstract String getCategory();
@@ -111,6 +111,15 @@ public class Room extends Bean
 	public Float getPrice()
 	{
 		return type.getPrice();
+	}
+
+	public String toHtml()
+	{
+		String str = String.format( "<ul class'room'>" + "<li>Código: %1$s</li>" + "<li>Categoria: %2$s</li>"
+				+ "<li>Preço: %3$s</li>" + "<li>Capacidade de Hóspedes: %4$s</li>" + "</ul>", getId(), getCategory(),
+				getPrice(), getMaximumCapacity() );
+
+		return str;
 	}
 
 	@Override
