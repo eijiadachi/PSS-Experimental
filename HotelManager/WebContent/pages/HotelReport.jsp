@@ -1,5 +1,6 @@
+<%@page import="java.util.List"%>
 <%@page import="br.inf.pucrio.hotel.HotelConstants"%>
-<%@page import="br.inf.pucrio.hotel.model.HotelReportResult"%>
+<%@page import="br.inf.pucrio.hotel.model.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,6 +18,12 @@
 	Integer roomsOccupied = result.getRoomsOccupied();
 	Float incomingOfMonth = result.getIncomingOfMonth();
 	Integer guestsOfMonth = result.getGuestsOfMonth();
+	List<Booking> bookingsForToday = result.getBookingsForToday();
+	Integer bookingsForTodayTotal = 0;
+	if(bookingsForToday != null)
+	{
+		bookingsForTodayTotal = bookingsForToday.size();	
+	}
 %>
 
 <h1>
@@ -27,6 +34,7 @@ Relatório
 		<li>Quartos ocupados: <%= roomsOccupied %></li>
 		<li>Valor total recebido no mês: <%= incomingOfMonth %></li>
 		<li>Hóspedes recebidos no mês: <%= guestsOfMonth %></li>
+		<li>Número de reservas com entrada hoje: <%= bookingsForTodayTotal %></li>
 	</ul>
 
 </body>

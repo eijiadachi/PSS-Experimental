@@ -1,6 +1,8 @@
 package br.inf.pucrio.hotel.web.action;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import br.inf.pucrio.hotel.HotelConstants;
@@ -12,6 +14,8 @@ import br.inf.pucrio.hotel.model.Room;
 
 public class HotelAction extends HotelBaseAction
 {
+
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public String add()
@@ -36,17 +40,41 @@ public class HotelAction extends HotelBaseAction
 			}
 		}
 
-		int month = Calendar.getInstance().get( Calendar.MONTH );
+		Calendar currentCalendar = Calendar.getInstance();
+		int currentMonth = currentCalendar.get( Calendar.MONTH );
 
-		Float incomingOfMonth = HotelManagerFacade.getIncomingOfMonth( month );
+		Float incomingOfMonth = HotelManagerFacade.getIncomingOfMonth( currentMonth );
 
-		Integer guestsOfMonth = HotelManagerFacade.getGuestsOfMonth( month );
+		Integer guestsOfMonth = HotelManagerFacade.getGuestsOfMonth( currentMonth );
+
+		List<Booking> bookingsForToday = new ArrayList<Booking>();
+
+		int currentDay = currentCalendar.get( Calendar.DAY_OF_MONTH );
+		int currentYear = currentCalendar.get( Calendar.YEAR );
+
+		List<Booking> allBookings = HotelManagerFacade.listAllBookings();
+		for (Booking booking : allBookings)
+		{
+			Date checkin = booking.getCheckin();
+			Calendar checkinCalendar = Calendar.getInstance();
+			checkinCalendar.setTime( checkin );
+
+			int checkinMonth = checkinCalendar.get( Calendar.MONTH );
+			int checkinDay = checkinCalendar.get( Calendar.DAY_OF_MONTH );
+			int checkinYear = checkinCalendar.get( Calendar.YEAR );
+
+			if (currentDay == checkinDay && currentMonth == checkinMonth && currentYear == checkinYear)
+			{
+				bookingsForToday.add( booking );
+			}
+		}
 
 		HotelReportResult result = new HotelReportResult();
 		result.setGuestsOfMonth( guestsOfMonth );
 		result.setIncomingOfMonth( incomingOfMonth );
 		result.setRoomsOccupied( roomsOccupied );
 		result.setRoomsTotal( roomsSize );
+		result.setBookingsForToday( bookingsForToday );
 
 		saveOnSession( HotelConstants.RESULT_HOTEL_REPORT_ATTR, result );
 

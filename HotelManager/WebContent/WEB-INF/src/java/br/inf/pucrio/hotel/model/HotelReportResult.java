@@ -1,7 +1,11 @@
 package br.inf.pucrio.hotel.model;
 
+import java.util.List;
+
 public class HotelReportResult
 {
+	private List<Booking> bookingsForToday;
+
 	private Integer guestsOfMonth;
 
 	private Float incomingOfMonth;
@@ -9,6 +13,11 @@ public class HotelReportResult
 	private Integer roomsOccupied;
 
 	private Integer roomsTotal;
+
+	public List<Booking> getBookingsForToday()
+	{
+		return bookingsForToday;
+	}
 
 	public Integer getGuestsOfMonth()
 	{
@@ -28,6 +37,11 @@ public class HotelReportResult
 	public Integer getRoomsTotal()
 	{
 		return roomsTotal;
+	}
+
+	public void setBookingsForToday(List<Booking> bookingsForToday)
+	{
+		this.bookingsForToday = bookingsForToday;
 	}
 
 	public void setGuestsOfMonth(Integer guestsOfMonth)

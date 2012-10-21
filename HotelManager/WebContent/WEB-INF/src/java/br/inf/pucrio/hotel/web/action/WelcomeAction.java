@@ -57,7 +57,20 @@ public class WelcomeAction extends ActionSupport
 		booking.setCheckin( fiveDaysAfterToday );
 		booking.setCheckout( sevenDaysAfterToday );
 
+		Client client102 = HotelManagerFacade.getClientById( 102 );
+		Room room9 = HotelManagerFacade.getRoomById( 9 );
+
+		Date today = getDateFromToday( 0 );
+
+		Booking booking2 = new Booking();
+		booking2.setClient( client102 );
+		booking2.setRoom( room9 );
+		booking2.setGuests( 2 );
+		booking2.setCheckin( today );
+		booking2.setCheckout( sevenDaysAfterToday );
+
 		HotelManagerFacade.addBooking( booking );
+		HotelManagerFacade.addBooking( booking2 );
 
 	}
 
