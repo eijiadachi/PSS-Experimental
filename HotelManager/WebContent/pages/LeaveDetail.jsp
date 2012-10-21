@@ -16,21 +16,14 @@
 	Booking stay = result.getStay();
 	Client client = stay.getClient();
 	Room room = stay.getRoom();
-	Date checkin = stay.getCheckin();
-	Date checkout = stay.getCheckout();
+	String checkin = stay.getCheckinStr();
+	String checkout = stay.getCheckoutStr();
 %>
 
-	Detalhes da estadia:<p>
+	<h1>Detalhes da estadia:</h1>
 	
 	<ul>
-		<li>Código do ciente <%= client.getId(  ) %></li>
-		<li>Nome do ciente <%= client.getName(  ) %></li>
-		<li>Número do quarto <%= room.getId(  ) %></li>
-		<li>Tipo do quarto <%= room.getCategory(  ) %></li>
-		<li>Valor da diária <%= room.getPrice(  ) %></li>
-		<li>Data de entrada <%= checkin.toString() %></li>
-		<li>Data de saída <%= checkout.toString() %></li>
-		<li>Número de hóspedes <%= stay.getGuests(  ) %></li>
+		<li>Estadia: <%= stay.toHtml() %></li>
 		<li>Número de diárias <%= result.getDays(  ) %></li>
 		<li>Valor total da estadia <%= result.getPrice() %></li>
 	</ul>

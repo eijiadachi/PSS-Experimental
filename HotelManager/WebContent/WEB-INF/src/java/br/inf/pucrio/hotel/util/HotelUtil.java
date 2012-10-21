@@ -16,13 +16,16 @@ public final class HotelUtil
 
 		boolean hasExtraBed = stay.hasExtraBed();
 
-		Long days = HotelUtil.subtractionInDays( stay.getCheckin(), stay.getCheckout() );
+		Date checkin = stay.getCheckin();
+		Date checkout = stay.getCheckout();
+		Long subtractionInDays = HotelUtil.subtractionInDays( checkin, checkout );
+		Long days = 1 + subtractionInDays;
 
 		Float total = pricePerDay * days;
 
 		if (hasExtraBed)
 		{
-			total = total * 0.3f;
+			total = total * 1.3f;
 		}
 
 		return total;

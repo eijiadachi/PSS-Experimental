@@ -8,7 +8,7 @@ public class LeaveResult
 
 	public Long getDays()
 	{
-		Long subtractionInDays = HotelUtil.subtractionInDays( stay.getCheckin(), stay.getCheckout() );
+		Long subtractionInDays = 1 + HotelUtil.subtractionInDays( stay.getCheckin(), stay.getCheckout() );
 		return subtractionInDays;
 	}
 

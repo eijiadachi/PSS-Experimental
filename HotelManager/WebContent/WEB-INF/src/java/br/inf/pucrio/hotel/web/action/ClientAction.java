@@ -130,17 +130,17 @@ public class ClientAction extends HotelBaseAction
 
 		if (isEmptyString( name ))
 		{
-			addFieldError( "client.name", "Nome é obrigatório" );
+			addFieldError( "client.name", "Nome Ž obrigat—rio" );
 		}
 
 		String cpf = localClient.getCpf();
 		if (isEmptyString( cpf ))
 		{
-			addFieldError( "client.cpf", "CPF é obrigatório" );
+			addFieldError( "client.cpf", "CPF Ž obrigat—rio" );
 		}
 		else if (!isValidCpf( cpf ))
 		{
-			addFieldError( "client.cpf", "CPF deve estar no padrão ###.###.###-##, em que # é um dígito." );
+			addFieldError( "client.cpf", "CPF deve estar no padr‹o ###.###.###-##, em que # corresponde um d’gito." );
 		}
 
 		Date birthday = localClient.getBirthday();

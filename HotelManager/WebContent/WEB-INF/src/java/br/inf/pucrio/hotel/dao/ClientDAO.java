@@ -23,7 +23,7 @@ public class ClientDAO extends TransientDAOImpl<Client>
 
 			if (cpf != null && cpf2 != null && cpf2.equals( cpf ))
 			{
-				String msg = String.format( "CPF cadastrado - %s - já encontra-se no sistema.", cpf );
+				String msg = String.format( "CPF cadastrado - %s - j‡ encontra-se no sistema.", cpf );
 				throw new HotelException( msg );
 			}
 		}

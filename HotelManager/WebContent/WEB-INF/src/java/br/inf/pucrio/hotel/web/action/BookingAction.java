@@ -239,7 +239,7 @@ public class BookingAction extends HotelBaseAction
 		Date checkout = booking.getCheckout();
 		if (checkout == null)
 		{
-			addFieldError( "booking.checkout", "Data de checkout é obrigatório." );
+			addFieldError( "booking.checkout", "Data de checkout é obrigat—rio." );
 		}
 	}
 
@@ -247,11 +247,11 @@ public class BookingAction extends HotelBaseAction
 	{
 		if (clientCode == null)
 		{
-			addFieldError( "clientCode", "Código do Cliente é obrigatório" );
+			addFieldError( "clientCode", "C—digo do Cliente Ž obrigat—rio" );
 		}
 		else if (!isValidClient( clientCode ))
 		{
-			String msg = String.format( "Não existe cliente cadastrado com o código '%s'.", clientCode );
+			String msg = String.format( "N‹o existe cliente cadastrado com o c—digo '%s'.", clientCode );
 			addFieldError( "clientCode", msg );
 		}
 
@@ -262,7 +262,7 @@ public class BookingAction extends HotelBaseAction
 		Integer guests2 = booking.getGuests();
 		if (guests2 == null || guests2 <= 0)
 		{
-			addFieldError( "booking.guests", "Número de hóspedes é obrigatório." );
+			addFieldError( "booking.guests", "Nœmero de h—spedes Ž obrigat—rio." );
 		}
 		else
 		{
@@ -273,7 +273,7 @@ public class BookingAction extends HotelBaseAction
 			{
 				String msg = String
 						.format(
-								"Número de hóspedes excede a capacidade máxima do quarto. Quarto suporta %s hóspedes, mais uma cama extra.",
+								"Nœmero de h—spedes excede a capacidade m‡xima do quarto. Quarto suporta %s h—spedes, mais uma cama extra.",
 								maximumCapacity );
 				addFieldError( "booking.guests", msg );
 			}
@@ -292,8 +292,7 @@ public class BookingAction extends HotelBaseAction
 			}
 			else if (!HotelUtil.hasMoreThanOneDayBetween( checkin, checkout ))
 			{
-				addFieldError( "booking.checkout",
-						"Data de checkout deve ser pelo menos um dia após a data de checkin." );
+				addFieldError( "booking.checkout", "Per’odo de estadia deve ser de pelo menos um dia." );
 			}
 		}
 
