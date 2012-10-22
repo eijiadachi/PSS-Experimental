@@ -1,16 +1,12 @@
 package br.inf.pucrio.hotel.web.action;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import br.inf.pucrio.hotel.HotelConstants;
 import br.inf.pucrio.hotel.HotelManagerFacade;
 import br.inf.pucrio.hotel.model.Booking;
-import br.inf.pucrio.hotel.model.Booking.Status;
 import br.inf.pucrio.hotel.model.result.HotelReportResult;
-import br.inf.pucrio.hotel.model.Room;
 
 public class HotelAction extends HotelBaseAction
 {
@@ -27,18 +23,9 @@ public class HotelAction extends HotelBaseAction
 	@Override
 	public String execute() throws Exception
 	{
-		List<Room> allRooms = HotelManagerFacade.listAllRooms();
-		int roomsSize = allRooms.size();
+		int roomsSize = HotelManagerFacade.getTotalRooms();
 
-		int roomsOccupied = 0;
-		List<Booking> allStays = HotelManagerFacade.listAllStays();
-		for (Booking stay : allStays)
-		{
-			if (Status.OCCUPIED.equals( stay.getStatus() ))
-			{
-				roomsOccupied++;
-			}
-		}
+		int roomsOccupied = HotelManagerFacade.getRoomsOccupied();
 
 		Calendar currentCalendar = Calendar.getInstance();
 		int currentMonth = currentCalendar.get( Calendar.MONTH );
@@ -47,27 +34,7 @@ public class HotelAction extends HotelBaseAction
 
 		Integer guestsOfMonth = HotelManagerFacade.getGuestsOfMonth( currentMonth );
 
-		List<Booking> bookingsForToday = new ArrayList<Booking>();
-
-		int currentDay = currentCalendar.get( Calendar.DAY_OF_MONTH );
-		int currentYear = currentCalendar.get( Calendar.YEAR );
-
-		List<Booking> allBookings = HotelManagerFacade.listAllBookings();
-		for (Booking booking : allBookings)
-		{
-			Date checkin = booking.getCheckin();
-			Calendar checkinCalendar = Calendar.getInstance();
-			checkinCalendar.setTime( checkin );
-
-			int checkinMonth = checkinCalendar.get( Calendar.MONTH );
-			int checkinDay = checkinCalendar.get( Calendar.DAY_OF_MONTH );
-			int checkinYear = checkinCalendar.get( Calendar.YEAR );
-
-			if (currentDay == checkinDay && currentMonth == checkinMonth && currentYear == checkinYear)
-			{
-				bookingsForToday.add( booking );
-			}
-		}
+		List<Booking> bookingsForToday = HotelManagerFacade.getBookingsForToday();
 
 		HotelReportResult result = new HotelReportResult();
 		result.setGuestsOfMonth( guestsOfMonth );

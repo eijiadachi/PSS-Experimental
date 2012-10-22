@@ -1,5 +1,6 @@
 package br.inf.pucrio.hotel;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -70,6 +71,35 @@ public class HotelManagerFacade
 		return booking;
 	}
 
+	public static List<Booking> getBookingsForToday()
+	{
+		Calendar currentCalendar = Calendar.getInstance();
+		int currentMonth = currentCalendar.get( Calendar.MONTH );
+		int currentDay = currentCalendar.get( Calendar.DAY_OF_MONTH );
+		int currentYear = currentCalendar.get( Calendar.YEAR );
+
+		List<Booking> bookingsForToday = new ArrayList<Booking>();
+
+		List<Booking> allBookings = HotelManagerFacade.listAllBookings();
+		for (Booking booking : allBookings)
+		{
+			Date checkin = booking.getCheckin();
+			Calendar checkinCalendar = Calendar.getInstance();
+			checkinCalendar.setTime( checkin );
+
+			int checkinMonth = checkinCalendar.get( Calendar.MONTH );
+			int checkinDay = checkinCalendar.get( Calendar.DAY_OF_MONTH );
+			int checkinYear = checkinCalendar.get( Calendar.YEAR );
+
+			if (currentDay == checkinDay && currentMonth == checkinMonth && currentYear == checkinYear)
+			{
+				bookingsForToday.add( booking );
+			}
+		}
+
+		return null;
+	}
+
 	public static List<Booking> getBookingsOfClient(Integer clientId)
 	{
 		List<Booking> bookings = bookingDAO.getBookingsOfClient( clientId );
@@ -117,6 +147,21 @@ public class HotelManagerFacade
 		return room;
 	}
 
+	public static Integer getRoomsOccupied()
+	{
+		int roomsOccupied = 0;
+		List<Booking> allStays = HotelManagerFacade.listAllStays();
+		for (Booking stay : allStays)
+		{
+			if (Status.OCCUPIED.equals( stay.getStatus() ))
+			{
+				roomsOccupied++;
+			}
+		}
+
+		return roomsOccupied;
+	}
+
 	public static List<Booking> getStaysOfClient(Integer clientId)
 	{
 		List<Booking> bookings = stayDAO.getBookingsOfClient( clientId );
@@ -127,6 +172,13 @@ public class HotelManagerFacade
 	{
 		List<Booking> bookings = stayDAO.getBookingsOfRoom( roomId );
 		return bookings;
+	}
+
+	public static Integer getTotalRooms()
+	{
+		List<Room> allRooms = listAllRooms();
+		int size = allRooms.size();
+		return size;
 	}
 
 	public static boolean isCpfUnique(String cpf)
