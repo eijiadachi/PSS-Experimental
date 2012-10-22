@@ -6,7 +6,7 @@ import br.inf.pucrio.hotel.HotelConstants;
 import br.inf.pucrio.hotel.HotelManagerFacade;
 import br.inf.pucrio.hotel.model.Booking;
 import br.inf.pucrio.hotel.model.Room;
-import br.inf.pucrio.hotel.model.RoomSearchResult;
+import br.inf.pucrio.hotel.model.result.RoomSearchResult;
 
 public class RoomAction extends HotelBaseAction
 {

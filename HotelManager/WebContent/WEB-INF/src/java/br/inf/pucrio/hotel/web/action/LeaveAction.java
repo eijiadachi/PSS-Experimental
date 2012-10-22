@@ -6,7 +6,7 @@ import br.inf.pucrio.hotel.HotelConstants;
 import br.inf.pucrio.hotel.HotelManagerFacade;
 import br.inf.pucrio.hotel.model.Booking;
 import br.inf.pucrio.hotel.model.Booking.Status;
-import br.inf.pucrio.hotel.model.LeaveResult;
+import br.inf.pucrio.hotel.model.result.LeaveResult;
 
 public class LeaveAction extends HotelBaseAction
 {

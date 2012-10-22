@@ -1,6 +1,8 @@
-package br.inf.pucrio.hotel.model;
+package br.inf.pucrio.hotel.model.result;
 
 import java.util.List;
+
+import br.inf.pucrio.hotel.model.Booking;
 
 public class HotelReportResult
 {

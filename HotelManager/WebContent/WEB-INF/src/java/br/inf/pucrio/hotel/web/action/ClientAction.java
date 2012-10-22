@@ -11,7 +11,7 @@ import br.inf.pucrio.hotel.HotelManagerFacade;
 import br.inf.pucrio.hotel.exception.HotelException;
 import br.inf.pucrio.hotel.model.Booking;
 import br.inf.pucrio.hotel.model.Client;
-import br.inf.pucrio.hotel.model.ClientSearchResult;
+import br.inf.pucrio.hotel.model.result.ClientSearchResult;
 
 public class ClientAction extends HotelBaseAction
 {

@@ -1,5 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="br.inf.pucrio.hotel.model.*"%>
+<%@page import="br.inf.pucrio.hotel.model.result.*"%>
 <%@page import="br.inf.pucrio.hotel.HotelConstants"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>

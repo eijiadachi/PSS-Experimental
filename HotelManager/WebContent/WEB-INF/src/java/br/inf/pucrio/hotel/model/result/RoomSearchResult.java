@@ -1,12 +1,15 @@
-package br.inf.pucrio.hotel.model;
+package br.inf.pucrio.hotel.model.result;
 
 import java.util.List;
 
-public class ClientSearchResult
+import br.inf.pucrio.hotel.model.Booking;
+import br.inf.pucrio.hotel.model.Room;
+
+public class RoomSearchResult
 {
 	private List<Booking> bookings;
 
-	private Client client;
+	private Room room;
 
 	private List<Booking> stays;
 
@@ -15,9 +18,9 @@ public class ClientSearchResult
 		return bookings;
 	}
 
-	public Client getClient()
+	public Room getRoom()
 	{
-		return client;
+		return room;
 	}
 
 	public List<Booking> getStays()
@@ -30,9 +33,9 @@ public class ClientSearchResult
 		this.bookings = bookings;
 	}
 
-	public void setClient(Client client)
+	public void setRoom(Room room)
 	{
-		this.client = client;
+		this.room = room;
 	}
 
 	public void setStays(List<Booking> stays)

@@ -1,5 +1,6 @@
-package br.inf.pucrio.hotel.model;
+package br.inf.pucrio.hotel.model.result;
 
+import br.inf.pucrio.hotel.model.Booking;
 import br.inf.pucrio.hotel.util.HotelUtil;
 
 public class LeaveResult

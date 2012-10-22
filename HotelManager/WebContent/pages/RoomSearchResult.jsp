@@ -1,5 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="br.inf.pucrio.hotel.model.*"%>
+<%@page import="br.inf.pucrio.hotel.model.result.*"%>
 <%@page import="br.inf.pucrio.hotel.HotelConstants"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -35,10 +36,7 @@
 			for(Booking booking : bookings )
 			{
 %>
-				<li>Cliente: <%= booking.getClient().toString() %></li>
-				<li>Data de checkin: <%= booking.getCheckin() %></li>
-				<li>Data de checkout: <%= booking.getCheckout() %></li>
-				<li>Número de hóspedes: <%= booking.getGuests() %></li>
+				<li>Reserva: <%= booking.toHtml(  ) %></li>
 <%
 			}
 		}
@@ -59,11 +57,7 @@
 			for(Booking booking : stays )
 			{
 %>
-				<li><%= booking.getRoom().toString() %></li>
-				<li><%= booking.getCheckin() %></li>
-				<li><%= booking.getCheckout() %></li>
-				<li><%= booking.getGuests() %></li>
-				<li><%= booking.getStatus() %></li>
+				<li>Ocupação <%= booking.toHtml(  ) %></li>
 			
 <%
 			}

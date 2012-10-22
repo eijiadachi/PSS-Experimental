@@ -1,3 +1,4 @@
+<%@page import="br.inf.pucrio.hotel.model.result.LeaveResult"%>
 <%@page import="java.util.Date"%>
 <%@page import="br.inf.pucrio.hotel.model.*"%>
 <%@page import="br.inf.pucrio.hotel.HotelConstants"%>

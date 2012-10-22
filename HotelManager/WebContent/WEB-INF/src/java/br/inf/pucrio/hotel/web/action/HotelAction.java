@@ -9,7 +9,7 @@ import br.inf.pucrio.hotel.HotelConstants;
 import br.inf.pucrio.hotel.HotelManagerFacade;
 import br.inf.pucrio.hotel.model.Booking;
 import br.inf.pucrio.hotel.model.Booking.Status;
-import br.inf.pucrio.hotel.model.HotelReportResult;
+import br.inf.pucrio.hotel.model.result.HotelReportResult;
 import br.inf.pucrio.hotel.model.Room;
 
 public class HotelAction extends HotelBaseAction

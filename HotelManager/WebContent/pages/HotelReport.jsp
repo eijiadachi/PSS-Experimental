@@ -1,3 +1,4 @@
+<%@page import="br.inf.pucrio.hotel.model.result.HotelReportResult"%>
 <%@page import="java.util.List"%>
 <%@page import="br.inf.pucrio.hotel.HotelConstants"%>
 <%@page import="br.inf.pucrio.hotel.model.*"%>
