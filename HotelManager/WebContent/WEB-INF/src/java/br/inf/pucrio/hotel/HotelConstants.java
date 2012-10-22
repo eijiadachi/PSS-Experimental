@@ -12,7 +12,9 @@ public final class HotelConstants
 
 	public static final String ALL_STAYS_ATTR = "all_stays";
 
-	public static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat( "dd-MM-yy" );
+	public static final String DATE_FORMAT_STR = "dd-MM-yy";
+
+	public static final SimpleDateFormat DATE_FORMATTER;
 
 	public static final String ERROR_MSG_ATTR = "error_msg";
 
@@ -29,4 +31,9 @@ public final class HotelConstants
 	public static final String STAY_BOOKED_ID = "stay_booked_id";
 
 	public static final String SUCCESS_MSG_ATTR = "success_msg";
+
+	static
+	{
+		DATE_FORMATTER = new SimpleDateFormat( DATE_FORMAT_STR );
+	}
 }

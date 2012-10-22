@@ -35,7 +35,7 @@ public final class HotelUtil
 	{
 		if (date == null)
 		{
-			return "Data n‹o cadastrada";
+			return "";
 		}
 
 		return HotelConstants.DATE_FORMATTER.format( date );

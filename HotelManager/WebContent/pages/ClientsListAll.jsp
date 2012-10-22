@@ -22,13 +22,6 @@
 		List<Client> allClients = (List<Client>)object;
 		for(Client client : allClients )
 		{
-			Integer id = client.getId();
-			String name = client.getName();
-			String cpf = client.getCpf();
-			String phone = client.getPhone();
-			String address = client.getAddress();
-			Date birthday = client.getBirthday();
-			String birthdayStr = HotelConstants.DATE_FORMATTER.format( birthday );
 %>
 	<%= client.toHtml() %>
 <%
