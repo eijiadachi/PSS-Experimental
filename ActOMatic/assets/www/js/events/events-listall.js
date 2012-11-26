@@ -1,16 +1,16 @@
 /*
  * Constants
  */
-var ACTION_PLUGIN_NAME = "Action";
+var EVENT_PLUGIN_NAME = "Event";
 var methodName = "listAll";
 
-var ACTIONS_LISTALL = function(){};
+var EVENTS_LISTALL = function(){};
 
 var successCallback = function( arg )
 {
 	if(arg=='undefined' || arg.length == 0 )
 	{
-		var msg = "There are no actions to list.";
+		var msg = "There are no events to list.";
 		console.log( msg );
 		$("#listAllDiv").html(msg);
 		return;
@@ -20,7 +20,7 @@ var successCallback = function( arg )
 	
 	var size = arg.length;
 	
-	var str = "<div id='all_actions'>";
+	var str = "<div id='all_events'>";
 	
 	for( var i = 0; i < size; i++ ){
 		var obj = jQuery.parseJSON( arg[i] );
@@ -31,40 +31,44 @@ var successCallback = function( arg )
 		var id = obj.id;
 		var name = obj.name;
 		var description = obj.description;
-		var type = obj.type;
 		
 		var requestParams = "id=" + id;
 		requestParams += "&name=" + name;
 		requestParams += "&description=" + description;
-		requestParams += "&type=" + type;
 		requestParams += "&objType=" + objType;
 		
-			str += "<div id='action" + id + "' actionId='" + id + "' class='containner-fluid'>";
-				str += "<div class='row-fluid action'>";
-					str += "<div class='span3 action-description'>";
+			str += "<div id='event" + id + "' eventId='" + id + "' class='containner-fluid'>";
+				str += "<div class='row-fluid event'>";
+					str += "<div class='span3 event-description'>";
 				        str += "<ul>";
 						str += "<li>" + name + "</li>";
 						str += "<li>" + description + "</li>";
-						str += "<li>" + type + "</li>";
-		if( objType === 'ConfigurationAction' )
+		if( objType === 'RegionEvent' )
 		{
-						var setting = obj.setting;
-						requestParams += "&setting=" + setting;
+						var latitude = obj.latitude;
+						var longitude = obj.longitude;
+						var radius = obj.radius;
 						
-						str += "<li>" + setting + "</li>";
+						requestParams += "&latitude=" + latitude;
+						requestParams += "&longitude=" + longitude;
+						requestParams += "&radius=" + radius;
+						
+						str += "<li>" + latitude + "</li>";
+						str += "<li>" + longitude + "</li>";
+						str += "<li>" + radius + "</li>";
 		}
 		else
 		{
-						var sendTo = obj.sendTo;
-						var message = obj.message;
-						requestParams += "&sendTo=" + sendTo;
-						requestParams += "&message=" + message;
-						str += "<li>" + sendTo + "</li>";
-						str += "<li>" + message + "</li>";
+						var date = obj.date;
+						var time = obj.time;
+						requestParams += "&date=" + date;
+						requestParams += "&time=" + time;
+						str += "<li>" + date + "</li>";
+						str += "<li>" + time + "</li>";
 		}
 		
-						str += "<li><a class='btn' title='Edit' href='actions-create.html?" + requestParams + "'><i class='icon-pencil'></i></a></li>";
-						str += "<li><a class='btn' title='Remove' href='actions-remove.html?" + requestParams + "'><i class='icon-trash'></i></a></li>";
+						str += "<li><a class='btn' title='Edit' href='events-create.html?" + requestParams + "'><i class='icon-pencil'></i></a></li>";
+						str += "<li><a class='btn' title='Remove' href='events-remove.html?" + requestParams + "'><i class='icon-trash'></i></a></li>";
 						
 						str += "</ul>";
 					str += "</div>";
@@ -81,12 +85,12 @@ var successCallback = function( arg )
 var errorCallback = function( arg )
 {
 	console.log( "Calling the method " + methodName + " returned unsuccessfully with the arguments: " + arg );
-	alert( "It was not possible to list all the actions.\n\n" + arg );
+	alert( "It was not possible to list all the events.\n\n" + arg );
 }
 
 var x = false;
 
-ACTIONS_LISTALL.init = function()
+EVENTS_LISTALL.init = function()
 { 	
 if(x)	successCallback( [
      	                  '{ "id":2,"objectType":"ConfigurationAction", "name":"Action 01", "description":"description", "type":"SCREEN", "setting":"9,3" }',
@@ -97,12 +101,12 @@ else
 	cordova.exec(
 			successCallback, 
 			errorCallback,
-			ACTION_PLUGIN_NAME,
+			EVENT_PLUGIN_NAME,
 			methodName, 
             []
 			);
 };
 
-//$(document).ready( ACTIONS_LISTALL.init );
+//$(document).ready( EVENTS_LISTALL.init );
 
-document.addEventListener("deviceready", ACTIONS_LISTALL.init, false);
+document.addEventListener("deviceready", EVENTS_LISTALL.init, false);
