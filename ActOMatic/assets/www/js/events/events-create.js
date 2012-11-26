@@ -159,8 +159,8 @@ EVENTS_CREATE.init = function()
 	{
 		methodName = "update";
 		
-		var $actionLegend = $("legend[id='actionLegend']");
-		$actionLegend.html("Edit Action");
+		var $actionLegend = $("legend[id='eventLegend']");
+		$actionLegend.html("Edit Event");
 		
 		var $inputId = $("input[id='inputId']");
 		$inputId.val(id);
@@ -174,32 +174,32 @@ EVENTS_CREATE.init = function()
 		$inputDescription.val( description );
 		
 		var actionType = urlParams['objType'];
-		if(actionType === "ConfigurationAction")
+		if(actionType === "RegionEvent")
 		{
-			var setting = urlParams['setting'];
-			var $inputSetting = $("input[id='inputSetting']");
-			$inputSetting.val( setting );
+			var latitude = urlParams['latitude'];
+			var $inputLatitude = $("input[id='inputLatitude']");
+			$inputLatitude.val( latitude );
 			
-			var type = urlParams['type'];
-			var $settingTypeInput = $("select[id='settingType']");
-			$settingTypeInput.val(type);
+			var longitude = urlParams['longitude'];
+			var $inputLongitude = $("input[id='inputLongitude']");
+			$inputLongitude.val( longitude );
+			
+			var radius = urlParams['radius'];
+			var $inputRadius = $("input[id='inputRadius']");
+			$inputRadius.val( radius );
 			
 			$regionButton.click();
 			$timerButton.attr("disabled", "disabled");
 		}
 		else
 		{
-			var sendTo = urlParams['sendTo'];
-			var $inputReceiver = $("input[id='inputReceiver']");
-			$inputReceiver.val( sendTo );
+			var date = urlParams['date'];
+			var $inputDate = $("input[id='inputDate']");
+			$inputDate.val( date );
 			
-			var type = urlParams['type'];
-			var $timerTypeInput = $("select[id='timerType']");
-			$timerTypeInput.val(type);
-			
-			var message = urlParams['message'];
-			var $inputMessage = $("textarea[id='inputMessage']");
-			$inputMessage.val( message );
+			var time = urlParams['time'];
+			var $inputTime = $("input[id='inputTime']");
+			$inputTime.val( time );
 			
 			$timerButton.click();
 			$regionButton.attr("disabled", "disabled");	
