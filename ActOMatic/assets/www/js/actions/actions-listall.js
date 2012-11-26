@@ -10,7 +10,9 @@ var successCallback = function( arg )
 {
 	if(arg=='undefined' || arg.length == 0 )
 	{
-		console.log( "There are no actions to list.");
+		var msg = "There are no actions to list.";
+		console.log( msg );
+		$("#listAllDiv").html(msg);
 		return;
 	}
 	
@@ -64,13 +66,8 @@ var successCallback = function( arg )
 		
 			str += "<div id='action" + id + "' userId='" + id + "' class='containner-fluid'>";
 				str += "<div class='row-fluid action'>";
-//					str += "<div class='span1 action-image'>";
-//						str += "<img class='img-rounded' src='../../img/config.png' width='45' height='45'>";
-//					str += "</div>";
-				
 					str += "<div class='span3 action-description'>";
 				        str += "<ul>";
-						
 						str += "<li>" + obj.name + "</li>";
 						str += "<li>" + obj.description + "</li>";
 						str += "<li>" + obj.type + "</li>";
@@ -81,11 +78,11 @@ var successCallback = function( arg )
 		else
 		{
 						str += "<li>" + obj.sendTo + "</li>";
-						str += "<li>" + obj.Message + "</li>";
+						str += "<li>" + obj.message + "</li>";
 		}
 		
-			//			str += "<li><a class='btn' title='Edit' href='actions-edit.html?id=" + obj.id + "'><i class='icon-pencil'></i></a></li>";
-			//			str += "<li><a class='btn' title='Remove' href='actions-remove.html?id=" + obj.id + "'><i class='icon-trash'></i></a></li>";
+						str += "<li><a class='btn' title='Edit' href='actions-edit.html?id=" + obj.id + "'><i class='icon-pencil'></i></a></li>";
+						str += "<li><a class='btn' title='Remove' href='actions-remove.html?id=" + obj.id + "'><i class='icon-trash'></i></a></li>";
 						
 						str += "</ul>";
 					str += "</div>";
