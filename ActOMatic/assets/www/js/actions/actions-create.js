@@ -61,6 +61,9 @@ ACTIONS_CREATE.handleSaveButton = function()
 		var getInputValue = function( inputId )
 		{
 			var $input = $( inputId );
+			if( $input.length == 0 ){
+				throw "Could not get input with id :" + inputId;
+			}
 			var val = $input.val();
 			
 			return val;
@@ -88,7 +91,7 @@ ACTIONS_CREATE.handleSaveButton = function()
 		}
 		else
 		{
-			var receiver = getInputValue("input[id='inputReceive']");
+			var receiver = getInputValue("input[id='inputReceiver']");
 			result.push(receiver);
 			
 			var notificationType = getInputValue("select[id='notificationType']");
