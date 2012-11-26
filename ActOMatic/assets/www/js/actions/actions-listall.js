@@ -103,6 +103,6 @@ else
 			);
 };
 
-$(document).ready( ACTIONS_LISTALL.init );
+//$(document).ready( ACTIONS_LISTALL.init );
 
 document.addEventListener("deviceready", ACTIONS_LISTALL.init, false);
