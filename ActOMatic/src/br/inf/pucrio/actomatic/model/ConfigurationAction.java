@@ -65,6 +65,8 @@ public class ConfigurationAction extends Action
 				jsonStringer.key( key ).value( value );
 			}
 
+			jsonStringer.key( "objectType" ).value( "Configuration" );
+
 			jsonStringer.endObject();
 			String str = String.valueOf( jsonStringer );
 
@@ -72,8 +74,8 @@ public class ConfigurationAction extends Action
 		}
 		catch (JSONException e)
 		{
-			LOG.d( "EIJI", "error JSON", e );
-			return "eiji";
+			LOG.d( ConfigurationAction.class.getCanonicalName(), e.getMessage(), e );
+			throw new RuntimeException( e );
 		}
 
 	}

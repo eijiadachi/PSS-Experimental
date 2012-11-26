@@ -12,3 +12,18 @@ ul.btn-list {
 a.btn-fixed {
 	width: 100px;
 }
+
+div.action{
+	border-bottom: dashed 1px #CCC;
+}
+
+div#all_actions{
+	border-top: 1px solid #666;
+	border-right: 1px solid #CCC;
+	border-bottom: 1px solid #CCC;
+	border-left: 1px solid #666;
+}
+
+div.action-image{
+	border-right: 1px solid #f00;
+}

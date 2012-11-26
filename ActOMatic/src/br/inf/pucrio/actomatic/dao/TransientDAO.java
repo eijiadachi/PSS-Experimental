@@ -22,12 +22,15 @@ public class TransientDAO<T extends Entity> implements IAbstractDAO<T>
 
 	public void add(T t)
 	{
-		map.put( ++idCounter, t );
+		++idCounter;
+		t.setId( idCounter );
+		map.put( idCounter, t );
 	}
 
-	public void delete(T t)
+	public boolean delete(Integer id)
 	{
-		map.remove( t );
+		T result = map.remove( id );
+		return result != null;
 	}
 
 	public void update(T t)

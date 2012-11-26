@@ -40,10 +40,24 @@ public abstract class AbstractActOMaticPlugin<T extends Entity> extends Plugin
 
 	private PluginResult remove(JSONArray args)
 	{
-		T entity = createEntity( args );
-		dao.delete( entity );
+		try
+		{
+			Integer id = args.getInt( 0 );
+			boolean result = dao.delete( id );
 
-		return new PluginResult( PluginResult.Status.OK );
+			if (result)
+			{
+				return new PluginResult( PluginResult.Status.OK );
+			}
+
+			return new PluginResult( PluginResult.Status.ERROR, "It was not possible to delete." );
+		}
+		catch (JSONException e)
+		{
+			LOG.d( AbstractActOMaticPlugin.class.getCanonicalName(), e.getMessage(), e );
+			throw new RuntimeException( e );
+		}
+
 	}
 
 	private PluginResult update(JSONArray args)
