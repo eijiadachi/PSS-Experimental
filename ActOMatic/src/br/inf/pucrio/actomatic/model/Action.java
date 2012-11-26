@@ -1,6 +1,6 @@
 package br.inf.pucrio.actomatic.model;
 
-public class Action extends Entity
+public abstract class Action extends Entity
 {
 
 	public Action()
@@ -38,10 +38,4 @@ public class Action extends Entity
 		this.description = description;
 	}
 
-	@Override
-	public String toJSON()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

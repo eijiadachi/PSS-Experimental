@@ -12,6 +12,8 @@ import br.inf.pucrio.actomatic.dao.IAbstractDAO;
 import br.inf.pucrio.actomatic.model.Action;
 import br.inf.pucrio.actomatic.model.ConfigurationAction;
 import br.inf.pucrio.actomatic.model.ConfigurationAction.ConfigurationType;
+import br.inf.pucrio.actomatic.model.NotificationAction;
+import br.inf.pucrio.actomatic.model.NotificationAction.NotificationType;
 
 public class ActionPlugin extends AbstractActOMaticPlugin<Action>
 {
@@ -91,11 +93,24 @@ public class ActionPlugin extends AbstractActOMaticPlugin<Action>
 
 				String settingType = args.getString( 4 );
 
-				ConfigurationType type = ConfigurationAction.ConfigurationType
-						.valueOf( settingType );
+				ConfigurationType type = ConfigurationType.valueOf( settingType );
 
 				( (ConfigurationAction) result ).setType( type );
+			}
+			else
+			{
+				result = new NotificationAction();
 
+				String sendTo = args.getString( 3 );
+				( (NotificationAction) result ).setSendTo( sendTo );
+
+				String notificationTypeStr = args.getString( 4 );
+
+				NotificationType type = NotificationType.valueOf( notificationTypeStr );
+				( (NotificationAction) result ).setType( type );
+
+				String message = args.getString( 5 );
+				( (NotificationAction) result ).setMessage( message );
 			}
 
 			result.setName( name );
@@ -108,5 +123,4 @@ public class ActionPlugin extends AbstractActOMaticPlugin<Action>
 			throw new RuntimeException( e );
 		}
 	}
-
 }

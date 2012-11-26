@@ -61,8 +61,7 @@ var successCallback = function( arg )
 		var objType = obj.objectType;
 		var id = obj.id;
 		
-		if( objType === 'Configuration' )
-		{
+		
 			str += "<div id='action" + id + "' userId='" + id + "' class='containner-fluid'>";
 				str += "<div class='row-fluid action'>";
 //					str += "<div class='span1 action-image'>";
@@ -75,7 +74,16 @@ var successCallback = function( arg )
 						str += "<li>" + obj.name + "</li>";
 						str += "<li>" + obj.description + "</li>";
 						str += "<li>" + obj.type + "</li>";
+		if( objType === 'ConfigurationAction' )
+		{
 						str += "<li>" + obj.setting + "</li>";
+		}
+		else
+		{
+						str += "<li>" + obj.sendTo + "</li>";
+						str += "<li>" + obj.Message + "</li>";
+		}
+		
 			//			str += "<li><a class='btn' title='Edit' href='actions-edit.html?id=" + obj.id + "'><i class='icon-pencil'></i></a></li>";
 			//			str += "<li><a class='btn' title='Remove' href='actions-remove.html?id=" + obj.id + "'><i class='icon-trash'></i></a></li>";
 						
@@ -84,13 +92,6 @@ var successCallback = function( arg )
 				
 				str += "</div>";
 			str += "</div>";
-		}
-		else
-		{
-			
-		}
-		
-		
 	}
 	
 	str += "</div>";
@@ -106,7 +107,7 @@ var errorCallback = function( arg )
 	alert( "It was not possible to list all the actions.\n\n" + arg );
 }
 
-var x = !false;
+var x = false;
 
 ACTIONS_LISTALL.init = function()
 { 	
