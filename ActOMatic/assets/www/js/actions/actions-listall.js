@@ -20,39 +20,6 @@ var successCallback = function( arg )
 	
 	var size = arg.length;
 	
-//	var str = "<table class='table table-bordered table-striped'>";
-//	str += "<thead><tr>";
-//	str += "<th>#</th>";
-//	str += "<th>Name</th>";
-//	str += "<th>Description</th>";
-//	str += "<th>Type</th>";
-//	str += "<th>Setting</th>";
-//	str += "<th>Edit</th>";
-//	str += "<th>Delete</th>";
-//	str += "</tr></thead>";
-//	
-//	str += "<tbody>";
-//	
-//	for( var i = 0; i < size; i++ ){
-//		var obj = jQuery.parseJSON( arg[i] );
-//		
-//		console.log(obj);
-//		
-//		str += "<tr>";
-//		
-//		str += "<td>" + (i+1) + "</td>";
-//		str += "<td>" + obj.name + "</td>";
-//		str += "<td>" + obj.description + "</td>";
-//		str += "<td>" + obj.type + "</td>";
-//		str += "<td>" + obj.setting + "</td>";
-//		str += "<td><a class='btn' href='actions-edit.html?id=" + obj.id + "'><i class='icon-pencil'></i></a></td>";
-//		str += "<td><a class='btn' href='actions-remove.html?id=" + obj.id + "'><i class='icon-trash'></i></a></td>";
-//		
-//		str += "</tr>";
-//	}
-//	
-//	str += "</tbody></table>";
-	
 	var str = "<div id='all_actions'>";
 	
 	for( var i = 0; i < size; i++ ){
@@ -62,27 +29,42 @@ var successCallback = function( arg )
 		
 		var objType = obj.objectType;
 		var id = obj.id;
+		var name = obj.name;
+		var description = obj.description;
+		var type = obj.type;
 		
+		var requestParams = "id=" + id;
+		requestParams += "&name=" + name;
+		requestParams += "&description=" + description;
+		requestParams += "&type=" + type;
+		requestParams += "&objType=" + objType;
 		
 			str += "<div id='action" + id + "' userId='" + id + "' class='containner-fluid'>";
 				str += "<div class='row-fluid action'>";
 					str += "<div class='span3 action-description'>";
 				        str += "<ul>";
-						str += "<li>" + obj.name + "</li>";
-						str += "<li>" + obj.description + "</li>";
-						str += "<li>" + obj.type + "</li>";
+						str += "<li>" + name + "</li>";
+						str += "<li>" + description + "</li>";
+						str += "<li>" + type + "</li>";
 		if( objType === 'ConfigurationAction' )
 		{
-						str += "<li>" + obj.setting + "</li>";
+						var setting = obj.setting;
+						requestParams += "&setting=" + setting;
+						
+						str += "<li>" + setting + "</li>";
 		}
 		else
 		{
-						str += "<li>" + obj.sendTo + "</li>";
-						str += "<li>" + obj.message + "</li>";
+						var sendTo = obj.sendTo;
+						var message = obj.message;
+						requestParams += "&sendTo=" + sendTo;
+						requestParams += "&message=" + message;
+						str += "<li>" + sendTo + "</li>";
+						str += "<li>" + message + "</li>";
 		}
 		
-						str += "<li><a class='btn' title='Edit' href='actions-edit.html?id=" + obj.id + "'><i class='icon-pencil'></i></a></li>";
-						str += "<li><a class='btn' title='Remove' href='actions-remove.html?id=" + obj.id + "'><i class='icon-trash'></i></a></li>";
+						str += "<li><a class='btn' title='Edit' href='actions-create.html?" + requestParams + "'><i class='icon-pencil'></i></a></li>";
+						str += "<li><a class='btn' title='Remove' href='actions-remove.html?" + requestParams + "'><i class='icon-trash'></i></a></li>";
 						
 						str += "</ul>";
 					str += "</div>";
@@ -94,8 +76,6 @@ var successCallback = function( arg )
 	str += "</div>";
 	
 	$("#listAllDiv").html(str);
-	
-	console.log(str);
 }
 
 var errorCallback = function( arg )
@@ -108,8 +88,11 @@ var x = false;
 
 ACTIONS_LISTALL.init = function()
 { 	
-if(x)	successCallback( ['{ "objectType":"Configuration", "name":"Action 01", "description":"description", "type":"SCREEN", "setting":"9,3" }',
-     	                 '{ "objectType":"Configuration", "name":"Action 01", "description":"description", "type":"SCREEN", "setting":"9,3" }'] );
+if(x)	successCallback( [
+     	                  '{ "id":2,"objectType":"ConfigurationAction", "name":"Action 01", "description":"description", "type":"SCREEN", "setting":"9,3" }',
+     	                 '{ "id":2,"objectType":"NotificationAction", "name":"Action 01", "description":"description", "type":"SMS", "sendTo":"Eiji", "message":"Ola mundo!" }',
+     	                  '{ "id":1,"objectType":"ConfigurationAction", "name":"Action 01", "description":"description", "type":"VOLUME", "setting":"9,3" }'
+     	                  ] );
 else
 	cordova.exec(
 			successCallback, 

@@ -6,7 +6,7 @@ var NOTIFICATION_DIV_ID = '#notificationDiv';
 var ACTION_PLUGIN_NAME = "Action";
 var NOTIFICATION_STATUS = "NOTIFICATION";
 var CONFIGURATION_STATUS = "CONFIGURATION";
-
+var methodName = "add";
 
 var ACTIONS_CREATE = function()
 {
@@ -41,12 +41,10 @@ ACTIONS_CREATE.handleConfigurationButton = function( event )
 
 ACTIONS_CREATE.handleSaveButton = function()
 {
-	var methodName = "add";
-	
 	var successCallback = function( arg )
 	{
 		console.log( "Calling the method " + methodName + " returned successfully with the arguments: " + arg );
-		alert("The action was successfully created!" + arg);
+		alert("Operation performed successfully!");
 		window.location="actions.html";
 	}
 	
@@ -72,6 +70,9 @@ ACTIONS_CREATE.handleSaveButton = function()
 		var result = new Array();
 		
 		result.push(ACTIONS_CREATE.STATUS);
+		
+		var id = getInputValue("input[id='inputId']");
+		result.push(id);
 		
 		var name = getInputValue("input[id='inputName']");
 		
@@ -107,6 +108,7 @@ ACTIONS_CREATE.handleSaveButton = function()
 	var parameters = buildParameters();
 
 	console.log("Before calling cordova.exec with parameters: " + parameters );
+	
 	cordova.exec(
 			successCallback, 
 			errorCallback,
@@ -124,11 +126,86 @@ ACTIONS_CREATE.init = function()
 	
 	var $configurationButton = $("button[id='configurationButton']");
 	$configurationButton.click( ACTIONS_CREATE.handleConfigurationButton );
+	$configurationButton.removeAttr("disabled");
 	$configurationButton.click();
 	
 	var $notificationButton = $("button[id='notificationButton']");
+	$notificationButton.removeAttr("disabled");
 	$notificationButton.click( ACTIONS_CREATE.handleNotificationButton );
+	
+	var urlParams = {};
+	(function () {
+		
+		var pl     = /\+/g;
+		var search = /([^&=]+)=?([^&]*)/g;
+		var decode = function (s) { 
+			return decodeURIComponent(s.replace(pl, " ")); 
+		};
+		var query  = window.location.search.substring(1);
+		
+		var match;
+		while (match = search.exec(query))
+		{
+			urlParams[decode(match[1])] = decode(match[2]);
+		}
+	})();
+		
+	console.log(urlParams);
+
+	var id = urlParams['id'] ;
+	
+	//Se tem parametros na request, entao eh update
+	if( id != undefined )
+	{
+		methodName = "update";
+		
+		var $actionLegend = $("legend[id='actionLegend']");
+		$actionLegend.html("Edit Action");
+		
+		var $inputId = $("input[id='inputId']");
+		$inputId.val(id);
+		
+		var name = urlParams['name'];
+		var $inputName = $("input[id='inputName']");
+		$inputName.val( name );
+		
+		var description = urlParams['description'];
+		var $inputDescription = $("textarea[id='inputDescription']");
+		$inputDescription.val( description );
+		
+		var actionType = urlParams['objType'];
+		if(actionType === "ConfigurationAction")
+		{
+			var setting = urlParams['setting'];
+			var $inputSetting = $("input[id='inputSetting']");
+			$inputSetting.val( setting );
+			
+			var type = urlParams['type'];
+			var $settingTypeInput = $("select[id='settingType']");
+			$settingTypeInput.val(type);
+			
+			$configurationButton.click();
+			$notificationButton.attr("disabled", "disabled");
+		}
+		else
+		{
+			var sendTo = urlParams['sendTo'];
+			var $inputReceiver = $("input[id='inputReceiver']");
+			$inputReceiver.val( sendTo );
+			
+			var type = urlParams['type'];
+			var $notificationTypeInput = $("select[id='notificationType']");
+			$notificationTypeInput.val(type);
+			
+			var message = urlParams['message'];
+			var $inputMessage = $("textarea[id='inputMessage']");
+			$inputMessage.val( message );
+			
+			$notificationButton.click();
+			$configurationButton.attr("disabled", "disabled");	
+		}
+	}
 };
 
-
+//$(document).ready( ACTIONS_CREATE.init );
 document.addEventListener("deviceready", ACTIONS_CREATE.init, false);

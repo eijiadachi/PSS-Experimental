@@ -24,7 +24,8 @@ public class TransientDAO<T extends Entity> implements IAbstractDAO<T>
 	{
 		++idCounter;
 		t.setId( idCounter );
-		map.put( idCounter, t );
+
+		this.update( t );
 	}
 
 	public boolean delete(Integer id)
@@ -35,9 +36,7 @@ public class TransientDAO<T extends Entity> implements IAbstractDAO<T>
 
 	public void update(T t)
 	{
-		Integer id = t.getId();
-
-		map.put( id, t );
+		map.put( idCounter, t );
 	}
 
 	public List<T> listAll()

@@ -1,12 +1,8 @@
 package br.inf.pucrio.actomatic;
 
-import org.apache.cordova.api.PluginResult;
-import org.apache.cordova.api.PluginResult.Status;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import android.util.Log;
 import br.inf.pucrio.actomatic.dao.FactoryDAO;
 import br.inf.pucrio.actomatic.dao.IAbstractDAO;
 import br.inf.pucrio.actomatic.model.Action;
@@ -24,47 +20,6 @@ public class ActionPlugin extends AbstractActOMaticPlugin<Action>
 
 	public static final String TAG = "ActionPlugin";
 
-	public String mProcessDataCallbackId;
-
-	private void startProcessingData(final JSONArray args)
-	{
-		new Thread()
-		{
-			@Override
-			public void run()
-			{
-
-			}
-		}.start();
-
-	}
-
-	private void onProcessDataReadSuccess(double processedData)
-	{
-		Log.d( TAG, "onCardDataReadSuccess() called. Processed data: " + processedData );
-
-		PluginResult result;
-
-		try
-		{
-			JSONObject resultJSON = new JSONObject();
-			resultJSON.put( "processedData", processedData );
-			result = new PluginResult( Status.OK, resultJSON );
-		}
-		catch (JSONException jsonEx)
-		{
-			Log.e( TAG, "Got JSON Exception " + jsonEx.getMessage() );
-			jsonEx.printStackTrace();
-			result = new PluginResult( Status.JSON_EXCEPTION );
-		}
-
-		// callback to the javascript layer with our result
-		// using the held callbackId via success(PluginResult result, String
-		// callbackId)
-		result.setKeepCallback( false );
-		this.success( result, this.mProcessDataCallbackId );
-	}
-
 	@Override
 	protected IAbstractDAO<Action> getDaoInstance()
 	{
@@ -79,19 +34,24 @@ public class ActionPlugin extends AbstractActOMaticPlugin<Action>
 		{
 			Action result = null;
 
-			String actionType = args.getString( 0 );
-			String name = args.getString( 1 );
-			String description = args.getString( 2 );
+			int counter = 0;
+
+			String actionType = args.getString( counter++ );
+
+			String idStr = args.getString( counter++ );
+
+			String name = args.getString( counter++ );
+			String description = args.getString( counter++ );
 
 			if ("CONFIGURATION".equals( actionType ))
 			{
 				result = new ConfigurationAction();
 
-				String settingStr = args.getString( 3 );
+				String settingStr = args.getString( counter++ );
 				Double setting = Double.parseDouble( settingStr );
 				( (ConfigurationAction) result ).setSetting( setting );
 
-				String settingType = args.getString( 4 );
+				String settingType = args.getString( counter++ );
 
 				ConfigurationType type = ConfigurationType.valueOf( settingType );
 
@@ -101,16 +61,22 @@ public class ActionPlugin extends AbstractActOMaticPlugin<Action>
 			{
 				result = new NotificationAction();
 
-				String sendTo = args.getString( 3 );
+				String sendTo = args.getString( counter++ );
 				( (NotificationAction) result ).setSendTo( sendTo );
 
-				String notificationTypeStr = args.getString( 4 );
+				String notificationTypeStr = args.getString( counter++ );
 
 				NotificationType type = NotificationType.valueOf( notificationTypeStr );
 				( (NotificationAction) result ).setType( type );
 
-				String message = args.getString( 5 );
+				String message = args.getString( counter++ );
 				( (NotificationAction) result ).setMessage( message );
+			}
+
+			if (idStr != null && !idStr.isEmpty())
+			{
+				Integer id = Integer.parseInt( idStr );
+				result.setId( id );
 			}
 
 			result.setName( name );
