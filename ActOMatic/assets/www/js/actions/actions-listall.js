@@ -84,11 +84,11 @@ var errorCallback = function( arg )
 	alert( "It was not possible to list all the actions.\n\n" + arg );
 }
 
-var x = false;
+var browser = false;
 
 ACTIONS_LISTALL.init = function()
 { 	
-if(x)	successCallback( [
+if(browser)	successCallback( [
      	                  '{ "id":2,"objectType":"ConfigurationAction", "name":"Action 01", "description":"description", "type":"SCREEN", "setting":"9,3" }',
      	                 '{ "id":2,"objectType":"NotificationAction", "name":"Action 01", "description":"description", "type":"SMS", "sendTo":"Eiji", "message":"Ola mundo!" }',
      	                  '{ "id":1,"objectType":"ConfigurationAction", "name":"Action 01", "description":"description", "type":"VOLUME", "setting":"9,3" }'
