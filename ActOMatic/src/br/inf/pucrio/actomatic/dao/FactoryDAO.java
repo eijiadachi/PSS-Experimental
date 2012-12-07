@@ -2,12 +2,15 @@ package br.inf.pucrio.actomatic.dao;
 
 import br.inf.pucrio.actomatic.model.Action;
 import br.inf.pucrio.actomatic.model.Event;
+import br.inf.pucrio.actomatic.model.Rule;
 
 public final class FactoryDAO
 {
 	private static TransientDAO<Action> actionDAO;
 
 	private static TransientDAO<Event> eventDAO;
+
+	private static TransientDAO<Rule> ruleDAO;
 
 	public static IAbstractDAO<Action> getActionDAOInstance()
 	{
@@ -25,5 +28,14 @@ public final class FactoryDAO
 			return eventDAO;
 		}
 		return new TransientDAO<Event>();
+	}
+
+	public static IAbstractDAO<Rule> getRuleDAOInstance()
+	{
+		if (ruleDAO != null)
+		{
+			return ruleDAO;
+		}
+		return new TransientDAO<Rule>();
 	}
 }
