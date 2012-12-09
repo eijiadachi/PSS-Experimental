@@ -130,8 +130,6 @@ RULES_CREATE.init = function()
 		
 		var optionStr = "<option value='" + optionValue + "'>" + optionContent + "</option>"; 
 		
-		console.log(optionStr);
-		
 		$select.append(optionStr);
 	}
 	
@@ -146,8 +144,8 @@ RULES_CREATE.init = function()
 				for( var i = 0; i < size; i++ )
 				{
 					var command = jQuery.parseJSON( listAll[i] );
+					var id = command.id;
 					var event = jQuery.parseJSON( command.argument );
-					var id = event.id;
 					var name = event.name;
 					
 					appendOptions( "select[id='eventId']", id, name );
@@ -173,8 +171,8 @@ RULES_CREATE.init = function()
 				for( var i = 0; i < size; i++ )
 				{
 					var command = jQuery.parseJSON( listAll[i] );
+					var id = command.id;
 					var action = jQuery.parseJSON( command.argument );
-					var id = action.id;
 					var name = action.name;
 					
 					appendOptions( "select[id='actionId']", id, name );

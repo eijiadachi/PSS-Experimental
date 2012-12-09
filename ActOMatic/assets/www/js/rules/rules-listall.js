@@ -25,8 +25,6 @@ var successCallback = function( arg )
 	for( var i = 0; i < size; i++ ){
 		var obj = jQuery.parseJSON( arg[i] );
 		
-		console.log(obj);
-		
 		var objType = obj.objectType;
 		var id = obj.id;
 		var name = obj.name;
