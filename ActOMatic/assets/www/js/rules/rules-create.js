@@ -1,57 +1,24 @@
 /*
  * Constants
  */
-var SETTING_DIV_ID = '#settingDiv';
-var NOTIFICATION_DIV_ID = '#notificationDiv';
-var ACTION_PLUGIN_NAME = "Action";
-var NOTIFICATION_STATUS = "NOTIFICATION";
-var CONFIGURATION_STATUS = "CONFIGURATION";
+var RULE_PLUGIN_NAME = "Rule";
 var methodName = "add";
 
-var ACTIONS_CREATE = function()
-{
-	this.STATUS = "";
-};
+var RULES_CREATE = function(){};
 
-ACTIONS_CREATE.showDiv = function( divId )
-{
-	var $div = $(divId);
-	$div.show();
-}
-
-ACTIONS_CREATE.hideDiv = function( divId )
-{
-	var $div = $(divId);
-	$div.hide();
-}
-
-ACTIONS_CREATE.handleNotificationButton = function( event )
-{
-	ACTIONS_CREATE.showDiv( NOTIFICATION_DIV_ID );
-	ACTIONS_CREATE.hideDiv( SETTING_DIV_ID );
-	ACTIONS_CREATE.STATUS = NOTIFICATION_STATUS;
-}
-
-ACTIONS_CREATE.handleConfigurationButton = function( event )
-{
-	ACTIONS_CREATE.showDiv( SETTING_DIV_ID );
-	ACTIONS_CREATE.hideDiv( NOTIFICATION_DIV_ID );
-	ACTIONS_CREATE.STATUS = CONFIGURATION_STATUS;
-}
-
-ACTIONS_CREATE.handleSaveButton = function()
+RULES_CREATE.handleSaveButton = function()
 {
 	var successCallback = function( arg )
 	{
 		console.log( "Calling the method " + methodName + " returned successfully with the arguments: " + arg );
 		alert("Operation performed successfully!");
-		window.location="actions.html";
+		window.location="rules.html";
 	}
 	
 	var errorCallback = function( arg )
 	{
 		console.log( "Calling the method " + methodName + " returned unsuccessfully with the arguments: " + arg );
-		alert( "It was not possible to create the action.\n\n" + arg );
+		alert( "It was not possible to create the rule.\n\n" + arg );
 	}
 	
 	var buildParameters = function()
@@ -69,8 +36,6 @@ ACTIONS_CREATE.handleSaveButton = function()
 		
 		var result = new Array();
 		
-		result.push(ACTIONS_CREATE.STATUS);
-		
 		var id = getInputValue("input[id='inputId']");
 		result.push(id);
 		
@@ -82,25 +47,11 @@ ACTIONS_CREATE.handleSaveButton = function()
 		
 		result.push(description);
 		
-		if( ACTIONS_CREATE.STATUS === CONFIGURATION_STATUS )
-		{
-			var setting = getInputValue("input[id='inputSetting']");
-			result.push( setting );
-			
-			var settingType = getInputValue("select[id='settingType']");
-			result.push( settingType );
-		}
-		else
-		{
-			var receiver = getInputValue("input[id='inputReceiver']");
-			result.push(receiver);
-			
-			var notificationType = getInputValue("select[id='notificationType']");
-			result.push(notificationType);
-			
-			var message = getInputValue("textarea[id='inputMessage']");
-			result.push(message);
-		}
+		var eventId = getInputValue("select[id='eventId']");
+		result.push(eventId);
+		
+		var actionId = getInputValue("select[id='actionId']");
+		result.push(actionId);
 		
 		return result;
 	}
@@ -112,26 +63,17 @@ ACTIONS_CREATE.handleSaveButton = function()
 	cordova.exec(
 			successCallback, 
 			errorCallback,
-			ACTION_PLUGIN_NAME,
+			RULE_PLUGIN_NAME,
 			methodName, 
             parameters
 			);
 	return;
 }
 
-ACTIONS_CREATE.init = function()
+RULES_CREATE.init = function()
 { 	
-	var $saveButton = $("button#actionsCreateSaveButton");
-	$saveButton.click( ACTIONS_CREATE.handleSaveButton );
-	
-	var $configurationButton = $("button[id='configurationButton']");
-	$configurationButton.click( ACTIONS_CREATE.handleConfigurationButton );
-	$configurationButton.removeAttr("disabled");
-	$configurationButton.click();
-	
-	var $notificationButton = $("button[id='notificationButton']");
-	$notificationButton.removeAttr("disabled");
-	$notificationButton.click( ACTIONS_CREATE.handleNotificationButton );
+	var $saveButton = $("button#rulesCreateSaveButton");
+	$saveButton.click( RULES_CREATE.handleSaveButton );
 	
 	var urlParams = {};
 	(function () {
@@ -159,8 +101,8 @@ ACTIONS_CREATE.init = function()
 	{
 		methodName = "update";
 		
-		var $actionLegend = $("legend[id='actionLegend']");
-		$actionLegend.html("Edit Action");
+		var $ruleLegend = $("legend[id='ruleLegend']");
+		$ruleLegend.html("Edit Rule");
 		
 		var $inputId = $("input[id='inputId']");
 		$inputId.val(id);
@@ -173,39 +115,78 @@ ACTIONS_CREATE.init = function()
 		var $inputDescription = $("textarea[id='inputDescription']");
 		$inputDescription.val( description );
 		
-		var actionType = urlParams['objType'];
-		if(actionType === "ConfigurationAction")
-		{
-			var setting = urlParams['setting'];
-			var $inputSetting = $("input[id='inputSetting']");
-			$inputSetting.val( setting );
-			
-			var type = urlParams['type'];
-			var $settingTypeInput = $("select[id='settingType']");
-			$settingTypeInput.val(type);
-			
-			$configurationButton.click();
-			$notificationButton.attr("disabled", "disabled");
-		}
-		else
-		{
-			var sendTo = urlParams['sendTo'];
-			var $inputReceiver = $("input[id='inputReceiver']");
-			$inputReceiver.val( sendTo );
-			
-			var type = urlParams['type'];
-			var $notificationTypeInput = $("select[id='notificationType']");
-			$notificationTypeInput.val(type);
-			
-			var message = urlParams['message'];
-			var $inputMessage = $("textarea[id='inputMessage']");
-			$inputMessage.val( message );
-			
-			$notificationButton.click();
-			$configurationButton.attr("disabled", "disabled");	
-		}
+		var eventId = urlParams['eventId'];
+		var $eventSelect = $("select[id='eventId']");
+		$eventSelect.val( eventId );
+		
+		var actionId = urlParams['actionId'];
+		var $actionSelect = $("select[id='actionId']");
+		$actionSelect.val( actionId );
 	}
+	
+	var appendOptions = function( selectId, optionValue, optionContent )
+	{
+		var $select = $( selectId );
+		
+		var optionStr = "<option value='" + optionValue + "'>" + optionContent + "</option>"; 
+		
+		console.log(optionStr);
+		
+		$select.append(optionStr);
+	}
+	
+	cordova.exec(
+			function( listAll ){
+				
+				var size = listAll.length;
+				if(  size === 0 ){
+					return;
+				}
+				
+				for( var i = 0; i < size; i++ )
+				{
+					var event = jQuery.parseJSON( listAll[i] );
+					var id = event.id;
+					var name = event.name;
+					
+					appendOptions( "select[id='eventId']", id, name );
+				}
+				
+			}, 
+			function(){
+				alert('error');
+			},
+			"Event",
+			"listAll", 
+            []
+			);
+	
+	cordova.exec(
+			function( listAll ){
+				
+				var size = listAll.length;
+				if(  size === 0 ){
+					return;
+				}
+				
+				for( var i = 0; i < size; i++ )
+				{
+					var event = jQuery.parseJSON( listAll[i] );
+					var id = event.id;
+					var name = event.name;
+					
+					appendOptions( "select[id='actionId']", id, name );
+				}
+				
+			}, 
+			function(){
+				alert('error');
+			},
+			"Action",
+			"listAll", 
+            []
+			);
 };
 
-//$(document).ready( ACTIONS_CREATE.init );
-document.addEventListener("deviceready", ACTIONS_CREATE.init, false);
+//$(document).ready( RULES_CREATE.init );
+document.addEventListener("deviceready", RULES_CREATE.init, false);

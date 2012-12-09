@@ -12,6 +12,13 @@ public final class FactoryDAO
 
 	private static TransientDAO<Rule> ruleDAO;
 
+	static
+	{
+		actionDAO = new TransientDAO<Action>();
+		eventDAO = new TransientDAO<Event>();
+		ruleDAO = new TransientDAO<Rule>();
+	}
+
 	public static IAbstractDAO<Action> getActionDAOInstance()
 	{
 		if (actionDAO != null)

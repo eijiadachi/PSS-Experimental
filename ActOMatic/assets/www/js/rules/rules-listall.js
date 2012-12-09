@@ -31,13 +31,18 @@ var successCallback = function( arg )
 		var id = obj.id;
 		var name = obj.name;
 		var description = obj.description;
-		var type = obj.type;
+		var event = jQuery.parseJSON(obj.event);
+		var eventId = event.id;
+		var eventName = event.name;
+		var action = jQuery.parseJSON(obj.action);
+		var actionId = action.id;
+		var actionName = action.name;
 		
 		var requestParams = "id=" + id;
 		requestParams += "&name=" + name;
 		requestParams += "&description=" + description;
-		requestParams += "&type=" + type;
-		requestParams += "&objType=" + objType;
+		requestParams += "&eventId=" + eventId;
+		requestParams += "&actionId=" + actionId;
 		
 			str += "<div id='rule" + id + "' ruleId='" + id + "' class='containner-fluid'>";
 				str += "<div class='row-fluid rule'>";
@@ -45,23 +50,8 @@ var successCallback = function( arg )
 				        str += "<ul>";
 						str += "<li>" + name + "</li>";
 						str += "<li>" + description + "</li>";
-						str += "<li>" + type + "</li>";
-		if( objType === 'ConfigurationAction' )
-		{
-						var setting = obj.setting;
-						requestParams += "&setting=" + setting;
-						
-						str += "<li>" + setting + "</li>";
-		}
-		else
-		{
-						var sendTo = obj.sendTo;
-						var message = obj.message;
-						requestParams += "&sendTo=" + sendTo;
-						requestParams += "&message=" + message;
-						str += "<li>" + sendTo + "</li>";
-						str += "<li>" + message + "</li>";
-		}
+						str += "<li>" + eventName + "</li>";
+						str += "<li>" + actionName + "</li>";
 		
 						str += "<li><a class='btn' title='Edit' href='rules-create.html?" + requestParams + "'><i class='icon-pencil'></i></a></li>";
 						str += "<li><a class='btn' title='Remove' href='rules-remove.html?" + requestParams + "'><i class='icon-trash'></i></a></li>";
