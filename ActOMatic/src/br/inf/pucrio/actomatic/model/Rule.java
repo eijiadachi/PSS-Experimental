@@ -1,27 +1,30 @@
 package br.inf.pucrio.actomatic.model;
 
+import br.inf.pucrio.actomatic.action.ActionCommand;
+import br.inf.pucrio.actomatic.event.EventCommand;
+
 public class Rule extends Entity
 {
-	private Action action;
+	private ActionCommand<?> action;
 
-	private Event event;
+	private EventCommand<?> event;
 
-	public Action getAction()
+	public ActionCommand<?> getAction()
 	{
 		return action;
 	}
 
-	public void setAction(Action action)
+	public void setAction(ActionCommand<?> action)
 	{
 		this.action = action;
 	}
 
-	public Event getEvent()
+	public EventCommand<?> getEvent()
 	{
 		return event;
 	}
 
-	public void setEvent(Event event)
+	public void setEvent(EventCommand<?> event)
 	{
 		this.event = event;
 	}

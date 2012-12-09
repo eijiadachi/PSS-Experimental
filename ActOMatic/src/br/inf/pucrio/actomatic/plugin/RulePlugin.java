@@ -1,12 +1,15 @@
-package br.inf.pucrio.actomatic;
+package br.inf.pucrio.actomatic.plugin;
 
+import org.apache.cordova.api.LOG;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import br.inf.pucrio.actomatic.action.ActionCommand;
 import br.inf.pucrio.actomatic.dao.FactoryDAO;
 import br.inf.pucrio.actomatic.dao.IAbstractDAO;
-import br.inf.pucrio.actomatic.model.Action;
-import br.inf.pucrio.actomatic.model.Event;
+import br.inf.pucrio.actomatic.event.EventCommand;
+import br.inf.pucrio.actomatic.event.region.RegionCommand;
+import br.inf.pucrio.actomatic.location.GPSTracker;
 import br.inf.pucrio.actomatic.model.Rule;
 
 public class RulePlugin extends AbstractActOMaticPlugin<Rule>
@@ -17,6 +20,8 @@ public class RulePlugin extends AbstractActOMaticPlugin<Rule>
 	public RulePlugin()
 	{
 		super( TAG );
+		// MainActivity context = (MainActivity) this.cordova;
+		// gpsTracker = context.getGpsTracker();
 	}
 
 	@Override
@@ -48,11 +53,11 @@ public class RulePlugin extends AbstractActOMaticPlugin<Rule>
 			rule.setName( name );
 			rule.setDescription( description );
 
-			IAbstractDAO<Action> actionDAO = FactoryDAO.getActionDAOInstance();
-			Action action = actionDAO.getById( actionId );
+			IAbstractDAO<ActionCommand<?>> actionDAO = FactoryDAO.getActionDAOInstance();
+			ActionCommand<?> action = actionDAO.getById( actionId );
 
-			IAbstractDAO<Event> eventDAO = FactoryDAO.getEventDAOInstance();
-			Event event = eventDAO.getById( eventId );
+			IAbstractDAO<EventCommand<?>> eventDAO = FactoryDAO.getEventDAOInstance();
+			EventCommand<?> event = eventDAO.getById( eventId );
 
 			rule.setAction( action );
 			rule.setEvent( event );
@@ -63,6 +68,20 @@ public class RulePlugin extends AbstractActOMaticPlugin<Rule>
 				rule.setId( ruleId );
 			}
 
+			if (event instanceof RegionCommand)
+			{
+				GPSTracker gpsTracker = getGpsTracker();
+
+				gpsTracker.registerCommand();
+
+				double latitude = gpsTracker.getLatitude();
+				double longitude = gpsTracker.getLongitude();
+
+				String msg = String.format( "%s %s", latitude, longitude );
+				LOG.d( "eiji", msg );
+
+			}
+
 			return rule;
 		}
 		catch (JSONException e)
@@ -70,5 +89,4 @@ public class RulePlugin extends AbstractActOMaticPlugin<Rule>
 			throw new RuntimeException( e );
 		}
 	}
-
 }

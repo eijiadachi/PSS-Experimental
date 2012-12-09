@@ -1,4 +1,4 @@
-package br.inf.pucrio.actomatic;
+package br.inf.pucrio.actomatic.plugin;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +11,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import br.inf.pucrio.actomatic.MainActivity;
 import br.inf.pucrio.actomatic.dao.IAbstractDAO;
+import br.inf.pucrio.actomatic.location.GPSTracker;
 import br.inf.pucrio.actomatic.model.Entity;
 import br.inf.pucrio.actomatic.util.Util;
 
@@ -21,10 +23,18 @@ public abstract class AbstractActOMaticPlugin<T extends Entity> extends Plugin
 
 	private final String tag;
 
+	protected GPSTracker getGpsTracker()
+	{
+		MainActivity activity = (MainActivity) this.cordova;
+		GPSTracker gpsTracker = activity.getGpsTracker();
+		return gpsTracker;
+	}
+
 	protected AbstractActOMaticPlugin(String tag)
 	{
-		this.dao = getDaoInstance();
+		super();
 
+		this.dao = getDaoInstance();
 		this.tag = tag;
 	}
 

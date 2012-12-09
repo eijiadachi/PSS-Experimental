@@ -11,6 +11,7 @@ var methodName = "add";
 var EVENTS_CREATE = function()
 {
 	this.STATUS = "";
+	this.REGION_EVENT_TYPE="";
 };
 
 EVENTS_CREATE.showDiv = function( divId )
@@ -84,6 +85,8 @@ EVENTS_CREATE.handleSaveButton = function()
 		
 		if( EVENTS_CREATE.STATUS === REGION_STATUS )
 		{
+			result.pus(EVENTS_CREATE.REGION_EVENT_TYPE);
+			
 			var latitude = getInputValue("input[id='inputLatitude']");
 			result.push( latitude );
 			
@@ -128,6 +131,12 @@ EVENTS_CREATE.init = function()
 	$regionButton.click( EVENTS_CREATE.handleRegionButton );
 	$regionButton.removeAttr("disabled");
 	$regionButton.click();
+	
+	var $enterRegionButton = $("button[id='enterRegionButton']");
+	$enterRegionButton.click( function(){ EVENTS_CREATE.REGION_EVENT_TYPE="Enter"} );
+	
+	var $leaveRegionButton = $("button[id='leaveRegionButton']");
+	$leaveRegionButton.click( function(){ EVENTS_CREATE.REGION_EVENT_TYPE="Leave"} );
 	
 	var $timerButton = $("button[id='timerButton']");
 	$timerButton.removeAttr("disabled");

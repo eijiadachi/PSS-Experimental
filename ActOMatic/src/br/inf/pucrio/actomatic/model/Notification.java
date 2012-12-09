@@ -1,12 +1,12 @@
 package br.inf.pucrio.actomatic.model;
 
-public class NotificationAction extends Action
+public class Notification extends Action
 {
 
 	@Override
 	public String getObjectType()
 	{
-		return "NotificationAction";
+		return "Notification";
 	}
 
 	public enum NotificationType

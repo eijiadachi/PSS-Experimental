@@ -85,7 +85,7 @@ public abstract class Entity
 		}
 		catch (JSONException e)
 		{
-			LOG.d( ConfigurationAction.class.getCanonicalName(), e.getMessage(), e );
+			LOG.d( Configuration.class.getCanonicalName(), e.getMessage(), e );
 			throw new RuntimeException( e );
 		}
 	}

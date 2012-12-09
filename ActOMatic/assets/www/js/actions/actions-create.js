@@ -39,6 +39,25 @@ ACTIONS_CREATE.handleConfigurationButton = function( event )
 	ACTIONS_CREATE.STATUS = CONFIGURATION_STATUS;
 }
 
+ACTIONS_CREATE.handleCancelButton = function( event )
+{
+	function alertDismissed() {
+	    // do something
+	}
+
+//	navigator.notification.beep(1);
+//	navigator.notification.vibrate(1000);
+//	
+//	navigator.notification.alert(
+//	    'You are the winner!',  // message
+//	    alertDismissed,         // callback
+//	    'Game Over',            // title
+//	    'Done'                  // buttonName
+//	);
+	
+	window.MainActivity.showAlert();
+}
+
 ACTIONS_CREATE.handleSaveButton = function()
 {
 	var successCallback = function( arg )
@@ -123,6 +142,9 @@ ACTIONS_CREATE.init = function()
 { 	
 	var $saveButton = $("button#actionsCreateSaveButton");
 	$saveButton.click( ACTIONS_CREATE.handleSaveButton );
+	
+	var $cancelButton = $("button#actionsCreateCancelButton");
+	$cancelButton.click( ACTIONS_CREATE.handleCancelButton );
 	
 	var $configurationButton = $("button[id='configurationButton']");
 	$configurationButton.click( ACTIONS_CREATE.handleConfigurationButton );

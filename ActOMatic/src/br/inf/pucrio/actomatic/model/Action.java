@@ -1,6 +1,6 @@
 package br.inf.pucrio.actomatic.model;
 
-public abstract class Action extends Entity
+public abstract class Action extends Entity implements CommandArgument
 {
 	public Action()
 	{

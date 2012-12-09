@@ -145,7 +145,8 @@ RULES_CREATE.init = function()
 				
 				for( var i = 0; i < size; i++ )
 				{
-					var event = jQuery.parseJSON( listAll[i] );
+					var command = jQuery.parseJSON( listAll[i] );
+					var event = jQuery.parseJSON( command.argument );
 					var id = event.id;
 					var name = event.name;
 					
@@ -171,9 +172,10 @@ RULES_CREATE.init = function()
 				
 				for( var i = 0; i < size; i++ )
 				{
-					var event = jQuery.parseJSON( listAll[i] );
-					var id = event.id;
-					var name = event.name;
+					var command = jQuery.parseJSON( listAll[i] );
+					var action = jQuery.parseJSON( command.argument );
+					var id = action.id;
+					var name = action.name;
 					
 					appendOptions( "select[id='actionId']", id, name );
 				}

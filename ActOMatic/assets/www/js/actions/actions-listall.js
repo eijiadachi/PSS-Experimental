@@ -23,7 +23,8 @@ var successCallback = function( arg )
 	var str = "<div id='all_actions'>";
 	
 	for( var i = 0; i < size; i++ ){
-		var obj = jQuery.parseJSON( arg[i] );
+		var command = jQuery.parseJSON( arg[i] );
+		var obj = jQuery.parseJSON( command.argument );
 		
 		console.log(obj);
 		
@@ -46,7 +47,7 @@ var successCallback = function( arg )
 						str += "<li>" + name + "</li>";
 						str += "<li>" + description + "</li>";
 						str += "<li>" + type + "</li>";
-		if( objType === 'ConfigurationAction' )
+		if( objType === 'Configuration' )
 		{
 						var setting = obj.setting;
 						requestParams += "&setting=" + setting;

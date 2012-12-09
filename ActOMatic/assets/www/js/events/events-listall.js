@@ -24,35 +24,35 @@ var successCallback = function( arg )
 	
 	for( var i = 0; i < size; i++ ){
 		var obj = jQuery.parseJSON( arg[i] );
-		
-		console.log(obj);
+		var argument = jQuery.parseJSON( obj.argument );
 		
 		var objType = obj.objectType;
 		var id = obj.id;
-		var name = obj.name;
-		var description = obj.description;
+		var name = argument.name;
+		var description = argument.description;
 		
 		var requestParams = "id=" + id;
+		requestParams += "&objType=" + objType;
 		requestParams += "&name=" + name;
 		requestParams += "&description=" + description;
-		requestParams += "&objType=" + objType;
 		
 			str += "<div id='event" + id + "' eventId='" + id + "' class='containner-fluid'>";
 				str += "<div class='row-fluid event'>";
 					str += "<div class='span3 event-description'>";
 				        str += "<ul>";
-						str += "<li>" + name + "</li>";
-						str += "<li>" + description + "</li>";
-		if( objType === 'RegionEvent' )
+							str += "<li>" + name + "</li>";
+							str += "<li>" + description + "</li>";
+							
+		if( objType === 'EnterRegionCommand' || objType === 'LeaveRegionCommand' )
 		{
-						var latitude = obj.latitude;
-						var longitude = obj.longitude;
-						var radius = obj.radius;
+			var latitude = argument.latitude;
+			var longitude = argument.longitude;
+			var radius = argument.radius;
 						
-						requestParams += "&latitude=" + latitude;
-						requestParams += "&longitude=" + longitude;
-						requestParams += "&radius=" + radius;
-						
+			requestParams += "&latitude=" + latitude;
+			requestParams += "&longitude=" + longitude;
+			requestParams += "&radius=" + radius;
+		
 						str += "<li>" + latitude + "</li>";
 						str += "<li>" + longitude + "</li>";
 						str += "<li>" + radius + "</li>";

@@ -1,6 +1,6 @@
 package br.inf.pucrio.actomatic.model;
 
-public class ConfigurationAction extends Action
+public class Configuration extends Action 
 {
 	public enum ConfigurationType
 	{
@@ -34,6 +34,6 @@ public class ConfigurationAction extends Action
 	@Override
 	public String getObjectType()
 	{
-		return "ConfigurationAction";
+		return "Configuration";
 	}
 }

@@ -51,9 +51,9 @@
     <plugin name="Battery" value="org.apache.cordova.BatteryListener"/>
     <plugin name="SplashScreen" value="org.apache.cordova.SplashScreen"/>
     <plugin name="Echo" value="org.apache.cordova.Echo" />
-    <plugin name="Action" value="br.inf.pucrio.actomatic.ActionPlugin" />
-    <plugin name="Event" value="br.inf.pucrio.actomatic.EventPlugin" />
-    <plugin name="Rule" value="br.inf.pucrio.actomatic.RulePlugin" />
+    <plugin name="Action" value="br.inf.pucrio.actomatic.plugin.ActionPlugin" />
+    <plugin name="Event" value="br.inf.pucrio.actomatic.plugin.EventPlugin" />
+    <plugin name="Rule" value="br.inf.pucrio.actomatic.plugin.RulePlugin" />
 </plugins>
 </cordova>
 
