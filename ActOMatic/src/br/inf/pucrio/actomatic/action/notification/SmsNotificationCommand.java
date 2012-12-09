@@ -1,6 +1,6 @@
 package br.inf.pucrio.actomatic.action.notification;
 
-import br.inf.pucrio.actomatic.MainActivity;
+import android.app.Activity;
 import br.inf.pucrio.actomatic.model.Notification;
 
 public class SmsNotificationCommand extends NotificationCommand
@@ -31,7 +31,7 @@ public class SmsNotificationCommand extends NotificationCommand
 	}
 
 	@Override
-	public void update(MainActivity activity)
+	public void update(Activity activity)
 	{
 		// TODO Auto-generated method stub
 

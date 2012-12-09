@@ -1,6 +1,7 @@
 package br.inf.pucrio.actomatic.action.notification;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
@@ -42,7 +43,7 @@ public class AlertNotificationCommand extends NotificationCommand
 	}
 
 	@Override
-	public void update(final MainActivity activity)
+	public void update(final Activity activity)
 	{
 		Notification notification = this.getArgument();
 		final String message = notification.getMessage();

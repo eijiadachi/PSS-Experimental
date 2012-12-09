@@ -4,57 +4,34 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import br.inf.pucrio.actomatic.MainActivity;
+import android.app.Activity;
 import br.inf.pucrio.actomatic.event.EventCommand;
 import br.inf.pucrio.actomatic.event.EventSource;
 import br.inf.pucrio.actomatic.model.Time;
 
 public class TimerSource extends EventSource<Time>
 {
-
-	private final MainActivity activity;
-
-	public TimerSource(MainActivity activity)
+	public TimerSource(Activity activity)
 	{
-		this.activity = activity;
+		super( activity );
 	}
 
-	public void run()
+	@Override
+	protected void performInnerRun()
 	{
-		synchronized (this)
+		Calendar instance = Calendar.getInstance();
+		Date date = instance.getTime();
+		Time time = new Time( date );
+
+		List<EventCommand<Time>> observers = getObservers();
+		for (EventCommand<Time> eventCommand : observers)
 		{
-			while (true)
+			boolean execute = eventCommand.execute( time );
+			if (execute)
 			{
-				Calendar instance = Calendar.getInstance();
-				Date date = instance.getTime();
-				Time time = new Time( date );
-
-				List<EventCommand<Time>> observers = getObservers();
-				for (EventCommand<Time> eventCommand : observers)
-				{
-					boolean execute = eventCommand.execute( time );
-					if (execute)
-					{
-						eventCommand.notifyObservers( activity );
-					}
-				}
-
-				try
-				{
-					this.wait( 5000 );
-				}
-				catch (InterruptedException e)
-				{
-					e.printStackTrace();
-					continue;
-				}
+				eventCommand.notifyObservers( getActivity() );
 			}
 		}
-	}
 
-	public MainActivity getActivity()
-	{
-		return activity;
 	}
-
 }

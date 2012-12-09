@@ -14,8 +14,8 @@ import org.json.JSONObject;
 import android.content.Context;
 import br.inf.pucrio.actomatic.MainActivity;
 import br.inf.pucrio.actomatic.dao.IAbstractDAO;
+import br.inf.pucrio.actomatic.event.region.RegionSource;
 import br.inf.pucrio.actomatic.event.timer.TimerSource;
-import br.inf.pucrio.actomatic.location.LocationTracker;
 import br.inf.pucrio.actomatic.model.Entity;
 import br.inf.pucrio.actomatic.util.Util;
 
@@ -24,13 +24,6 @@ public abstract class AbstractActOMaticPlugin<T extends Entity> extends Plugin
 	private final IAbstractDAO<T> dao;
 
 	private final String tag;
-
-	protected LocationTracker getGpsTracker()
-	{
-		MainActivity activity = getActivity();
-		LocationTracker gpsTracker = activity.getGpsTracker();
-		return gpsTracker;
-	}
 
 	protected MainActivity getActivity()
 	{
@@ -49,6 +42,13 @@ public abstract class AbstractActOMaticPlugin<T extends Entity> extends Plugin
 		MainActivity activity = getActivity();
 		Context context = activity.getContext();
 		return context;
+	}
+
+	protected RegionSource getRegionSource()
+	{
+		MainActivity activity = getActivity();
+		RegionSource regionSource = activity.getRegionSource();
+		return regionSource;
 	}
 
 	protected TimerSource getTimerSource()

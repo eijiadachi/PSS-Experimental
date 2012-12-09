@@ -8,6 +8,7 @@ public class LeaveRegionCommand extends RegionCommand
 	public LeaveRegionCommand(Region region)
 	{
 		super( region );
+		setType( RegionEventType.LEAVE );
 	}
 
 	public void run()
@@ -20,7 +21,7 @@ public class LeaveRegionCommand extends RegionCommand
 	public boolean execute(Region targetArgument)
 	{
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -35,5 +36,4 @@ public class LeaveRegionCommand extends RegionCommand
 		// TODO Auto-generated method stub
 
 	}
-
 }

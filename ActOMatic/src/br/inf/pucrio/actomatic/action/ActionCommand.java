@@ -1,6 +1,6 @@
 package br.inf.pucrio.actomatic.action;
 
-import br.inf.pucrio.actomatic.MainActivity;
+import android.app.Activity;
 import br.inf.pucrio.actomatic.Observer;
 import br.inf.pucrio.actomatic.model.Action;
 import br.inf.pucrio.actomatic.model.Command;
@@ -14,6 +14,6 @@ public abstract class ActionCommand<T extends Action> extends Command<T> impleme
 		super( argument );
 	}
 
-	public abstract void update(MainActivity activity);
+	public abstract void update(Activity activity);
 
 }

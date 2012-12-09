@@ -1,4 +1,4 @@
-package br.inf.pucrio.actomatic.location;
+package br.inf.pucrio.actomatic.event.region;
 
 import org.apache.cordova.api.LOG;
 

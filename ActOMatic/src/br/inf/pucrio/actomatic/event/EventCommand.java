@@ -3,7 +3,7 @@ package br.inf.pucrio.actomatic.event;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.inf.pucrio.actomatic.MainActivity;
+import android.app.Activity;
 import br.inf.pucrio.actomatic.Observable;
 import br.inf.pucrio.actomatic.Observer;
 import br.inf.pucrio.actomatic.action.ActionCommand;
@@ -32,7 +32,7 @@ public abstract class EventCommand<T extends Event> extends Command<T> implement
 		return result;
 	}
 
-	public void notifyObservers(MainActivity activity)
+	public void notifyObservers(Activity activity)
 	{
 		for (ActionCommand<?> observer : getObservers())
 		{

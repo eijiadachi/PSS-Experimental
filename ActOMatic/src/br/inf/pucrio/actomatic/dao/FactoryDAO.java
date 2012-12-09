@@ -51,9 +51,11 @@ public final class FactoryDAO
 		notification3.setType( NotificationType.SMS );
 
 		AlertNotificationCommand action1 = new AlertNotificationCommand( notification1 );
+		action1.setName( "Alert action" );
 		EmailNotificationCommand action2 = new EmailNotificationCommand( notification2 );
+		action2.setName( "email action" );
 		SmsNotificationCommand action3 = new SmsNotificationCommand( notification3 );
-
+		action3.setName( "SMS action" );
 		Configuration configuration1 = new Configuration();
 		configuration1.setDescription( "Mock description" );
 		configuration1.setName( "Config 1 " );
@@ -84,7 +86,10 @@ public final class FactoryDAO
 		region.setName( "Home Region" );
 
 		EnterRegionCommand event1 = new EnterRegionCommand( region );
+		event1.setName( "Enter Home" );
 		LeaveRegionCommand event2 = new LeaveRegionCommand( region );
+		event2.setName( "Leave Home" );
+
 		Date date = new Date( System.currentTimeMillis() + 15000 );
 		Time time = new Time( date );
 		TimerCommand event3 = new TimerCommand( time );

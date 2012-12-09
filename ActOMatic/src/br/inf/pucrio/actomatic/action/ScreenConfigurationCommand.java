@@ -1,6 +1,6 @@
 package br.inf.pucrio.actomatic.action;
 
-import br.inf.pucrio.actomatic.MainActivity;
+import android.app.Activity;
 import br.inf.pucrio.actomatic.model.Configuration;
 
 public class ScreenConfigurationCommand extends ActionCommand<Configuration>
@@ -31,7 +31,7 @@ public class ScreenConfigurationCommand extends ActionCommand<Configuration>
 	}
 
 	@Override
-	public void update(MainActivity activity)
+	public void update(Activity activity)
 	{
 		// TODO Auto-generated method stub
 

@@ -31,14 +31,13 @@ var successCallback = function( arg )
 		var description = obj.description;
 		
 		var eventCommand = jQuery.parseJSON( obj.event );
-		var event = jQuery.parseJSON( eventCommand.argument );
-		var eventId = event.id;
-		var eventName = event.name;
+		var eventId = eventCommand.id;
+		var eventName = eventCommand.name;
 		
 		var actionCommand = jQuery.parseJSON( obj.action );
 		var action = jQuery.parseJSON(actionCommand.argument);
-		var actionId = action.id;
-		var actionName = action.name;
+		var actionId = actionCommand.id;
+		var actionName = actionCommand.name;
 		
 		var requestParams = "id=" + id;
 		requestParams += "&name=" + name;

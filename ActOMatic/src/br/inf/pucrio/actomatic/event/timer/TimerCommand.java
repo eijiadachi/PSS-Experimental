@@ -3,7 +3,6 @@ package br.inf.pucrio.actomatic.event.timer;
 import java.util.Date;
 
 import br.inf.pucrio.actomatic.event.EventCommand;
-import br.inf.pucrio.actomatic.model.CommandArgument;
 import br.inf.pucrio.actomatic.model.Time;
 
 public class TimerCommand extends EventCommand<Time>
@@ -11,18 +10,6 @@ public class TimerCommand extends EventCommand<Time>
 	public TimerCommand(Time argument)
 	{
 		super( argument );
-	}
-
-	public void run()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	public void update(CommandArgument argument)
-	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -42,12 +29,6 @@ public class TimerCommand extends EventCommand<Time>
 	{
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	public void notifyObservers()
-	{
-		// TODO Auto-generated method stub
-
 	}
 
 }

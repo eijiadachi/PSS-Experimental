@@ -7,6 +7,7 @@ public class EnterRegionCommand extends RegionCommand
 	public EnterRegionCommand(Region region)
 	{
 		super( region );
+		setType( RegionEventType.ENTER );
 	}
 
 	@Override

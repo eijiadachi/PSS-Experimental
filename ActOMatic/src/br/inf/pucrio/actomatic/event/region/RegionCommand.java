@@ -9,4 +9,21 @@ public abstract class RegionCommand extends EventCommand<Region>
 	{
 		super( region );
 	}
+
+	public RegionEventType getType()
+	{
+		return type;
+	}
+
+	protected void setType(RegionEventType type)
+	{
+		this.type = type;
+	}
+
+	public enum RegionEventType
+	{
+		ENTER, LEAVE
+	}
+
+	private RegionEventType type;
 }

@@ -4,8 +4,9 @@ import org.apache.cordova.DroidGap;
 
 import android.os.Bundle;
 import android.view.Menu;
+import br.inf.pucrio.actomatic.event.region.LocationTracker;
+import br.inf.pucrio.actomatic.event.region.RegionSource;
 import br.inf.pucrio.actomatic.event.timer.TimerSource;
-import br.inf.pucrio.actomatic.location.LocationTracker;
 
 public class MainActivity extends DroidGap
 {
@@ -13,6 +14,8 @@ public class MainActivity extends DroidGap
 	private LocationTracker gpsTracker;
 
 	private TimerSource timerSource;
+
+	private RegionSource regionSource;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -24,8 +27,10 @@ public class MainActivity extends DroidGap
 		setGpsTracker( new LocationTracker( this ) );
 
 		setTimerSource( new TimerSource( this ) );
-
 		new Thread( getTimerSource() ).start();
+
+		setRegionSource( new RegionSource( this ) );
+		new Thread( getRegionSource() ).start();
 	}
 
 	@Override
@@ -53,5 +58,15 @@ public class MainActivity extends DroidGap
 	public void setTimerSource(TimerSource timerSource)
 	{
 		this.timerSource = timerSource;
+	}
+
+	public RegionSource getRegionSource()
+	{
+		return regionSource;
+	}
+
+	public void setRegionSource(RegionSource regionSource)
+	{
+		this.regionSource = regionSource;
 	}
 }

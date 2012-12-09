@@ -9,6 +9,8 @@ import br.inf.pucrio.actomatic.dao.IAbstractDAO;
 import br.inf.pucrio.actomatic.event.EventCommand;
 import br.inf.pucrio.actomatic.event.region.RegionCommand;
 import br.inf.pucrio.actomatic.event.timer.TimerCommand;
+import br.inf.pucrio.actomatic.model.CommandArgument;
+import br.inf.pucrio.actomatic.model.Region;
 import br.inf.pucrio.actomatic.model.Rule;
 import br.inf.pucrio.actomatic.model.Time;
 
@@ -55,7 +57,7 @@ public class RulePlugin extends AbstractActOMaticPlugin<Rule>
 			ActionCommand<?> action = actionDAO.getById( actionId );
 
 			IAbstractDAO<EventCommand<?>> eventDAO = FactoryDAO.getEventDAOInstance();
-			EventCommand<?> event = eventDAO.getById( eventId );
+			EventCommand<? extends CommandArgument> event = eventDAO.getById( eventId );
 
 			event.addObserver( action );
 
@@ -68,21 +70,28 @@ public class RulePlugin extends AbstractActOMaticPlugin<Rule>
 				rule.setId( ruleId );
 			}
 
-			if (event instanceof RegionCommand)
-			{
-
-			}
-			else if (event instanceof TimerCommand)
-			{
-				EventCommand<Time> timerEventCommand = (EventCommand<Time>) event;
-				getTimerSource().addObserver( timerEventCommand );
-			}
+			addObserver( event );
 
 			return rule;
 		}
 		catch (JSONException e)
 		{
 			throw new RuntimeException( e );
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private void addObserver(EventCommand<? extends CommandArgument> event)
+	{
+		if (event instanceof RegionCommand)
+		{
+			EventCommand<Region> regionEventCommand = (EventCommand<Region>) event;
+			getRegionSource().addObserver( regionEventCommand );
+		}
+		else if (event instanceof TimerCommand)
+		{
+			EventCommand<Time> timerEventCommand = (EventCommand<Time>) event;
+			getTimerSource().addObserver( timerEventCommand );
 		}
 	}
 }
