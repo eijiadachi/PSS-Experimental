@@ -21,4 +21,16 @@ public class EnterRegionCommand extends RegionCommand
 		return "EnterRegionCommand";
 	}
 
+	public void run()
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	public void notifyObservers()
+	{
+		// TODO Auto-generated method stub
+
+	}
+
 }

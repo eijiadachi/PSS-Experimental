@@ -1,5 +1,7 @@
 package br.inf.pucrio.actomatic.plugin;
 
+import java.util.Calendar;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -76,9 +78,7 @@ public class EventPlugin extends AbstractActOMaticPlugin<EventCommand<?>>
 
 				String hour = args.getString( counter++ );
 
-				Time time = new Time();
-				time.setDay( day );
-				time.setHour( hour );
+				Time time = new Time( Calendar.getInstance().getTime() );
 
 				result = new TimerCommand( time );
 

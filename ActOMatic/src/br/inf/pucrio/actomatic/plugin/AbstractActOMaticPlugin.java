@@ -11,9 +11,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import br.inf.pucrio.actomatic.MainActivity;
 import br.inf.pucrio.actomatic.dao.IAbstractDAO;
-import br.inf.pucrio.actomatic.location.GPSTracker;
+import br.inf.pucrio.actomatic.event.timer.TimerSource;
+import br.inf.pucrio.actomatic.location.LocationTracker;
 import br.inf.pucrio.actomatic.model.Entity;
 import br.inf.pucrio.actomatic.util.Util;
 
@@ -23,11 +25,37 @@ public abstract class AbstractActOMaticPlugin<T extends Entity> extends Plugin
 
 	private final String tag;
 
-	protected GPSTracker getGpsTracker()
+	protected LocationTracker getGpsTracker()
+	{
+		MainActivity activity = getActivity();
+		LocationTracker gpsTracker = activity.getGpsTracker();
+		return gpsTracker;
+	}
+
+	protected MainActivity getActivity()
 	{
 		MainActivity activity = (MainActivity) this.cordova;
-		GPSTracker gpsTracker = activity.getGpsTracker();
-		return gpsTracker;
+		return activity;
+	}
+
+	protected void runOnUiThread(Runnable runnable)
+	{
+		MainActivity activity = getActivity();
+		activity.runOnUiThread( runnable );
+	}
+
+	protected Context getContext()
+	{
+		MainActivity activity = getActivity();
+		Context context = activity.getContext();
+		return context;
+	}
+
+	protected TimerSource getTimerSource()
+	{
+		MainActivity activity = getActivity();
+		TimerSource timerSource = activity.getTimerSource();
+		return timerSource;
 	}
 
 	protected AbstractActOMaticPlugin(String tag)

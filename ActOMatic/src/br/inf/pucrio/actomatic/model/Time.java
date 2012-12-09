@@ -1,36 +1,30 @@
 package br.inf.pucrio.actomatic.model;
 
+import java.util.Date;
+
 public class Time extends Event
 {
-	private String day;
+	private Date date;
 
-	private String hour;
-
-	public String getDay()
+	public Time(Date date)
 	{
-		return day;
-	}
-
-	public void setDay(String day)
-	{
-		this.day = day;
-	}
-
-	public String getHour()
-	{
-		return hour;
-	}
-
-	public void setHour(String hour)
-	{
-		this.hour = hour;
+		this.setDate( date );
 	}
 
 	@Override
 	public String getObjectType()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return "Time";
+	}
+
+	public Date getDate()
+	{
+		return date;
+	}
+
+	public void setDate(Date date)
+	{
+		this.date = date;
 	}
 
 }

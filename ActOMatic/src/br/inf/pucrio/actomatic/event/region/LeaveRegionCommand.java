@@ -4,20 +4,36 @@ import br.inf.pucrio.actomatic.model.Region;
 
 public class LeaveRegionCommand extends RegionCommand
 {
+
 	public LeaveRegionCommand(Region region)
 	{
 		super( region );
 	}
 
-	@Override
-	public boolean execute(Region argument)
+	public void run()
 	{
-		return true;
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public boolean execute(Region targetArgument)
+	{
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public String getObjectType()
 	{
-		return "LeaveRegionCommand";
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	public void notifyObservers()
+	{
+		// TODO Auto-generated method stub
+
+	}
+
 }

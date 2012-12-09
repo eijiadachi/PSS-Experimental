@@ -11,7 +11,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 
-public class GPSTracker extends Service implements LocationListener
+public class LocationTracker extends Service implements LocationListener
 {
 	private final Context mContext;
 
@@ -21,7 +21,7 @@ public class GPSTracker extends Service implements LocationListener
 
 	private double longitude;
 
-	public GPSTracker(Context context)
+	public LocationTracker(Context context)
 	{
 		this.mContext = context;
 		getLocation();

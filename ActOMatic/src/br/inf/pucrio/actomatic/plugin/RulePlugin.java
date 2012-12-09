@@ -1,6 +1,5 @@
 package br.inf.pucrio.actomatic.plugin;
 
-import org.apache.cordova.api.LOG;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -9,8 +8,9 @@ import br.inf.pucrio.actomatic.dao.FactoryDAO;
 import br.inf.pucrio.actomatic.dao.IAbstractDAO;
 import br.inf.pucrio.actomatic.event.EventCommand;
 import br.inf.pucrio.actomatic.event.region.RegionCommand;
-import br.inf.pucrio.actomatic.location.GPSTracker;
+import br.inf.pucrio.actomatic.event.timer.TimerCommand;
 import br.inf.pucrio.actomatic.model.Rule;
+import br.inf.pucrio.actomatic.model.Time;
 
 public class RulePlugin extends AbstractActOMaticPlugin<Rule>
 {
@@ -20,8 +20,6 @@ public class RulePlugin extends AbstractActOMaticPlugin<Rule>
 	public RulePlugin()
 	{
 		super( TAG );
-		// MainActivity context = (MainActivity) this.cordova;
-		// gpsTracker = context.getGpsTracker();
 	}
 
 	@Override
@@ -59,6 +57,8 @@ public class RulePlugin extends AbstractActOMaticPlugin<Rule>
 			IAbstractDAO<EventCommand<?>> eventDAO = FactoryDAO.getEventDAOInstance();
 			EventCommand<?> event = eventDAO.getById( eventId );
 
+			event.addObserver( action );
+
 			rule.setAction( action );
 			rule.setEvent( event );
 
@@ -70,16 +70,12 @@ public class RulePlugin extends AbstractActOMaticPlugin<Rule>
 
 			if (event instanceof RegionCommand)
 			{
-				GPSTracker gpsTracker = getGpsTracker();
 
-				gpsTracker.registerCommand();
-
-				double latitude = gpsTracker.getLatitude();
-				double longitude = gpsTracker.getLongitude();
-
-				String msg = String.format( "%s %s", latitude, longitude );
-				LOG.d( "eiji", msg );
-
+			}
+			else if (event instanceof TimerCommand)
+			{
+				EventCommand<Time> timerEventCommand = (EventCommand<Time>) event;
+				getTimerSource().addObserver( timerEventCommand );
 			}
 
 			return rule;

@@ -4,17 +4,12 @@ public abstract class Command<T extends CommandArgument> extends Entity
 {
 	private T argument;
 
-	public Command()
-	{
-		super();
-	}
-
 	public Command(T argument)
 	{
 		this.argument = argument;
 	}
 
-	public abstract boolean execute(T argument);
+	public abstract boolean execute(T targetArgument);
 
 	public Command(String name, String description)
 	{

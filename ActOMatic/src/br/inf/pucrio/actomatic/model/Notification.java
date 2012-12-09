@@ -49,5 +49,4 @@ public class Notification extends Action
 	{
 		this.type = type;
 	}
-
 }

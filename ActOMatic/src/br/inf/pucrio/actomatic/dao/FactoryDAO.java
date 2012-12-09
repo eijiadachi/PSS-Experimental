@@ -1,5 +1,7 @@
 package br.inf.pucrio.actomatic.dao;
 
+import java.util.Date;
+
 import br.inf.pucrio.actomatic.action.ActionCommand;
 import br.inf.pucrio.actomatic.action.VolumeConfigurationCommand;
 import br.inf.pucrio.actomatic.action.notification.AlertNotificationCommand;
@@ -8,12 +10,14 @@ import br.inf.pucrio.actomatic.action.notification.SmsNotificationCommand;
 import br.inf.pucrio.actomatic.event.EventCommand;
 import br.inf.pucrio.actomatic.event.region.EnterRegionCommand;
 import br.inf.pucrio.actomatic.event.region.LeaveRegionCommand;
+import br.inf.pucrio.actomatic.event.timer.TimerCommand;
 import br.inf.pucrio.actomatic.model.Configuration;
 import br.inf.pucrio.actomatic.model.Configuration.ConfigurationType;
 import br.inf.pucrio.actomatic.model.Notification;
 import br.inf.pucrio.actomatic.model.Notification.NotificationType;
 import br.inf.pucrio.actomatic.model.Region;
 import br.inf.pucrio.actomatic.model.Rule;
+import br.inf.pucrio.actomatic.model.Time;
 
 public final class FactoryDAO
 {
@@ -81,15 +85,23 @@ public final class FactoryDAO
 
 		EnterRegionCommand event1 = new EnterRegionCommand( region );
 		LeaveRegionCommand event2 = new LeaveRegionCommand( region );
+		Date date = new Date( System.currentTimeMillis() + 15000 );
+		Time time = new Time( date );
+		TimerCommand event3 = new TimerCommand( time );
+		event3.setDescription( "new time" );
+		event3.setName( "Event Timer" );
 
 		eventDAO = new TransientDAO<EventCommand<?>>();
 		eventDAO.add( event1 );
 		eventDAO.add( event2 );
+		eventDAO.add( event3 );
+
+		event3.addObserver( action1 );
 
 		Rule rule = new Rule();
 		rule.setAction( action1 );
+		rule.setEvent( event3 );
 		rule.setDescription( "Just another Mock Rule" );
-		rule.setEvent( event1 );
 		rule.setName( "Mock Rule" );
 		ruleDAO = new TransientDAO<Rule>();
 		ruleDAO.add( rule );
