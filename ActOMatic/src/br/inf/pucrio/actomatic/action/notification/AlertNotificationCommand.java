@@ -10,8 +10,6 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import br.inf.pucrio.actomatic.MainActivity;
 import br.inf.pucrio.actomatic.R;
-import br.inf.pucrio.actomatic.action.ActionCommand;
-import br.inf.pucrio.actomatic.model.CommandArgument;
 import br.inf.pucrio.actomatic.model.Notification;
 
 public class AlertNotificationCommand extends NotificationCommand
@@ -23,23 +21,10 @@ public class AlertNotificationCommand extends NotificationCommand
 	}
 
 	@Override
-	public boolean execute(Notification argument)
-	{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public String getObjectType()
 	{
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	public void update(ActionCommand<?> observable, CommandArgument argument)
-	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

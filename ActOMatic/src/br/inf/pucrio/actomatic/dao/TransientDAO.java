@@ -54,4 +54,12 @@ public class TransientDAO<T extends Entity> implements IAbstractDAO<T>
 		return result;
 	}
 
+	public void addAll(List<T> list)
+	{
+		for (T t : list)
+		{
+			this.add( t );
+		}
+	}
+
 }

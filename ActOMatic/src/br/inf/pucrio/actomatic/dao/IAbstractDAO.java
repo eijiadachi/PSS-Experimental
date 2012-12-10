@@ -8,6 +8,8 @@ public interface IAbstractDAO<T extends Entity>
 {
 	public void add(T t);
 
+	public void addAll(List<T> list);
+
 	public boolean delete(Integer id);
 
 	public void update(T t);

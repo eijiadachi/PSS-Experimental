@@ -17,6 +17,28 @@ public class TimerSource extends EventSource<Time>
 	}
 
 	@Override
+	public void run()
+	{
+		synchronized (this)
+		{
+			while (true)
+			{
+				performInnerRun();
+
+				try
+				{
+					this.wait( 5000 );
+				}
+				catch (InterruptedException e)
+				{
+					e.printStackTrace();
+					continue;
+				}
+			}
+		}
+	}
+
+	@Override
 	protected void performInnerRun()
 	{
 		Calendar instance = Calendar.getInstance();

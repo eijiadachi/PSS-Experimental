@@ -1,6 +1,10 @@
 package br.inf.pucrio.actomatic.action.notification;
 
 import android.app.Activity;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.telephony.SmsManager;
+import br.inf.pucrio.actomatic.MainActivity;
 import br.inf.pucrio.actomatic.model.Notification;
 
 public class SmsNotificationCommand extends NotificationCommand
@@ -11,30 +15,34 @@ public class SmsNotificationCommand extends NotificationCommand
 	}
 
 	@Override
-	public boolean execute(Notification argument)
-	{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public String getObjectType()
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void run()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
 	@Override
-	public void update(Activity activity)
+	public void update(final Activity activity)
 	{
-		// TODO Auto-generated method stub
+
+		Notification notification = this.getArgument();
+
+		final String phoneNumber = notification.getSendTo();
+		final String message = notification.getMessage();
+
+		activity.runOnUiThread( new Runnable()
+		{
+
+			public void run()
+			{
+				PendingIntent pi = PendingIntent.getActivity( activity, 0, new Intent( activity,
+						MainActivity.class ), 0 );
+
+				SmsManager sms = SmsManager.getDefault();
+				sms.sendTextMessage( phoneNumber, null, message, pi, null );
+
+			}
+		} );
 
 	}
-
 }

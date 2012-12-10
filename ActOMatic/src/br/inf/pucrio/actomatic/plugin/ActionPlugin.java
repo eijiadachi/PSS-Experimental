@@ -4,8 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import br.inf.pucrio.actomatic.action.ActionCommand;
-import br.inf.pucrio.actomatic.action.ScreenConfigurationCommand;
-import br.inf.pucrio.actomatic.action.VolumeConfigurationCommand;
+import br.inf.pucrio.actomatic.action.configuration.ScreenConfigurationCommand;
+import br.inf.pucrio.actomatic.action.configuration.VolumeConfigurationCommand;
 import br.inf.pucrio.actomatic.action.notification.AlertNotificationCommand;
 import br.inf.pucrio.actomatic.action.notification.EmailNotificationCommand;
 import br.inf.pucrio.actomatic.action.notification.SmsNotificationCommand;

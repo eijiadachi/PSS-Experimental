@@ -1,9 +1,8 @@
 package br.inf.pucrio.actomatic;
 
 import android.app.Activity;
-import br.inf.pucrio.actomatic.model.Command;
 
-public interface Observable<T extends Command<?>>
+public interface Observable<T extends Observer<?>>
 {
 	public void addObserver(T observer);
 
