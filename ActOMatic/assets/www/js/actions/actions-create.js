@@ -41,21 +41,7 @@ ACTIONS_CREATE.handleConfigurationButton = function( event )
 
 ACTIONS_CREATE.handleCancelButton = function( event )
 {
-	function alertDismissed() {
-	    // do something
-	}
 
-//	navigator.notification.beep(1);
-//	navigator.notification.vibrate(1000);
-//	
-//	navigator.notification.alert(
-//	    'You are the winner!',  // message
-//	    alertDismissed,         // callback
-//	    'Game Over',            // title
-//	    'Done'                  // buttonName
-//	);
-	
-	window.MainActivity.showAlert();
 }
 
 ACTIONS_CREATE.handleSaveButton = function()

@@ -71,6 +71,7 @@ EVENTS_CREATE.handleSaveButton = function()
 		var result = new Array();
 		
 		result.push(EVENTS_CREATE.STATUS);
+		result.push(EVENTS_CREATE.REGION_EVENT_TYPE);
 		
 		var id = getInputValue("input[id='inputId']");
 		result.push(id);
@@ -183,7 +184,20 @@ EVENTS_CREATE.init = function()
 		$inputDescription.val( description );
 		
 		var actionType = urlParams['objType'];
-		if(actionType === "RegionEvent")
+		if(actionType === "TimerCommand")
+		{
+			var date = urlParams['date'];
+			var $inputDate = $("input[id='inputDate']");
+			$inputDate.val( date );
+			
+			var time = urlParams['time'];
+			var $inputTime = $("input[id='inputTime']");
+			$inputTime.val( time );
+			
+			$timerButton.click();
+			$regionButton.attr("disabled", "disabled");	
+		}
+		else
 		{
 			var latitude = urlParams['latitude'];
 			var $inputLatitude = $("input[id='inputLatitude']");
@@ -199,19 +213,6 @@ EVENTS_CREATE.init = function()
 			
 			$regionButton.click();
 			$timerButton.attr("disabled", "disabled");
-		}
-		else
-		{
-			var date = urlParams['date'];
-			var $inputDate = $("input[id='inputDate']");
-			$inputDate.val( date );
-			
-			var time = urlParams['time'];
-			var $inputTime = $("input[id='inputTime']");
-			$inputTime.val( time );
-			
-			$timerButton.click();
-			$regionButton.attr("disabled", "disabled");	
 		}
 	}
 };
