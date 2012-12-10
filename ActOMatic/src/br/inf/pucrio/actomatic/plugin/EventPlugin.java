@@ -1,6 +1,9 @@
 package br.inf.pucrio.actomatic.plugin;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,16 +43,13 @@ public class EventPlugin extends AbstractActOMaticPlugin<EventCommand<?>>
 
 			int counter = 0;
 
-			String actionType = args.getString( counter++ );
-
+			String eventType = args.getString( counter++ );
+			String regionEventType = args.getString( counter++ );
 			String idStr = args.getString( counter++ );
-
 			String name = args.getString( counter++ );
 			String description = args.getString( counter++ );
 
-			String regionEventType = args.getString( counter++ );
-
-			if ("REGION".equals( actionType ))
+			if ("REGION".equals( eventType ))
 			{
 				Double latitude = args.getDouble( counter++ );
 
@@ -74,17 +74,38 @@ public class EventPlugin extends AbstractActOMaticPlugin<EventCommand<?>>
 			}
 			else
 			{
-				String day = args.getString( counter++ );
+				String dateStr = args.getString( counter++ );
+				Date date = new SimpleDateFormat( "dd-MM-yyyy" ).parse( dateStr );
+				Calendar dateCalendar = Calendar.getInstance();
+				dateCalendar.setTime( date );
+				dateCalendar.set( Calendar.HOUR, 0 );
+				dateCalendar.set( Calendar.MINUTE, 0 );
 
-				String hour = args.getString( counter++ );
+				String hourStr = args.getString( counter++ );
+				Date hour = new SimpleDateFormat( "HH:mm" ).parse( hourStr );
+				Calendar hourCalendar = Calendar.getInstance();
+				hourCalendar.setTime( hour );
 
-				Time time = new Time( Calendar.getInstance().getTime() );
+				int amPm = hourCalendar.get( Calendar.AM_PM );
+
+				int hourInt = hourCalendar.get( Calendar.HOUR );
+
+				if (amPm == Calendar.PM)
+				{
+					hourInt += 12;
+				}
+
+				dateCalendar.add( Calendar.HOUR, hourInt );
+
+				int minuteInt = hourCalendar.get( Calendar.MINUTE );
+				dateCalendar.add( Calendar.MINUTE, minuteInt );
+
+				Time time = new Time( dateCalendar.getTime() );
 
 				result = new TimerCommand( time );
-
 			}
 
-			if (idStr != null && idStr.trim().length() == 0)
+			if (idStr != null && !"".equals( idStr.trim() ))
 			{
 				Integer id = Integer.parseInt( idStr );
 				result.setId( id );
@@ -96,6 +117,10 @@ public class EventPlugin extends AbstractActOMaticPlugin<EventCommand<?>>
 			return result;
 		}
 		catch (JSONException e)
+		{
+			throw new RuntimeException( e );
+		}
+		catch (ParseException e)
 		{
 			throw new RuntimeException( e );
 		}

@@ -54,25 +54,33 @@
 				<textarea rows="3" id="inputDescription" placeholder="Description"></textarea>
 	    	</div>
 		</div>
-		
-		<div id="settingDiv" class="control-group input-append">
-  			<label class="control-label" for="inputSetting">Setting</label>
-  			<div class="controls">
-				<input type="number" step="0.1" id="inputSetting" placeholder="Setting">
-				<span class="add-on">applied to</span>
-				<select id="settingType" class="span2">
-					<option value="SCREEN">Screen</option>
-					<option value="VOLUME">Volume</option>
-				</select>
-		    </div>
+		<div id="settingDiv"> 
+			<div class="control-group">
+	  			<label class="control-label">Settings For</label>
+	  			<div class="controls">
+					<select id="settingType" class="span2">
+						<option value="SCREEN">Screen</option>
+						<option value="VOLUME">Volume</option>
+					</select>
+			    </div>
+			</div>
+			<div class="control-group">
+	  			<label class="control-label" for="inputSetting">Setting Value</label>
+	  			<div class="controls">
+					<input type="number" step="0.1" id="inputSetting" placeholder="Setting">
+			    </div>
+			</div>
 		</div>
-		<br>
 		<div id="notificationDiv" >
-			<div class="control-group input-append">
-	  			<label class="control-label" for="inputReceiver">Send to</label>
+			<div class="control-group">
+	  			<label class="control-label" for="inputReceiver">Send To</label>
 	  			<div class="controls">
 					<input type="text" id="inputReceiver" placeholder="Send to">
-					<span class="add-on">via</span>
+			    </div>
+		    </div>
+		    <div class="control-group">
+	  			<label class="control-label">Send Through</label>
+	  			<div class="controls">
 					<select id="notificationType" class="span2">
 						<option value="ALERT">Alert</option>
 						<option value="SMS">SMS</option>
@@ -80,6 +88,8 @@
 					</select>
 			    </div>
 		    </div>
+		    
+		    
 		    <div class="control-group">
 			    <label class="control-label" for="inputMessage">Message</label>
 		    	<div class="controls">

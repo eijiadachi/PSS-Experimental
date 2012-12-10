@@ -11,13 +11,13 @@ public abstract class EventSource<T extends Event> implements Runnable, Observab
 {
 	private final Activity activity;
 
-	private final Long timeToWait;
+	private Long timeToWait;
 
 	public EventSource(Activity activity)
 	{
 		observers = new ArrayList<EventCommand<T>>();
 		this.activity = activity;
-		timeToWait = Long.valueOf( 5000 );
+		setTimeToWait( Long.valueOf( 45000 ) );
 	}
 
 	public void run()
@@ -30,7 +30,7 @@ public abstract class EventSource<T extends Event> implements Runnable, Observab
 
 				try
 				{
-					this.wait( timeToWait );
+					this.wait( getTimeToWait() );
 				}
 				catch (InterruptedException e)
 				{
@@ -70,6 +70,16 @@ public abstract class EventSource<T extends Event> implements Runnable, Observab
 	public Activity getActivity()
 	{
 		return activity;
+	}
+
+	public Long getTimeToWait()
+	{
+		return timeToWait;
+	}
+
+	public void setTimeToWait(Long timeToWait)
+	{
+		this.timeToWait = timeToWait;
 	}
 
 	private final List<EventCommand<T>> observers;

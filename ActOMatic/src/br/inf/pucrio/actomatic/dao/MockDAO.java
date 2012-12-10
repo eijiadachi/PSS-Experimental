@@ -42,12 +42,15 @@ public class MockDAO
 		email.setMessage( "Mensagem de texto para email." );
 		email.setName( "Titulo: subject" );
 		email.setSendTo( "eijiadachi@gmail.com" );
+		email.setType( NotificationType.EMAIL );
 
 		EmailNotificationCommand emailCommand = new EmailNotificationCommand( email );
+		emailCommand.setDescription( "Email command description" );
+		emailCommand.setName( "Email Command 1" );
 
 		List<ActionCommand<? extends Action>> list = new ArrayList<ActionCommand<? extends Action>>();
 
-		// list.add( sms );
+		list.add( sms );
 		// list.add( alert );
 		list.add( emailCommand );
 
@@ -62,12 +65,12 @@ public class MockDAO
 		Date date = instance.getTime();
 
 		Time time = new Time( date );
-		time.setDescription( "Daqui a 15s" );
-		time.setName( "daqui 15s" );
+		time.setDescription( "Daqui a 1 min" );
+		time.setName( "Daqui a 1 min" );
 
 		TimerCommand timer = new TimerCommand( time );
-		timer.setDescription( "Dispara em 15s" );
-		timer.setName( "Dispara em 15s" );
+		timer.setDescription( "Dispara em 1min" );
+		timer.setName( "Dispara em 1min" );
 
 		List<EventCommand<? extends Event>> list = new ArrayList<EventCommand<? extends Event>>();
 		list.add( timer );

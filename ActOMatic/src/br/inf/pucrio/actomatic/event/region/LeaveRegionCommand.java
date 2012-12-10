@@ -11,29 +11,15 @@ public class LeaveRegionCommand extends RegionCommand
 		setType( RegionEventType.LEAVE );
 	}
 
-	public void run()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
 	@Override
 	public boolean execute(Region targetArgument)
 	{
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public String getObjectType()
 	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void notifyObservers()
-	{
-		// TODO Auto-generated method stub
-
+		return "LeaveRegionCommand";
 	}
 }

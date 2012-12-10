@@ -60,8 +60,7 @@ public class TimerCommand extends EventCommand<Time>
 	@Override
 	public String getObjectType()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return "TimerCommand";
 	}
 
 }

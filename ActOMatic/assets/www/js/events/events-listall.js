@@ -23,13 +23,13 @@ var successCallback = function( arg )
 	var str = "<div id='all_events'>";
 	
 	for( var i = 0; i < size; i++ ){
-		var obj = jQuery.parseJSON( arg[i] );
-		var argument = jQuery.parseJSON( obj.argument );
+		var command = jQuery.parseJSON( arg[i] );
+		var argument = jQuery.parseJSON( command.argument );
 		
-		var objType = obj.objectType;
-		var id = obj.id;
-		var name = argument.name;
-		var description = argument.description;
+		var objType = command.objectType;
+		var id = command.id;
+		var name = command.name;
+		var description = command.description;
 		
 		var requestParams = "id=" + id;
 		requestParams += "&objType=" + objType;
@@ -59,10 +59,10 @@ var successCallback = function( arg )
 		}
 		else
 		{
-						var date = obj.date;
-						var time = obj.time;
-						requestParams += "&date=" + date;
-						requestParams += "&time=" + time;
+						var date = argument.dateStr;
+						var time = argument.time;
+						requestParams += "&date=" + encodeURIComponent(date);
+						requestParams += "&time=" + encodeURIComponent(time);
 						str += "<li>" + date + "</li>";
 						str += "<li>" + time + "</li>";
 		}

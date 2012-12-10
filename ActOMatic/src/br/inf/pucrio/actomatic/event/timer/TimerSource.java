@@ -14,28 +14,7 @@ public class TimerSource extends EventSource<Time>
 	public TimerSource(Activity activity)
 	{
 		super( activity );
-	}
-
-	@Override
-	public void run()
-	{
-		synchronized (this)
-		{
-			while (true)
-			{
-				performInnerRun();
-
-				try
-				{
-					this.wait( 5000 );
-				}
-				catch (InterruptedException e)
-				{
-					e.printStackTrace();
-					continue;
-				}
-			}
-		}
+		setTimeToWait( Long.valueOf( 60000 ) );
 	}
 
 	@Override

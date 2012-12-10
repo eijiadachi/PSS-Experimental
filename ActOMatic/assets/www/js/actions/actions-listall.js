@@ -23,16 +23,15 @@ var successCallback = function( arg )
 	var str = "<div id='all_actions'>";
 	
 	for( var i = 0; i < size; i++ ){
+
 		var command = jQuery.parseJSON( arg[i] );
-		var obj = jQuery.parseJSON( command.argument );
+		var id = command.id;
+		var name = command.name;
+		var description = command.description;
 		
-		console.log(obj);
-		
-		var objType = obj.objectType;
-		var id = obj.id;
-		var name = obj.name;
-		var description = obj.description;
-		var type = obj.type;
+		var argument = jQuery.parseJSON( command.argument );
+		var objType = argument.objectType;
+		var type = argument.type;
 		
 		var requestParams = "id=" + id;
 		requestParams += "&name=" + name;
@@ -47,17 +46,18 @@ var successCallback = function( arg )
 						str += "<li>" + name + "</li>";
 						str += "<li>" + description + "</li>";
 						str += "<li>" + type + "</li>";
+	
 		if( objType === 'Configuration' )
 		{
-						var setting = obj.setting;
+						var setting = argument.setting;
 						requestParams += "&setting=" + setting;
 						
 						str += "<li>" + setting + "</li>";
 		}
 		else
 		{
-						var sendTo = obj.sendTo;
-						var message = obj.message;
+						var sendTo = argument.sendTo;
+						var message = argument.message;
 						requestParams += "&sendTo=" + sendTo;
 						requestParams += "&message=" + message;
 						str += "<li>" + sendTo + "</li>";

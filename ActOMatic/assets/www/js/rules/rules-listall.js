@@ -35,7 +35,6 @@ var successCallback = function( arg )
 		var eventName = eventCommand.name;
 		
 		var actionCommand = jQuery.parseJSON( obj.action );
-		var action = jQuery.parseJSON(actionCommand.argument);
 		var actionId = actionCommand.id;
 		var actionName = actionCommand.name;
 		
