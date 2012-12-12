@@ -34,7 +34,7 @@ public class TimerCommand extends EventCommand<Time>
 			int valueCurrent = valuesCurrent[i];
 			if (valueRegistered != valueCurrent)
 			{
-				return false;
+				// return false;
 			}
 		}
 

@@ -1,16 +1,16 @@
 /*
  * Constants
  */
-var ACTION_PLUGIN_NAME = "Action";
+var RULE_PLUGIN_NAME = "Rule";
 var methodName = "remove";
 
-var ACTIONS_REMOVE = function(){};
+var RULES_REMOVE = function(){};
 
 var successCallback = function( arg )
 {
 	console.log( "Calling the method " + methodName + " returned successfully with the arguments: " + arg );
 	alert( "Removed Successfully!");
-	window.location="actions.html";
+	window.location="rules.html";
 }
 
 var errorCallback = function( arg )
@@ -19,7 +19,7 @@ var errorCallback = function( arg )
 	alert( "It was not possible to remove the action.\n\n" + arg );
 }
 
-ACTIONS_REMOVE.init = function()
+RULES_REMOVE.init = function()
 { 	
 	var urlParams = {};
 	(function () {
@@ -40,15 +40,15 @@ ACTIONS_REMOVE.init = function()
 		
 	var id = urlParams['id'] ;
 	
-	console.log( "Preparing to remove Action.id=" + id);
+	console.log( "Preparing to remove Rule.id=" + id);
 		
 	cordova.exec(
 		successCallback, 
 		errorCallback,
-		ACTION_PLUGIN_NAME,
+		RULE_PLUGIN_NAME,
 		methodName, 
         [id]
 		);
 };
 
-document.addEventListener("deviceready", ACTIONS_REMOVE.init, false);
+document.addEventListener("deviceready", RULES_REMOVE.init, false);

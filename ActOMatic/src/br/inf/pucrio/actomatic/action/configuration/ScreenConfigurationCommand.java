@@ -16,7 +16,7 @@ public class ScreenConfigurationCommand extends ActionCommand<Configuration>
 	@Override
 	public String getObjectType()
 	{
-		return "ScreeConfigurationCommand";
+		return "ScreenConfigurationCommand";
 	}
 
 	@Override

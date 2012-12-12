@@ -17,7 +17,7 @@ public abstract class EventSource<T extends Event> implements Runnable, Observab
 	{
 		observers = new ArrayList<EventCommand<T>>();
 		this.activity = activity;
-		setTimeToWait( Long.valueOf( 45000 ) );
+		setTimeToWait( Long.valueOf( 120000 ) );
 	}
 
 	public void run()

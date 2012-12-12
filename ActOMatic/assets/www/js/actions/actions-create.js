@@ -182,7 +182,7 @@ ACTIONS_CREATE.init = function()
 		$inputDescription.val( description );
 		
 		var actionType = urlParams['objType'];
-		if(actionType === "ConfigurationAction")
+		if(actionType === "Configuration")
 		{
 			var setting = urlParams['setting'];
 			var $inputSetting = $("input[id='inputSetting']");
