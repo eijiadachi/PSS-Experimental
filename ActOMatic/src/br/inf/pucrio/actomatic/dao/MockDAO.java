@@ -67,7 +67,7 @@ public class MockDAO
 	public static List<EventCommand<? extends Event>> createMockEvents()
 	{
 		Calendar instance = Calendar.getInstance();
-		instance.add( Calendar.MINUTE, 0 );
+		instance.add( Calendar.MINUTE, 1 );
 
 		Date date = instance.getTime();
 
